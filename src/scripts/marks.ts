@@ -47,7 +47,7 @@ export function updateMark(key: string, patch: Partial<Omit<Mark, 'updated'>>) {
   const all = { ...loadMarks() };
   const next: Mark = { ...all[key], ...patch, updated: new Date().toISOString() };
   if (patch.status === 'done' && !next.doneAt) next.doneAt = today();
-  if (patch.status !== undefined && patch.status !== 'done') delete next.doneAt;
+  if ('status' in patch && patch.status !== 'done') delete next.doneAt;
   for (const k of ['status', 'plan', 'note', 'doneAt'] as const) if (!next[k]) delete next[k];
   if (!next.status && !next.plan && !next.note) delete all[key];
   else all[key] = next;
