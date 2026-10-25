@@ -27,8 +27,6 @@ GU:
   intro: 良興電子 / EcLife 良興購物網，門市與線上都能用，會員 APP 是「良興行動金賺」。
   regions: [全台, 線上]
   website: https://www.eclife.com.tw
-  sources:
-    - https://www.4gamers.com.tw/news/detail/40214/eclife-e-sports-brand-limited-time
   verified: false
 
 家樂福家速配店取:
@@ -54,8 +52,7 @@ GU:
   discount: 100
   intro: 平價鞋款連鎖，全台約 195 家，官網會員生日月有生日購物金。
   regions: [全台, 線上]
-  sources:
-    - https://www.nownews.com/news/6666979
+  website: https://www.familyshoes.com.tw
   verified: false
 
 環球購物中心:
@@ -64,8 +61,6 @@ GU:
   intro: Global Mall，有中和、林口 A8/A9、桃園 A19、板橋車站、南港車站、屏東等館，會員系統是 iMall / GMpay。
   regions: [新北市, 台北市, 桃園市, 屏東縣]
   website: https://www.twglobalmall.com
-  sources:
-    - https://uanalyze.com.tw/articles/3920133860
   verified: false
 
 NET:

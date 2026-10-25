@@ -1,6 +1,6 @@
 # 餐廳生日優惠。key = 店家名稱（同時是網址 id，不可重複）
 # 欄位說明見 README.md「資料格式」。必填：category、offer、value
-# verified: false 代表 intro / regions / website / sources / locations 為自動蒐集、尚未人工確認
+# verified: false 代表 intro / regions / website / locations 為自動蒐集、尚未人工確認
 
 薄多義:
   category: 義式
@@ -11,8 +11,7 @@
   intro: 平價義式連鎖，招牌是烤雞翅與窯烤披薩，全台多家分店。
   caution: 2023 年報導指出「幾歲送幾隻雞翅」已於 5/31 結束，請先向店家確認是否恢復。
   regions: [全台]
-  sources:
-    - https://www.setn.com/klist/83059
+  website: https://www.bite2eatpizza.com
   verified: false
 
 好食多涮涮屋:
@@ -24,8 +23,7 @@
   notes: 提前預約
   intro: 台北中山區的日式涮涮鍋，以肉盤與海鮮為主。
   regions: [台北市]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/309359
+  website: https://www.facebook.com/shabuhsd/
   locations:
     - name: 南西店
       address: 台北市中山區南京西路5-1號B1
@@ -45,8 +43,7 @@
   notes: 提前預約、低消2000、適合多人
   intro: 泰式火鍋，主打冬蔭功湯底。壽星需提前 3 天訂位並備註「當月壽星活動」，2 人單點低消 1,600、3 人以上 2,000，生日當天另送拍立得。
   regions: [台北市, 桃園市, 台中市]
-  sources:
-    - https://supertaste.tvbs.com.tw/offers/12610
+  website: https://www.facebook.com/rollingthaitw/
   verified: false
 
 米塔義式:
@@ -57,8 +54,7 @@
   notes: 提前預約、低消2000、適合多人
   intro: 米塔集團旗下義式餐廳（同集團還有洋朵義式廚坊、洋城義大利餐廳、日本橋浜町食事処）。
   regions: [台北市]
-  sources:
-    - https://www.foodnext.net/life/recipes/lunch/paper/5111316110
+  website: https://www.facebook.com/ZhongliMita/
   verified: false
 
 天鍋宴:
@@ -68,8 +64,7 @@
   value: 500
   intro: 一人一鍋的個人火鍋，有活體海鮮，全分店不收服務費。
   regions: [台北市, 新北市]
-  sources:
-    - https://uptogo.com.tw/美食/湯/天鍋宴要服務費嗎？/
+  website: https://www.facebook.com/tiantiantianguo/
   locations:
     - name: 天母店
       address: 台北市士林區天母北路66-1號
@@ -87,6 +82,10 @@
       address: 新北市蘆洲區長榮路38-10號2樓
       lat: 25.08292
       lng: 121.46336
+    - name: 淡水店
+      address: 新北市淡水區中正路一段87巷8弄31之1號
+      lat: 25.18122
+      lng: 121.41874
   verified: false
 
 默爾 pasta pizza:
@@ -97,8 +96,7 @@
   notes: 限平日一到四
   intro: 平價義式連鎖，多開在誠品、百貨與車站商場，約 15 間門市。
   regions: [台北市, 新北市, 桃園市, 台中市]
-  sources:
-    - https://news.tvbs.com.tw/travel/2716437
+  website: https://www.morepasta.com.tw
   verified: false
 
 龐德羅莎:
@@ -110,8 +108,6 @@
   intro: 近 40 年的老牌自助吧牛排館，排餐附沙拉吧。
   regions: [台北市]
   website: https://www.ponderosa.com.tw
-  sources:
-    - https://supertaste.tvbs.com.tw/pack/357968
   verified: false
 
 布納咖啡館:
@@ -121,8 +117,7 @@
   value: 400
   intro: 無國界料理咖啡館，有早午餐、義大利麵、排餐與甜點，部分分館有可投影的包廂。
   regions: [台北市]
-  sources:
-    - https://supertaste.tvbs.com.tw/hot/306088
+  website: https://www.buna.com.tw
   verified: false
 
 德克士炸雞:
@@ -142,8 +137,7 @@
   value: 358
   intro: 豆府餐飲集團的韓式豆腐鍋品牌。過去的壽星禮是加入官方 LINE 後，當月第一個工作日發送韓式炸雞兌換券。
   regions: [全台]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/331632
+  website: https://www.dubuhouse.com.tw
   verified: false
 
 銷魂麵鋪:
@@ -154,8 +148,7 @@
   notes: 免消費可拿麵
   intro: 大師兄銷魂麵舖，主打川味拌麵與雞湯，Ocard 會員每週二可免費加麵。
   regions: [全台]
-  sources:
-    - https://uptogo.com.tw/美食/銷魂麵舖為什麼這麼貴？/
+  website: https://www.masterspicy.com
   verified: false
 
 金色三麥:
@@ -178,8 +171,7 @@
   period: 當天
   intro: 台式熱炒小酒館，有台北一郎（忠孝）、二郎（公館）、三郎（南西）。週五晚上與週末常一位難求。
   regions: [台北市]
-  sources:
-    - https://uptogo.com.tw/?p=1739743
+  website: https://www.facebook.com/UncleABoLangTaiwanBistro/
   verified: false
 
 法大炸雞:
@@ -189,8 +181,7 @@
   value: 300
   intro: 台中起家的美式炸雞，總店在台中精誠，雙北、桃園、台中共約 8 家。
   regions: [台北市, 新北市, 桃園市, 台中市]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/355102
+  website: https://www.fukdupchicken.com
   verified: false
 
 小時厚牛排:
@@ -201,8 +192,7 @@
   notes: 低消100、要有消費紀錄
   intro: 六扇門火鍋旗下的平價牛排，排餐 190–350 元含自助吧，部分門市只收現金。
   regions: [新北市, 桃園市, 新竹縣, 苗栗縣, 台中市, 彰化縣, 高雄市, 屏東縣]
-  sources:
-    - https://www.nownews.com/news/6671760
+  website: https://www.6owldoor.com
   locations:
     - name: 永和店
       address: 新北市永和區竹林路14號
@@ -217,8 +207,7 @@
   value: 300
   intro: Ulove 羽樂歐陸創意料理，近捷運小巨蛋站，有包廂，用餐會幫客人拍照列印。
   regions: [台北市]
-  sources:
-    - https://travel.yam.com/article/114253
+  website: https://www.ulovebistro.com
   verified: false
 
 品川蘭:
@@ -229,8 +218,7 @@
   period: 兩個月
   intro: 三商餐飲旗下的牛肉麵品牌，招牌是雪花牛肉麵。
   regions: [台北市, 新北市]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/352061
+  website: https://www.mfb.com.tw
   verified: false
 
 這味泰泰:
@@ -240,8 +228,7 @@
   value: 250
   intro: Mrs. Thai，開在百貨美食街的泰式快餐，一個人也能吃。
   regions: [台北市, 新北市, 新竹市]
-  sources:
-    - https://travel.yam.com/article/112386
+  website: https://www.facebook.com/p/%E9%80%99%E5%91%B3%E6%B3%B0%E6%B3%B0-Mrs-Thai-Thai-61557938236982/
   locations:
     - name: 微風南山店
       address: 台北市信義區松智路17號
@@ -256,14 +243,17 @@
   value: 250
   notes: 炸牡蠣要主動出示證件
   intro: 韓式豬骨湯飯，小菜無限續加。
-  regions: [基隆市]
-  sources:
-    - https://keelunghihi.com.tw/83245
+  regions: [基隆市, 苗栗縣]
+  website: https://www.facebook.com/kimchunhee.korea/
   locations:
     - name: 基隆好食城店
       address: 基隆市中正區中正路3號2樓
       lat: 25.1334
       lng: 121.74522
+    - name: 苗栗店
+      address: 苗栗縣苗栗市國華路599號
+      lat: 24.5737
+      lng: 120.81761
   verified: false
 
 北村豆腐家:
@@ -273,8 +263,7 @@
   value: 238
   intro: 豆府餐飲集團旗下韓式料理，全台約 22 間，有明洞韓式炸雞系列。
   regions: [全台]
-  sources:
-    - https://www.beauty321.com/post/44501
+  website: https://www.hanoktofu.com.tw
   verified: false
 
 創意麵:
@@ -283,8 +272,8 @@
   offer: 套餐+前菜+甜點
   value: 223
   intro: 正式名稱為「創義麵 Creative Pasta」。網友分享生日月可送甜點、季節料理各一份，主餐免費升級 A 套餐。
-  sources:
-    - https://www.dcard.tw/@mmc1107/post/258484905
+  regions: [台北市, 新北市]
+  website: https://www.creativepas.com
   verified: false
 
 福勝亭:
@@ -295,8 +284,7 @@
   period: 兩個月
   intro: 三商餐飲旗下日式豬排定食。生日月要用三商 i 美食卡 APP 領券。
   regions: [全台]
-  sources:
-    - https://supertaste.tvbs.com.tw/offers/11800
+  website: https://www.mfb.com.tw
   verified: false
 
 Woosa:
@@ -306,9 +294,7 @@ Woosa:
   value: 220
   intro: Woosa 洋食鬆餅屋，招牌是舒芙蕾「雲の鬆餅」，也有義大利麵、排餐等鹹食。
   regions: [台北市, 新北市, 桃園市, 台中市, 台南市, 高雄市]
-  website: https://page.line.me/641prdiv
-  sources:
-    - https://www.marieclaire.com.tw/lifestyle/taste/45592
+  website: https://www.facebook.com/woosa.pancake/
   locations:
     - name: 松菸店
       address: 台北市信義區忠孝東路四段553巷28號
@@ -333,8 +319,6 @@ Pizza Rock:
   intro: 搖滾披薩，2011 年台中創立的美式披薩，水牛城雞翅也很受歡迎。
   regions: [台中市, 彰化縣, 高雄市]
   website: https://www.pizzarock.com.tw
-  sources:
-    - https://englishintaiwan.com/business-directory/5126/pizza-rock-taiwan
   locations:
     - name: 台中精誠店
       address: 台中市西區精誠路202號
@@ -354,8 +338,7 @@ Pizza Rock:
   notes: 需要預約
   intro: 自己做烘焙聚樂部，DIY 烘焙教室。壽星需年滿 12 歲，出示證件與官網會員資料，陪同者要另做一份，部分門市不參加。
   regions: [台北市, 新北市, 台中市]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/325714
+  website: https://mydiybc.com
   locations:
     - name: 南京店
       address: 台北市松山區南京東路四段195號
@@ -374,8 +357,7 @@ Pizza Rock:
   value: 200
   intro: 築間幸福鍋物，2010 年基隆起家的個人鍋，18 款湯底，部分分店有蔬菜自助吧。
   regions: [全台]
-  sources:
-    - https://www.beauty321.com/post/63220
+  website: https://www.jhujian.com.tw/tw
   verified: false
 
 貳樓:
@@ -395,8 +377,7 @@ Pizza Rock:
   value: 200
   intro: 樂多多集團的肉控火鍋。當月壽星加入「樂多多 APP」會員後內用，可領 200g 生日肉蛋糕，限一份，點餐前出示證件與兌換券。
   regions: [全台]
-  sources:
-    - https://supertaste.tvbs.com.tw/offers/12611
+  website: https://www.twrododo.com
   verified: false
 
 六角集團(杏子豬排、勝牛):
@@ -406,8 +387,7 @@ Pizza Rock:
   value: 200
   intro: 六角國際旗下的杏子豬排、京都勝牛等，在「六角美食通」APP 發生日當月 8 折券。生日註冊後不能自行修改。
   regions: [全台]
-  sources:
-    - https://vocus.cc/article/65837121fd89780001e662c4
+  website: https://lakaffagroup.com
   verified: false
 
 樂蝦拉麵:
@@ -417,8 +397,7 @@ Pizza Rock:
   value: 198
   intro: 鮮蝦湯頭拉麵。報導中的壽星禮是「四大天王酥炸拼盤」（雞塊、里肌、魚片、牛蒡天婦羅）。
   regions: [台北市, 新北市]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/355618
+  website: https://www.facebook.com/leshrimptw/
   locations:
     - name: 微風南山店
       address: 台北市信義區松智路17號
@@ -448,8 +427,7 @@ Pizza Rock:
   period: 兩個月
   intro: 三商餐飲的牛肉麵連鎖。生日月用三商 i 美食卡 APP 領原汁牛肉麵買一送一。
   regions: [全台]
-  sources:
-    - https://supertaste.tvbs.com.tw/offers/11800
+  website: https://www.mfb.com.tw
   verified: false
 
 添好運:
@@ -459,8 +437,7 @@ Pizza Rock:
   value: 160
   intro: 香港米其林港式點心，2014 年進駐台灣。
   regions: [台北市, 新北市, 桃園市, 台中市, 高雄市]
-  sources:
-    - https://www.foodnext.net/life/recipes/lunch/paper/5234472801
+  website: https://www.facebook.com/timhowan.taiwan/
   verified: false
 
 勝博殿:
@@ -480,8 +457,7 @@ Pizza Rock:
   value: 150
   intro: 2005 年創立的平價壽司，2022 年起由莫凡彼餐飲集團經營，多開在百貨美食街。
   regions: [台北市, 新北市]
-  sources:
-    - https://www.ctee.com.tw/news/20221123700042-430404
+  website: https://mvp-icecream.com.tw/index.php?ac=MenuShow8
   verified: false
 
 焱の挽肉:
@@ -491,8 +467,7 @@ Pizza Rock:
   value: 150
   intro: 炭烤漢堡排專賣，在第一大飯店一樓，只賣午餐（11:30–14:30）。
   regions: [台北市]
-  sources:
-    - https://www.bella.tw/articles/travel&foodies/44577
+  website: https://www.facebook.com/gyen.hamburgersteak/
   locations:
     - name: 南京店
       address: 台北市中山區南京東路二段63號
@@ -507,8 +482,7 @@ Pizza Rock:
   value: 150
   intro: 莫凡彼歐陸餐廳，同集團有尖牙、海壽司、滷春秋，生日禮要用「莫凡彼集團卡」APP 領取。
   regions: [台北市, 新北市]
-  sources:
-    - https://apps.apple.com/tw/app/%E8%8E%AB%E5%87%A1%E5%BD%BC%E9%9B%86%E5%9C%98/id883921127
+  website: https://mvp-icecream.com.tw
   verified: false
 
 尖牙:
@@ -518,8 +492,7 @@ Pizza Rock:
   value: 149
   intro: 尖牙義式廚房，莫凡彼集團的平價義大利麵與披薩。
   regions: [台北市, 新北市]
-  sources:
-    - https://www.ctee.com.tw/news/20221123700042-430404
+  website: https://mvp-icecream.com.tw/fangspasta.html
   verified: false
 
 大河屋:
@@ -529,8 +502,7 @@ Pizza Rock:
   value: 148
   intro: 燒肉丼專賣，丼飯附胡麻豆腐、小松菜與玉子燒，多開在百貨與車站商場。
   regions: [台北市, 高雄市]
-  sources:
-    - https://www.ctee.com.tw/news/20200903700446-431207
+  website: https://www.facebook.com/mitataigaya/
   locations:
     - name: 微風南山店
       address: 台北市信義區松智路17號
@@ -549,8 +521,7 @@ Pizza Rock:
   value: 138
   intro: 日本橋浜町食事処，米塔集團旗下的江戶風日式料理，招牌是鰻魚三食御膳。
   regions: [台北市]
-  sources:
-    - https://cpok.tw/11428
+  website: https://www.facebook.com/hamachou.jp/
   locations:
     - name: 微風南山店
       address: 台北市信義區松智路17號
@@ -566,8 +537,7 @@ Pizza Rock:
   period: 兩個月
   intro: 三商餐飲旗下丼飯品牌，生日券在三商 i 美食卡 APP 領取。
   regions: [全台]
-  sources:
-    - https://supertaste.tvbs.com.tw/offers/11800
+  website: https://www.mfb.com.tw
   verified: false
 
 天成飯店:
@@ -578,8 +548,7 @@ Pizza Rock:
   notes: 免消費
   intro: 台北天成大飯店（北車對面）。生日禮在天成飯店集團的 Cosmos CLUB APP，消費每 100 元累積 1 點。
   regions: [台北市]
-  sources:
-    - https://www.1111.com.tw/news/jobns/153810
+  website: https://www.cosmos-hotel.com.tw
   locations:
     - name: 台北天成大飯店
       address: 台北市中正區忠孝西路一段43號
@@ -594,8 +563,7 @@ Pizza Rock:
   value: 114
   intro: 丸亀製麵，日本讚岐烏龍麵連鎖，全台約 60 多家直營店。
   regions: [全台]
-  sources:
-    - https://udn.com/news/story/120911/8985052
+  website: https://www.toridoll.com.tw/marugame/tw
   verified: false
 
 聚:
@@ -615,8 +583,7 @@ Pizza Rock:
   value: 100
   intro: 養鍋 石頭涮涮鍋，台中起家，石頭爆香湯底，全台 30 多間（台中就有 12 間），價位 288–868 元。
   regions: [全台]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/346374
+  website: https://www.yangguo.com.tw
   locations:
     - name: 台中逢甲店
       address: 台中市西屯區至善路116號
@@ -639,6 +606,13 @@ Pizza Rock:
   platform: Ocard
   offer: 折100
   value: 100
+  regions: [台北市]
+  website: https://www.facebook.com/p/%E7%BE%A9%E9%BA%B5%E5%B1%8B-%E5%8D%97%E4%BA%AC%E4%B8%80%E5%BA%97-100067461693067/
+  locations:
+    - name: 南京一店
+      address: 台北市松山區南京東路五段250巷8號
+      lat: 25.05028
+      lng: 121.56573
   verified: false
 
 波奇波奇:
@@ -648,8 +622,7 @@ Pizza Rock:
   value: 100
   intro: PokéPoké 波奇波奇，夏威夷生魚飯（poke bowl）。網友分享生日月有 100 元折價券。
   regions: [台北市]
-  sources:
-    - https://www.dcard.tw/f/food/p/260307176
+  website: https://www.facebook.com/pokepoketw/
   verified: false
 
 漢來美食:
@@ -677,10 +650,9 @@ Pizza Rock:
   platform: Line
   offer: 買一送一
   value: 100
-  intro: 台式鹹粥與滷味小菜，有台北車站、高雄鳳山等分店。
-  regions: [台北市, 高雄市]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/359475
+  intro: 粥大福・雞湯粥舖，雞湯熬粥與港式拌麵，全台約 65 間門市。
+  regions: [全台]
+  website: https://www.joudafu.com
   verified: false
 
 錢都:
@@ -691,8 +663,6 @@ Pizza Rock:
   intro: 1997 年成立的錢都日式涮涮鍋，昆布湯底。壽星用「錢都餐飲」APP 領肉品兌換券（梅花豬、培根牛肉、雞肉片三選一），需訂位、用餐前告知並出示證件。
   regions: [台北市, 新北市, 桃園市, 新竹縣, 新竹市, 苗栗縣, 彰化縣, 花蓮縣, 台東縣, 高雄市, 宜蘭縣]
   website: https://www.chientu.com.tw
-  sources:
-    - https://supertaste.tvbs.com.tw/offers/10482
   verified: false
 
 裕珍馨:
@@ -703,6 +673,7 @@ Pizza Rock:
   notes: 免消費
   intro: 台中大甲老字號餅店，招牌是奶油酥餅。
   regions: [台北市, 新北市, 桃園市, 台中市, 彰化縣]
+  website: https://www.yjs.com.tw
   verified: false
 
 紅九九:
@@ -712,13 +683,16 @@ Pizza Rock:
   value: 99
   intro: 紅九九個人麻辣鍋，麻辣鴛鴦鍋配蜂巢豆腐、鴨血。
   regions: [台北市]
-  sources:
-    - https://travel.yam.com/article/114579
+  website: https://www.facebook.com/red9999/
   locations:
-    - name: 南京店
-      address: 台北市松山區南京東路四段179巷3號
-      lat: 25.05209
-      lng: 121.55647
+    - name: 市府店
+      address: 台北市信義區逸仙路42巷9號
+      lat: 25.04028
+      lng: 121.5625
+    - name: 延吉店
+      address: 台北市大安區延吉街131巷7號
+      lat: 25.04269
+      lng: 121.55465
   verified: false
 
 31 冰淇淋:
@@ -729,8 +703,7 @@ Pizza Rock:
   notes: 免消費
   intro: Baskin-Robbins 31 冰淇淋，會員 APP 是「31俱樂部」。
   regions: [全台]
-  sources:
-    - https://apps.apple.com/tw/app/id6755289789
+  website: https://br31.tw
   verified: false
 
 雞湯大叔:
@@ -740,8 +713,7 @@ Pizza Rock:
   value: 89
   intro: 雞白湯火鍋，季節限定湯底輪替，部分分店是吃到飽店型。
   regions: [台北市, 桃園市, 台中市]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/345443
+  website: https://broth-master.com
   verified: false
 
 Yayoi:
@@ -771,8 +743,7 @@ MOS:
   value: 70
   intro: 日本東京拉麵名店，在台有本店、信義、光復、神山、台中、高雄武骨等分店，各店菜單不同。
   regions: [台北市, 台中市, 高雄市]
-  sources:
-    - https://udn.com/news/story/7270/9634999
+  website: https://www.menyatw-shop.com.tw
   verified: false
 
 beard papas:
@@ -782,6 +753,7 @@ beard papas:
   value: 65
   intro: 日本泡芙專賣店。
   regions: [全台]
+  website: https://beardpapas.com.tw
   verified: false
 
 朵頤:
@@ -792,8 +764,6 @@ beard papas:
   intro: 饗賓集團的朵頤牛排。前一個月 20 日會在「iEAT 饗愛吃」APP 發 96 折生日券，2026 年起每桌優惠上限 8 人。
   regions: [台北市, 新北市, 台南市]
   website: https://www.eatogether.com.tw
-  sources:
-    - https://news.tvbs.com.tw/life/3224512
   verified: false
 
 定食8:
@@ -803,8 +773,7 @@ beard papas:
   value: 60
   intro: 爭鮮集團的日式定食，2007 年創立，30 多間門市。
   regions: [全台]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/358124
+  website: https://www.sushiexpress.com.tw/teishoku8/index
   verified: false
 
 爭鮮:
@@ -824,6 +793,7 @@ beard papas:
   value: 60
   intro: 彰化起家的三明治老店，招牌是夾心三明治。
   regions: [全台]
+  website: https://www.hrc1947.com
   verified: false
 
 必勝客:
@@ -855,8 +825,7 @@ beard papas:
   value: 50
   intro: 東大門韓國特色料理，台北有西門、中山、長安東路、師大等分店。
   regions: [台北市]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/350273
+  website: https://www.facebook.com/Dongdamen.Taipei/
   locations:
     - name: 西門店
       address: 台北市萬華區昆明街92之1號4樓
@@ -875,8 +844,7 @@ beard papas:
   value: 50
   intro: 順億鮪魚專賣店，有自家船隊，全台約 19 家直營門市。
   regions: [全台]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/352423
+  website: https://www.soonyi.com.tw
   verified: false
 
 星海食事所:
@@ -886,8 +854,7 @@ beard papas:
   value: 50
   intro: 台北大安區延吉街的海鮮丼小店，板前約 11 席，17 種海鮮可自選。
   regions: [台北市]
-  sources:
-    - https://travel.yam.com/article/116070
+  website: https://www.facebook.com/StarHiseafood
   verified: false
 
 大心:
@@ -897,8 +864,7 @@ beard papas:
   value: 50
   intro: 瓦城集團的新泰式麵食。網友分享生日券是單筆滿 250 元折 50 元。
   regions: [全台]
-  sources:
-    - https://www.dcard.tw/f/food/p/260292917
+  website: https://www.bheartnoodles.com
   verified: false
 
 聖瑪莉:
@@ -918,6 +884,7 @@ beard papas:
   value: 40
   intro: 台灣老牌鹹酥雞連鎖。
   regions: [全台]
+  website: https://www.jgssg.com.tw/zh-tw
   verified: false
 
 孫東寶:
@@ -927,8 +894,7 @@ beard papas:
   value: 40
   intro: 平價台式牛排連鎖，Plus 店型有自助吧。
   regions: [全台]
-  sources:
-    - https://supertaste.tvbs.com.tw/food/348637
+  website: https://www.xn--98som070a.tw
   verified: false
 
 爭鮮gogo:

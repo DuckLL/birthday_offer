@@ -28,7 +28,7 @@ const issue = `https://github.com/DuckLL/birthday_offer/issues/new?title=${encod
     {
       website && (
         <a class="btn" href={website} target="_blank" rel="noopener">
-          官方網站
+          {website.includes('facebook.com') ? 'Facebook 粉絲專頁' : '官方網站'}
         </a>
       )
     }
