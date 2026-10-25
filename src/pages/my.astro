@@ -1,0 +1,184 @@
+---
+import Base from '../layouts/Base.astro';
+import { getRestaurants, getShops } from '../lib/data';
+import { detailUrl, markKey, money } from '../lib/shared';
+
+const { items: rs } = await getRestaurants();
+const ss = await getShops();
+const catalog = [
+  ...rs.map((r) => ({ key: markKey('r', r.id), kind: 'r', name: r.id, offer: r.data.offer, value: r.data.value, url: detailUrl('r', r.id) })),
+  ...ss.map((s) => ({
+    key: markKey('s', s.id),
+    kind: 's',
+    name: s.id,
+    offer: s.data.minSpend ? `滿 ${money(s.data.minSpend)} 折 ${money(s.data.discount)}` : `折 ${money(s.data.discount)}`,
+    value: s.data.discount,
+    url: detailUrl('s', s.id),
+  })),
+];
+---
+
+<Base title="我的清單" nav="my">
+  <section class="hero">
+    <div>
+      <h1>我的<em>生日計畫</em></h1>
+      <p>標記只存在這台裝置的瀏覽器。換手機或清除瀏覽資料前，記得先匯出備份。</p>
+    </div>
+    <div class="stats">
+      <div class="stat want"><b id="s-want">0</b><span>想吃 / 想用</span></div>
+      <div class="stat plan"><b id="s-plan">0</b><span>已排日期</span></div>
+      <div class="stat done"><b id="s-done">0</b><span>已完成</span></div>
+      <div class="stat"><b id="s-saved">$0</b><span>已省下</span></div>
+    </div>
+  </section>
+
+  <section class="my-sec">
+    <h2>即將到來 <small>有預計日期、還沒完成</small></h2>
+    <div class="my-list" id="l-plan"></div>
+  </section>
+  <section class="my-sec">
+    <h2>想吃 / 想用 <small>還沒排日期</small></h2>
+    <div class="my-list" id="l-want"></div>
+  </section>
+  <section class="my-sec">
+    <h2>已完成</h2>
+    <div class="my-list" id="l-done"></div>
+  </section>
+
+  <section class="my-sec card">
+    <h2 style="margin-top:0">匯出 / 匯入</h2>
+    <div class="tools">
+      <button class="btn primary" type="button" id="x-json">匯出備份 (JSON)</button>
+      <button class="btn" type="button" id="x-csv">匯出表格 (CSV)</button>
+      <button class="btn" type="button" id="x-ics">匯出行事曆 (.ics)</button>
+      <label class="btn">匯入備份<input type="file" id="i-json" accept="application/json,.json" hidden /></label>
+      <button class="btn danger" type="button" id="x-clear">清除全部標記</button>
+    </div>
+    <p style="color:var(--muted);font-size:14px;margin:10px 0 0">
+      匯入時會和現有標記合併，同一家店以較新的修改為準。行事曆檔可以匯入 Google 日曆或 iPhone 行事曆。
+    </p>
+  </section>
+
+  <script type="application/json" id="catalog" set:html={JSON.stringify(catalog)} />
+
+  <script>
+    import { isValidMarks, loadMarks, mergeMarks, onMarksChange, replaceMarks, type Mark } from '../scripts/marks';
+
+    interface Item {
+      key: string;
+      kind: 'r' | 's';
+      name: string;
+      offer: string;
+      value: number;
+      url: string;
+    }
+    const catalog: Item[] = JSON.parse(document.getElementById('catalog')!.textContent!);
+    const byKey = new Map(catalog.map((c) => [c.key, c]));
+    const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+    const now = new Date();
+    const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
+    function toast(msg: string) {
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.textContent = msg;
+      document.body.append(t);
+      setTimeout(() => t.remove(), 2200);
+    }
+
+    function row(it: Item, m: Mark, date?: string) {
+      const d = date ? `<span class="d ${date < today ? 'past' : ''}">${date.slice(5).replace('-', '/')}</span>` : '<span class="d"></span>';
+      const note = m.note ? ` · ${esc(m.note)}` : '';
+      return `<div class="my-item">${d}<div><a href="${it.url}">${esc(it.name)}</a><p>${esc(it.offer)}${note}</p></div><span class="v">$${it.value}</span></div>`;
+    }
+
+    function render() {
+      const marks = loadMarks();
+      const entries = Object.entries(marks)
+        .map(([k, m]) => ({ it: byKey.get(k), m }))
+        .filter((x): x is { it: Item; m: Mark } => !!x.it);
+      const plan = entries.filter((x) => x.m.plan && x.m.status !== 'done').sort((a, b) => a.m.plan!.localeCompare(b.m.plan!));
+      const want = entries.filter((x) => x.m.status === 'want' && !x.m.plan).sort((a, b) => b.it.value - a.it.value);
+      const done = entries.filter((x) => x.m.status === 'done').sort((a, b) => (b.m.doneAt || '').localeCompare(a.m.doneAt || ''));
+      const fill = (id: string, list: typeof entries, empty: string, dateOf: (m: Mark) => string | undefined) => {
+        document.getElementById(id)!.innerHTML = list.length ? list.map((x) => row(x.it, x.m, dateOf(x.m))).join('') : `<p class="empty">${empty}</p>`;
+      };
+      fill('l-plan', plan, '還沒有排日期。到店家頁或列表上的日曆按鈕設定預計日期。', (m) => m.plan);
+      fill('l-want', want, '還沒有標記想吃的店。', () => undefined);
+      fill('l-done', done, '還沒有完成的優惠。', (m) => m.doneAt);
+      document.getElementById('s-want')!.textContent = String(entries.filter((x) => x.m.status === 'want').length);
+      document.getElementById('s-plan')!.textContent = String(plan.length);
+      document.getElementById('s-done')!.textContent = String(done.length);
+      document.getElementById('s-saved')!.textContent = `$${done.reduce((s, x) => s + x.it.value, 0).toLocaleString('zh-TW')}`;
+    }
+
+    function download(name: string, type: string, body: string) {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([body], { type }));
+      a.download = name;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    }
+    const stamp = () => today.replaceAll('-', '');
+    const statusText = { want: '想', done: '完成' } as const;
+
+    document.getElementById('x-json')!.addEventListener('click', () => {
+      download(`hbd-marks-${stamp()}.json`, 'application/json', JSON.stringify({ app: 'hbd.duckll.tw', version: 1, exportedAt: new Date().toISOString(), marks: loadMarks() }, null, 2));
+    });
+    document.getElementById('x-csv')!.addEventListener('click', () => {
+      const q = (s: unknown) => `"${String(s ?? '').replaceAll('"', '""')}"`;
+      const lines = [['類別', '店家', '優惠', '價值', '狀態', '預計日期', '完成日期', '筆記'].join(',')];
+      for (const [k, m] of Object.entries(loadMarks())) {
+        const it = byKey.get(k);
+        if (!it) continue;
+        lines.push([it.kind === 'r' ? '餐廳' : '商店', it.name, it.offer, it.value, m.status ? statusText[m.status] : '', m.plan, m.doneAt, m.note].map(q).join(','));
+      }
+      // 加 BOM 讓 Excel 正確顯示中文
+      download(`hbd-marks-${stamp()}.csv`, 'text/csv', '﻿' + lines.join('\r\n'));
+    });
+    document.getElementById('x-ics')!.addEventListener('click', () => {
+      const ev = Object.entries(loadMarks()).filter(([k, m]) => m.plan && byKey.has(k));
+      if (!ev.length) return toast('沒有設定預計日期的店家');
+      const fold = (s: string) => s.replace(/[\\;,]/g, (c) => `\\${c}`).replace(/\n/g, '\\n');
+      const out = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//hbd.duckll.tw//birthday offers//ZH', 'CALSCALE:GREGORIAN'];
+      for (const [k, m] of ev) {
+        const it = byKey.get(k)!;
+        const d = m.plan!.replaceAll('-', '');
+        const next = new Date(m.plan! + 'T00:00:00Z');
+        next.setUTCDate(next.getUTCDate() + 1);
+        out.push(
+          'BEGIN:VEVENT',
+          `UID:${encodeURIComponent(k)}-${d}@hbd.duckll.tw`,
+          `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').slice(0, 15)}Z`,
+          `DTSTART;VALUE=DATE:${d}`,
+          `DTEND;VALUE=DATE:${next.toISOString().slice(0, 10).replaceAll('-', '')}`,
+          `SUMMARY:${fold(`🎂 ${it.name}：${it.offer}`)}`,
+          `DESCRIPTION:${fold([m.note, `https://hbd.duckll.tw${it.url}`].filter(Boolean).join('\n'))}`,
+          'END:VEVENT',
+        );
+      }
+      out.push('END:VCALENDAR');
+      download(`hbd-plan-${stamp()}.ics`, 'text/calendar', out.join('\r\n'));
+    });
+    document.getElementById('i-json')!.addEventListener('change', async (e) => {
+      const f = (e.target as HTMLInputElement).files?.[0];
+      if (!f) return;
+      try {
+        const j = JSON.parse(await f.text());
+        const marks = j?.marks ?? j;
+        if (!isValidMarks(marks)) throw new Error('格式不符');
+        mergeMarks(marks);
+        toast(`已匯入 ${Object.keys(marks).length} 筆標記`);
+      } catch (err) {
+        toast(`匯入失敗：${(err as Error).message}`);
+      }
+      (e.target as HTMLInputElement).value = '';
+    });
+    document.getElementById('x-clear')!.addEventListener('click', () => {
+      if (confirm('確定清除這台裝置上的所有標記？建議先匯出備份。')) replaceMarks({});
+    });
+
+    onMarksChange(render);
+    render();
+  </script>
+</Base>

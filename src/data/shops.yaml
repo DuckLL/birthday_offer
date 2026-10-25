@@ -1,0 +1,96 @@
+# 商店生日折價券。key = 店家名稱（不可重複）
+# minSpend = 低消（沒有低消就省略），discount = 折抵金額
+# 實付比例由網站自動計算：(minSpend - discount) / minSpend，沒有低消視為 0（可 100% 折抵）
+
+Uniqlo:
+  category: 服飾
+  minSpend: 1000
+  discount: 100
+  intro: 日本平價服飾，生日券在 UNIQLO APP 會員中心。
+  regions: [全台, 線上]
+  website: https://www.uniqlo.com/tw/
+  verified: false
+
+GU:
+  category: 服飾
+  minSpend: 1000
+  discount: 100
+  intro: UNIQLO 姊妹品牌的平價服飾，生日券在 GU APP。
+  regions: [全台, 線上]
+  website: https://www.gu-global.com/tw/
+  verified: false
+
+良興:
+  category: 3C
+  minSpend: 1000
+  discount: 200
+  intro: 良興電子 / EcLife 良興購物網，門市與線上都能用，會員 APP 是「良興行動金賺」。
+  regions: [全台, 線上]
+  website: https://www.eclife.com.tw
+  sources:
+    - https://www.4gamers.com.tw/news/detail/40214/eclife-e-sports-brand-limited-time
+  verified: false
+
+家樂福家速配店取:
+  category: 量販
+  minSpend: 300
+  discount: 100
+  intro: 家樂福線上購物「家速配」選門市取貨。carrefour.com.tw 目前會轉址到「萬家福」，品牌可能已經改名，請確認。
+  regions: [全台, 線上]
+  website: https://www.uni-prosperity.com.tw
+  verified: false
+
+迪卡儂:
+  category: 運動
+  discount: 100
+  intro: 法國運動用品量販，生日禮在迪卡儂會員 APP。
+  regions: [全台, 線上]
+  website: https://www.decathlon.tw
+  verified: false
+
+鞋全家福:
+  category: 鞋
+  minSpend: 500
+  discount: 100
+  intro: 平價鞋款連鎖，全台約 195 家，官網會員生日月有生日購物金。
+  regions: [全台, 線上]
+  sources:
+    - https://www.nownews.com/news/6666979
+  verified: false
+
+環球購物中心:
+  category: 百貨
+  discount: 100
+  intro: Global Mall，有中和、林口 A8/A9、桃園 A19、板橋車站、南港車站、屏東等館，會員系統是 iMall / GMpay。
+  regions: [新北市, 台北市, 桃園市, 屏東縣]
+  website: https://www.twglobalmall.com
+  sources:
+    - https://uanalyze.com.tw/articles/3920133860
+  verified: false
+
+NET:
+  category: 服飾
+  minSpend: 500
+  discount: 100
+  intro: 台灣本土平價服飾。
+  regions: [全台, 線上]
+  website: https://www.net-fashion.net
+  verified: false
+
+MOMO:
+  category: 量販
+  minSpend: 990
+  discount: 300
+  intro: momo 購物網，生日禮在 momo APP 會員中心。
+  regions: [線上]
+  website: https://www.momoshop.com.tw
+  verified: false
+
+IKEA:
+  category: 家具
+  minSpend: 200
+  discount: 100
+  intro: IKEA Family 會員生日禮。
+  regions: [台北市, 新北市, 桃園市, 新竹縣, 台中市, 台南市, 高雄市, 線上]
+  website: https://www.ikea.com.tw
+  verified: false

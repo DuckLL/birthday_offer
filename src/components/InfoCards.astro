@@ -1,0 +1,103 @@
+---
+// 餐廳與商店詳細頁共用：介紹、分店、連結、來源
+import { mapsSearchUrl } from '../lib/shared';
+import { regionText } from '../lib/data';
+
+interface Props {
+  name: string;
+  intro?: string;
+  regions?: string[];
+  website?: string;
+  sources?: string[];
+  locations?: { name: string; address?: string; lat?: number; lng?: number; approx?: boolean }[];
+  verified: boolean;
+}
+const { name, intro, regions, website, sources, locations, verified } = Astro.props;
+const pins = (locations ?? []).filter((l) => l.lat && l.lng);
+const issue = `https://github.com/DuckLL/birthday_offer/issues/new?title=${encodeURIComponent(`資料更正：${name}`)}`;
+---
+
+<div class="card">
+  <h2>店家資訊</h2>
+  {intro && <p style="margin:0">{intro}</p>}
+  <dl class="kv">
+    <dt>地區</dt>
+    <dd>{regions?.length ? regions.join('、') : regionText(regions)}</dd>
+  </dl>
+  <div class="links" style="margin-top:14px">
+    {
+      website && (
+        <a class="btn" href={website} target="_blank" rel="noopener">
+          官方網站
+        </a>
+      )
+    }
+    <a class="btn" href={mapsSearchUrl(name)} target="_blank" rel="noopener">在 Google 地圖找分店</a>
+  </div>
+  {
+    !verified && (
+      <p class="notice info">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 8h.01M11 12h1v4h1" />
+        </svg>
+        <span>
+          這些店家資訊是自動蒐集，尚待人工確認。<a href={issue}>回報錯誤</a>
+        </span>
+      </p>
+    )
+  }
+</div>
+
+{
+  locations?.length ? (
+    <div class="card">
+      <h2>分店（{locations.length}）</h2>
+      <ul class="branches">
+        {locations.map((l) => (
+          <li>
+            <span>
+              {l.name}
+              {l.address && <small>{l.address}</small>}
+            </span>
+            <a href={mapsSearchUrl(`${name} ${l.address ?? l.name}`)} target="_blank" rel="noopener">
+              導航
+            </a>
+          </li>
+        ))}
+      </ul>
+      {pins.length > 0 && <div class="mini-map" id="mini-map" data-pins={JSON.stringify(pins)} />}
+    </div>
+  ) : null
+}
+
+{
+  sources?.length ? (
+    <div class="card">
+      <h2>資料來源</h2>
+      <ol class="sources">
+        {sources.map((s) => (
+          <li>
+            <a href={s} target="_blank" rel="noopener">
+              {decodeURI(s)}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  ) : null
+}
+
+<script>
+  const el = document.getElementById('mini-map');
+  if (el) {
+    import('../scripts/map').then(({ createMap, pinIcon }) => {
+      import('leaflet').then(({ default: L }) => {
+        const pins = JSON.parse(el.dataset.pins!) as { name: string; lat: number; lng: number }[];
+        const map = createMap(el);
+        for (const p of pins) L.marker([p.lat, p.lng], { icon: pinIcon(), title: p.name }).bindPopup(p.name).addTo(map);
+        map.fitBounds(L.latLngBounds(pins.map((p) => [p.lat, p.lng])), { padding: [30, 30], maxZoom: 15 });
+      });
+    });
+  }
+</script>

@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import MarkControls from '../../components/MarkControls.astro';
+import InfoCards from '../../components/InfoCards.astro';
+import { getShops } from '../../lib/data';
+import { money, ratioLabel } from '../../lib/shared';
+
+export async function getStaticPaths() {
+  const items = await getShops();
+  return items.map((s) => ({ params: { id: s.id }, props: { s } }));
+}
+
+const { s } = Astro.props;
+const d = s.data;
+---
+
+<Base title={`${s.id} 生日折價券`} description={`${s.id} 壽星禮：${d.minSpend ? `滿 ${money(d.minSpend)} ` : ''}折 ${money(d.discount)}。${d.intro ?? ''}`} nav="s">
+  <nav class="crumb"><a href="/shops/">商店</a> / {d.category}</nav>
+  <div class="detail">
+    <div>
+      <h1>{s.id}</h1>
+      <div class="tags">
+        <span class="chip">{d.category}</span>
+        <span class="chip hot">{ratioLabel(s.ratio)}</span>
+      </div>
+      <div class="card">
+        <div class="offer-card">
+          <div class="o">{d.minSpend ? `滿 ${money(d.minSpend)} 折 ${money(d.discount)}` : `折 ${money(d.discount)}（無低消）`}</div>
+          <div class="v">{money(d.discount)}<small>折抵金額</small></div>
+        </div>
+        <dl class="kv">
+          <dt>實付比例</dt>
+          <dd>{s.ratio > 0 ? `剛好買到低消時，約等於打 ${ratioLabel(s.ratio)}` : `買 ${money(d.discount)} 以內的商品等於免費`}</dd>
+          {
+            d.notes && (
+              <>
+                <dt>注意事項</dt>
+                <dd>{d.notes}</dd>
+              </>
+            )
+          }
+        </dl>
+        {
+          d.caution && (
+            <p class="notice warn">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3.5 2.5 20h19L12 3.5ZM12 10v4.5M12 17.5h.01" />
+              </svg>
+              <span>{d.caution}</span>
+            </p>
+          )
+        }
+      </div>
+      <InfoCards name={s.id} intro={d.intro} regions={d.regions} website={d.website} sources={d.sources} locations={d.locations} verified={d.verified} />
+    </div>
+    <aside class="card" style="position:sticky;top:72px">
+      <h2>我的標記</h2>
+      <MarkControls kind="s" id={s.id} full />
+    </aside>
+  </div>
+  <script>
+    import { initMarkControls } from '../../scripts/bind';
+    initMarkControls();
+  </script>
+</Base>

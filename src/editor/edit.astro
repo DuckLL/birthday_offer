@@ -1,0 +1,498 @@
+---
+// 只在 dev 由 integrations/editor.mjs 注入成 /edit
+import '../styles/global.css';
+import { REGION_GROUPS, NATIONWIDE, ONLINE } from '../lib/shared';
+const regions = [NATIONWIDE, ONLINE, ...Object.values(REGION_GROUPS).flat()];
+---
+
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>資料編輯器</title>
+    <meta name="robots" content="noindex" />
+    <style is:global>
+      body {
+        font-size: 14px;
+      }
+      .ed {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 16px;
+        padding: 16px;
+        max-width: 1400px;
+        margin: 0 auto;
+        min-height: 100vh;
+      }
+      .side {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: sticky;
+        top: 16px;
+        height: calc(100vh - 32px);
+      }
+      .side ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        overflow: auto;
+        flex: 1;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+      }
+      .side li button {
+        width: 100%;
+        text-align: left;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        background: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .side li button[aria-current='true'] {
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .side li small {
+        color: var(--muted);
+      }
+      .side li .dirty::after {
+        content: ' •';
+        color: var(--accent);
+      }
+      .bar {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      input,
+      select,
+      textarea {
+        border: 1px solid var(--line);
+        background: var(--bg);
+        border-radius: 8px;
+        padding: 7px 10px;
+        width: 100%;
+        font-weight: 400;
+        color: var(--text);
+      }
+      .form {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        align-content: start;
+      }
+      .form label {
+        display: grid;
+        gap: 4px;
+        font-weight: 600;
+        color: var(--muted);
+      }
+      .form label > span small {
+        font-weight: 400;
+      }
+      .span2 {
+        grid-column: span 2;
+      }
+      .span4 {
+        grid-column: 1 / -1;
+      }
+      .regions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .regions label {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 2px 10px;
+        font-weight: 400;
+        color: var(--text);
+        cursor: pointer;
+      }
+      .regions input {
+        width: auto;
+      }
+      .loc {
+        display: grid;
+        grid-template-columns: 1fr 2fr 100px 100px auto auto auto;
+        gap: 6px;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+      .loc label {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 400;
+        white-space: nowrap;
+      }
+      .loc input[type='checkbox'] {
+        width: auto;
+      }
+      .status {
+        color: var(--muted);
+      }
+      .status.err {
+        color: var(--want);
+        font-weight: 700;
+      }
+      .status.ok {
+        color: var(--done);
+        font-weight: 700;
+      }
+      @media (max-width: 900px) {
+        .ed {
+          grid-template-columns: 1fr;
+        }
+        .side {
+          position: static;
+          height: 40vh;
+        }
+        .form {
+          grid-template-columns: 1fr 1fr;
+        }
+        .loc {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ed">
+      <aside class="side">
+        <div class="bar">
+          <select id="coll">
+            <option value="restaurants">餐廳 restaurants.yaml</option>
+            <option value="shops">商店 shops.yaml</option>
+            <option value="platforms">平台 platforms.yaml</option>
+          </select>
+        </div>
+        <input type="search" id="find" placeholder="搜尋…" />
+        <ul id="entries"></ul>
+        <div class="bar">
+          <button class="btn" id="add" type="button">＋ 新增</button>
+          <button class="btn primary" id="save" type="button">儲存到 YAML</button>
+          <a class="btn" href="/" target="_blank">看網站</a>
+        </div>
+        <div class="status" id="status">載入中…</div>
+      </aside>
+      <section>
+        <div class="form" id="form"></div>
+      </section>
+    </div>
+
+    <script define:vars={{ regions }}>
+      window.__REGIONS = regions;
+    </script>
+    <script>
+      type Entry = Record<string, any> & { id: string };
+      const REGIONS: string[] = (window as any).__REGIONS;
+
+      // 欄位定義：key、標籤、型別、寬度
+      type F = [key: string, label: string, type: 'text' | 'number' | 'textarea' | 'lines' | 'regions' | 'locations' | 'bool' | 'url', span?: 1 | 2 | 4, hint?: string];
+      const COMMON_TAIL: F[] = [
+        ['notes', '備註', 'text', 4, '例如：提前預約、低消2000'],
+        ['intro', '介紹', 'textarea', 4],
+        ['caution', '警示', 'textarea', 4, '例如優惠可能已結束，會在列表顯示驚嘆號'],
+        ['regions', '地區', 'regions', 4],
+        ['website', '官網', 'url', 2],
+        ['verified', '已人工確認', 'bool', 2],
+        ['sources', '資料來源', 'lines', 4, '一行一個網址'],
+        ['locations', '分店', 'locations', 4, '填地址後按「定位」取得座標，地圖才會顯示'],
+      ];
+      const SCHEMA: Record<string, F[]> = {
+        restaurants: [
+          ['id', '店家名稱（唯一）', 'text', 2],
+          ['category', '類型', 'text', 1],
+          ['platform', '平台', 'text', 1, '要和平台 YAML 的名稱一致'],
+          ['offer', '優惠', 'text', 2],
+          ['value', '價值', 'number', 1],
+          ['period', '期限', 'text', 1, '當天 / 兩個月，空白=當月'],
+          ...COMMON_TAIL,
+        ],
+        shops: [
+          ['id', '商店名稱（唯一）', 'text', 2],
+          ['category', '類型', 'text', 2],
+          ['minSpend', '低消', 'number', 2, '沒有低消就留空'],
+          ['discount', '折抵', 'number', 2],
+          ...COMMON_TAIL,
+        ],
+        platforms: [
+          ['id', '平台名稱', 'text', 2],
+          ['url', '網址', 'url', 2],
+          ['intro', '說明', 'textarea', 4],
+        ],
+      };
+
+      const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+      let coll = 'restaurants';
+      let entries: Entry[] = [];
+      let hash = '';
+      let sel = 0;
+      let dirty = false;
+      const options: Record<string, Set<string>> = {};
+
+      const status = (msg: string, cls = '') => {
+        const s = $('status');
+        s.textContent = msg;
+        s.className = `status ${cls}`;
+      };
+
+      async function load() {
+        const r = await fetch(`/__edit/api/data/${coll}`);
+        const j = await r.json();
+        entries = j.entries;
+        hash = j.hash;
+        sel = 0;
+        setDirty(false);
+        for (const k of ['category', 'platform', 'period']) options[k] = new Set(entries.map((e) => e[k]).filter(Boolean));
+        renderList();
+        renderForm();
+        status(`${entries.length} 筆`);
+      }
+
+      function setDirty(d: boolean) {
+        dirty = d;
+        $('save').textContent = d ? '儲存到 YAML *' : '儲存到 YAML';
+      }
+
+      function dupIds() {
+        const seen = new Map<string, number>();
+        entries.forEach((e) => seen.set(e.id.trim(), (seen.get(e.id.trim()) ?? 0) + 1));
+        return new Set([...seen].filter(([, n]) => n > 1).map(([k]) => k));
+      }
+
+      function renderList() {
+        const q = $<HTMLInputElement>('find').value.trim().toLowerCase();
+        const dups = dupIds();
+        $('entries').innerHTML = '';
+        entries.forEach((e, i) => {
+          if (q && !JSON.stringify(e).toLowerCase().includes(q)) return;
+          const li = document.createElement('li');
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.setAttribute('aria-current', String(i === sel));
+          const name = document.createElement('span');
+          name.textContent = e.id || '（未命名）';
+          if (dups.has(e.id.trim())) name.style.color = 'var(--want)';
+          const sm = document.createElement('small');
+          sm.textContent = e.value != null ? `$${e.value}` : e.discount != null ? `折${e.discount}` : '';
+          b.append(name, sm);
+          b.onclick = () => {
+            sel = i;
+            renderList();
+            renderForm();
+          };
+          li.append(b);
+          $('entries').append(li);
+        });
+      }
+
+      function field(e: Entry, [key, label, type, span = 1, hint]: F) {
+        const wrap = document.createElement('label');
+        wrap.className = span === 4 ? 'span4' : span === 2 ? 'span2' : '';
+        wrap.innerHTML = `<span>${label}${hint ? ` <small>${hint}</small>` : ''}</span>`;
+        const change = (v: unknown) => {
+          const empty = v === '' || v == null || (Array.isArray(v) && !v.length);
+          if (empty && key !== 'id') delete e[key];
+          else e[key] = v;
+          setDirty(true);
+          if (key === 'id' || key === 'value' || key === 'discount') renderList();
+        };
+        if (type === 'text' || type === 'url' || type === 'number') {
+          const i = document.createElement('input');
+          i.type = type === 'number' ? 'number' : 'text';
+          i.value = e[key] ?? '';
+          if (options[key]) {
+            i.setAttribute('list', `dl-${key}`);
+            const dl = document.createElement('datalist');
+            dl.id = `dl-${key}`;
+            options[key].forEach((o) => dl.append(new Option(o)));
+            wrap.append(dl);
+          }
+          i.oninput = () => change(type === 'number' ? (i.value === '' ? undefined : Number(i.value)) : i.value);
+          wrap.append(i);
+        } else if (type === 'textarea' || type === 'lines') {
+          const t = document.createElement('textarea');
+          t.rows = type === 'lines' ? 3 : 2;
+          t.value = type === 'lines' ? (e[key] ?? []).join('\n') : (e[key] ?? '');
+          t.oninput = () =>
+            change(
+              type === 'lines'
+                ? t.value
+                    .split('\n')
+                    .map((s) => s.trim())
+                    .filter(Boolean)
+                : t.value,
+            );
+          wrap.append(t);
+        } else if (type === 'bool') {
+          const i = document.createElement('input');
+          i.type = 'checkbox';
+          i.style.width = 'auto';
+          i.checked = !!e[key];
+          i.onchange = () => change(i.checked);
+          wrap.append(i);
+        } else if (type === 'regions') {
+          const box = document.createElement('div');
+          box.className = 'regions';
+          for (const r of REGIONS) {
+            const l = document.createElement('label');
+            const c = document.createElement('input');
+            c.type = 'checkbox';
+            c.checked = (e[key] ?? []).includes(r);
+            c.onchange = () => {
+              const cur = new Set<string>(e[key] ?? []);
+              c.checked ? cur.add(r) : cur.delete(r);
+              change(REGIONS.filter((x) => cur.has(x)));
+            };
+            l.append(c, r);
+            box.append(l);
+          }
+          wrap.append(box);
+        } else if (type === 'locations') {
+          const box = document.createElement('div');
+          const draw = () => {
+            box.innerHTML = '';
+            (e[key] ?? []).forEach((loc: any, i: number) => {
+              const row = document.createElement('div');
+              row.className = 'loc';
+              const inp = (k: string, ph: string, num = false) => {
+                const x = document.createElement('input');
+                x.placeholder = ph;
+                x.value = loc[k] ?? '';
+                if (num) x.inputMode = 'decimal';
+                x.oninput = () => {
+                  const v = num ? (x.value === '' ? undefined : Number(x.value)) : x.value;
+                  if (v === '' || v === undefined) delete loc[k];
+                  else loc[k] = v;
+                  setDirty(true);
+                };
+                return x;
+              };
+              const approx = document.createElement('label');
+              const ac = document.createElement('input');
+              ac.type = 'checkbox';
+              ac.checked = !!loc.approx;
+              ac.onchange = () => {
+                ac.checked ? (loc.approx = true) : delete loc.approx;
+                setDirty(true);
+              };
+              approx.append(ac, '大略');
+              const geo = document.createElement('button');
+              geo.type = 'button';
+              geo.className = 'btn';
+              geo.textContent = '定位';
+              geo.onclick = async () => {
+                if (!loc.address) return status('請先填地址', 'err');
+                geo.disabled = true;
+                const r = await fetch(`/__edit/api/geocode?q=${encodeURIComponent(loc.address)}`);
+                const j = await r.json();
+                geo.disabled = false;
+                if (!r.ok) return status(j.error, 'err');
+                loc.lat = j.lat;
+                loc.lng = j.lng;
+                j.approx ? (loc.approx = true) : delete loc.approx;
+                setDirty(true);
+                draw();
+                status(`${loc.name} 已定位${j.approx ? '（大略位置）' : ''}`, 'ok');
+              };
+              const del = document.createElement('button');
+              del.type = 'button';
+              del.className = 'btn danger';
+              del.textContent = '✕';
+              del.onclick = () => {
+                e[key].splice(i, 1);
+                if (!e[key].length) delete e[key];
+                setDirty(true);
+                draw();
+              };
+              row.append(inp('name', '分店名'), inp('address', '地址'), inp('lat', 'lat', true), inp('lng', 'lng', true), approx, geo, del);
+              box.append(row);
+            });
+            const add = document.createElement('button');
+            add.type = 'button';
+            add.className = 'btn';
+            add.textContent = '＋ 分店';
+            add.onclick = () => {
+              (e[key] ??= []).push({ name: '' });
+              draw();
+            };
+            box.append(add);
+          };
+          draw();
+          wrap.append(box);
+        }
+        return wrap;
+      }
+
+      function renderForm() {
+        const form = $('form');
+        form.innerHTML = '';
+        const e = entries[sel];
+        if (!e) return;
+        for (const f of SCHEMA[coll]) form.append(field(e, f));
+        const del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'btn danger';
+        del.textContent = `刪除「${e.id}」`;
+        del.onclick = () => {
+          if (!confirm(`刪除「${e.id}」？`)) return;
+          entries.splice(sel, 1);
+          sel = Math.max(0, sel - 1);
+          setDirty(true);
+          renderList();
+          renderForm();
+        };
+        const wrap = document.createElement('div');
+        wrap.className = 'span4';
+        wrap.append(del);
+        form.append(wrap);
+      }
+
+      $('coll').onchange = async () => {
+        if (dirty && !confirm('有未儲存的修改，確定切換？')) {
+          $<HTMLSelectElement>('coll').value = coll;
+          return;
+        }
+        coll = $<HTMLSelectElement>('coll').value;
+        await load();
+      };
+      $('find').oninput = renderList;
+      $('add').onclick = () => {
+        const base: Entry = coll === 'restaurants' ? { id: '新店家', category: '', offer: '', value: 0, verified: false } : coll === 'shops' ? { id: '新商店', category: '', discount: 0, verified: false } : { id: '新平台', intro: '' };
+        entries.push(base);
+        sel = entries.length - 1;
+        setDirty(true);
+        renderList();
+        renderForm();
+      };
+      $('save').onclick = async () => {
+        const dups = dupIds();
+        if (dups.size) return status(`名稱重複：${[...dups].join('、')}`, 'err');
+        const r = await fetch(`/__edit/api/data/${coll}`, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ hash, entries }) });
+        const j = await r.json();
+        if (!r.ok) return status(j.error, 'err');
+        hash = j.hash;
+        setDirty(false);
+        status('已儲存，網站會自動更新', 'ok');
+      };
+      window.addEventListener('beforeunload', (e) => {
+        if (dirty) e.preventDefault();
+      });
+      load();
+    </script>
+  </body>
+</html>

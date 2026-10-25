@@ -1,0 +1,139 @@
+---
+import Base from '../layouts/Base.astro';
+import MarkControls from '../components/MarkControls.astro';
+import { getShops, regionText } from '../lib/data';
+import { REGION_GROUPS, ONLINE, detailUrl, markKey, money, ratioLabel } from '../lib/shared';
+
+const items = await getShops();
+const total = items.reduce((s, x) => s + x.data.discount, 0);
+const cats = [...new Set(items.map((s) => s.data.category))];
+---
+
+<Base title="商店生日折價券" nav="s">
+  <section class="hero">
+    <div>
+      <h1>壽星購物<em>折價券</em></h1>
+      <p>{items.length} 間商店的生日券，全部用完共折 <b>{money(total)}</b>。「實付比例」是剛好買到低消時等於打幾折，數字越低越划算。</p>
+    </div>
+    <div class="stats" id="my-stats" aria-live="polite">
+      <div class="stat want"><b data-stat="want">0</b><span>想用</span></div>
+      <div class="stat plan"><b data-stat="plan">0</b><span>已排日期</span></div>
+      <div class="stat done"><b data-stat="done">0</b><span>用過</span></div>
+      <div class="stat"><b data-stat="saved">$0</b><span>已折抵</span></div>
+    </div>
+  </section>
+
+  <section class="filters" data-kind="s" aria-label="篩選">
+    <div class="f-row">
+      <label class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4.2-4.2"></path></svg>
+        <span class="sr-only">搜尋</span>
+        <input type="search" id="f-q" placeholder="搜尋商店…" autocomplete="off" />
+      </label>
+      <select id="f-region" aria-label="地區">
+        <option value="">全部地區</option>
+        <option value={ONLINE}>線上</option>
+        {
+          Object.entries(REGION_GROUPS).map(([g, list]) => (
+            <optgroup label={g}>
+              {list.map((c) => (
+                <option value={c}>{c}</option>
+              ))}
+            </optgroup>
+          ))
+        }
+      </select>
+      <select id="f-sort" aria-label="排序">
+        <option value="ratio">最划算（實付比例低）</option>
+        <option value="value-desc">折抵金額高 → 低</option>
+        <option value="min">低消低 → 高</option>
+        <option value="name">店名</option>
+        <option value="plan">預計日期</option>
+      </select>
+      <select id="f-status" aria-label="我的標記">
+        <option value="">全部標記</option>
+        <option value="none">還沒標記</option>
+        <option value="want">想用</option>
+        <option value="plan">有預計日期</option>
+        <option value="done">用過</option>
+        <option value="hide-done">隱藏用過</option>
+      </select>
+    </div>
+    <div class="chips" id="f-cats" role="group" aria-label="類型">
+      {
+        cats.map((c) => (
+          <button type="button" class="chip-btn" data-cat={c} aria-pressed="false">
+            {c}
+          </button>
+        ))
+      }
+    </div>
+  </section>
+
+  <div class="resultbar"><span id="result-text"></span></div>
+
+  <section class="list shops" id="list" aria-label="商店列表">
+    <div class="list-head" role="row">
+      <span>商店</span><span>類型</span><span>低消</span><span>折抵</span><button type="button" data-sort="ratio">實付比例</button><span>地區</span><span>我的標記</span>
+    </div>
+    {
+      items.map((s) => {
+        const d = s.data;
+        const regions = d.regions ?? [];
+        return (
+          <article
+            class="item"
+            data-key={markKey('s', s.id)}
+            data-name={s.id}
+            data-cat={d.category}
+            data-value={d.discount}
+            data-ratio={s.ratio}
+            data-min={d.minSpend ?? 0}
+            data-regions={regions.join('|')}
+            data-q={[s.id, d.category, d.intro, d.notes, ...regions].filter(Boolean).join(' ').toLowerCase()}
+          >
+            <div class="c-name">
+              <a href={detailUrl('s', s.id)}>{s.id}</a>
+              {d.intro && <p class="intro">{d.intro}</p>}
+            </div>
+            <div class="c-cat">
+              <span class="chip">{d.category}</span>
+            </div>
+            <div class="c-min">{d.minSpend ? money(d.minSpend) : '無'}</div>
+            <div class="c-disc c-value" style="font-size:15px">
+              {money(d.discount)}
+            </div>
+            <div class="c-offer ratio">
+              <span>{ratioLabel(s.ratio)}</span>
+              <span class="bar" aria-hidden="true">
+                <i style={`width:${Math.round((1 - s.ratio) * 100)}%`} />
+              </span>
+            </div>
+            <div class="c-region" title={regions.join('、')}>
+              {regionText(regions)}
+            </div>
+            <div class="meta-row">
+              <span class="chip">{d.category}</span>
+              <span class="chip">{d.minSpend ? `低消 ${money(d.minSpend)}` : '無低消'}</span>
+              <span class="chip hot">折 {money(d.discount)}</span>
+              <span class="chip">{regionText(regions)}</span>
+            </div>
+            <div class="c-marks">
+              <MarkControls kind="s" id={s.id} />
+            </div>
+          </article>
+        );
+      })
+    }
+    <p class="empty" id="empty" hidden>沒有符合條件的商店。</p>
+  </section>
+
+  <script>
+    import { initMarkControls } from '../scripts/bind';
+    import { initList } from '../scripts/list';
+    import { initStats } from '../scripts/stats';
+    initMarkControls();
+    initStats();
+    initList();
+  </script>
+</Base>

@@ -1,0 +1,46 @@
+---
+import { markKey, type Kind } from '../lib/shared';
+
+interface Props {
+  kind: Kind;
+  id: string;
+  full?: boolean;
+}
+const { kind, id, full = false } = Astro.props;
+const doneLabel = kind === 'r' ? '吃過' : '用過';
+const wantLabel = kind === 'r' ? '想吃' : '想用';
+---
+
+<div class:list={['marks', { full }]} data-mark-key={markKey(kind, id)}>
+  <button type="button" class="mk mk-want" data-act="want" aria-pressed="false" title={wantLabel}>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.1A4.4 4.4 0 0 1 12 7.6a4.4 4.4 0 0 1 7.5 2.8c0 5.5-7.5 10.1-7.5 10.1Z"></path></svg>
+    <span>{wantLabel}</span>
+  </button>
+  <button type="button" class="mk mk-done" data-act="done" aria-pressed="false" title={doneLabel}>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg>
+    <span>{doneLabel}</span>
+  </button>
+  {
+    full ? (
+      <>
+        <label class="mk-date">
+          <span>預計日期</span>
+          <input type="date" data-act="plan" />
+        </label>
+        <label class="mk-note">
+          <span>我的筆記</span>
+          <textarea data-act="note" rows="2" placeholder="例如：已訂位週六 19:00、記得帶身分證" />
+        </label>
+      </>
+    ) : (
+      <span class="mk mk-plan" title="預計日期">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="4" y="5.5" width="16" height="14.5" rx="2.5" />
+          <path d="M4 10h16M8.5 3.5v4M15.5 3.5v4" />
+        </svg>
+        <span data-plan-label />
+        <input type="date" data-act="plan" aria-label="預計日期" />
+      </span>
+    )
+  }
+</div>
