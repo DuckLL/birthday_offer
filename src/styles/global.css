@@ -1412,16 +1412,22 @@ svg {
   gap: 8px;
 }
 .my-item {
-  display: grid;
-  grid-template-columns: 76px 1fr auto;
-  gap: 4px 12px;
+  display: flex;
   align-items: center;
+  gap: 12px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 10px 14px;
+  padding: 10px 10px 10px 14px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.my-item:hover {
+  border-color: var(--accent);
 }
 .my-item .d {
+  flex: 0 0 48px;
   font-weight: 700;
   color: var(--plan);
   font-variant-numeric: tabular-nums;
@@ -1429,18 +1435,44 @@ svg {
 .my-item .d.past {
   color: var(--muted);
 }
-.my-item a {
-  font-weight: 700;
-  text-decoration: none;
+/* 店名、優惠、筆記同一行，太長就截斷 */
+.my-item .main {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.my-item p {
-  margin: 0;
+.my-item .main b {
+  font-weight: 700;
+}
+.my-item .offer,
+.my-item .note {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
+  margin-left: 10px;
+}
+.my-item .note::before {
+  content: '· ';
 }
 .my-item .v {
   font-weight: 800;
   color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.my-item .go {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--muted);
+}
+@media (max-width: 640px) {
+  .my-item .main {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
 }
 .empty {
   color: var(--muted);

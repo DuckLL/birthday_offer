@@ -86,10 +86,16 @@ const catalog = [
       setTimeout(() => t.remove(), 2200);
     }
 
+    // 整列是一個連結，點了由 modal 打開詳細資訊
     function row(it: Item, m: Mark, date?: string) {
-      const d = date ? `<span class="d ${date < today ? 'past' : ''}">${date.slice(5).replace('-', '/')}</span>` : '<span class="d"></span>';
-      const note = m.note ? ` · ${esc(m.note)}` : '';
-      return `<div class="my-item">${d}<div><a href="${it.url}">${esc(it.name)}</a><p>${esc(it.offer)}${note}</p></div><span class="v">$${it.value}</span></div>`;
+      const d = date ? `<span class="d ${date < today ? 'past' : ''}">${date.slice(5).replace('-', '/')}</span>` : '';
+      const note = m.note ? `<span class="note">${esc(m.note)}</span>` : '';
+      return (
+        `<a class="my-item" href="${it.url}">${d}` +
+        `<span class="main"><b>${esc(it.name)}</b><span class="offer">${esc(it.offer)}</span>${note}</span>` +
+        `<span class="v">$${it.value}</span>` +
+        `<svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></a>`
+      );
     }
 
     function render() {
