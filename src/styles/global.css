@@ -192,7 +192,7 @@ svg {
   .site-head .wrap {
     gap: 8px;
   }
-  .brand span {
+  .brand-sub {
     display: none;
   }
   .nav a {

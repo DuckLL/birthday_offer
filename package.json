@@ -1,5 +1,6 @@
 {
   "name": "birthday-offer",
+  "license": "MIT",
   "type": "module",
   "private": true,
   "scripts": {

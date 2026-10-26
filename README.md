@@ -1,4 +1,4 @@
-# HBD 生日優惠
+# DuckLL 的壽星優惠攻略
 
 壽星生日優惠一覽：<https://hbd.duckll.tw>
 
@@ -99,3 +99,8 @@ Ocard:
 - 平台名稱用 APP 在 App Store / Google Play 上的正式名稱（例如 `王品瘋美食`、`PK雙饗卡`），`url` 放 App Store 連結。
 - 補分店座標可以在 dev server 開著時呼叫 `GET /__edit/api/geocode?q=<地址>`。
 - 改完跑 `npm run build` 確認通過。
+
+## 授權
+
+- 程式碼：[MIT License](LICENSE)，© DuckLL
+- 優惠資料（`src/data/*.yaml`）：[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant)，轉載或再利用請註明出處「DuckLL 的壽星優惠攻略 <https://hbd.duckll.tw>」
