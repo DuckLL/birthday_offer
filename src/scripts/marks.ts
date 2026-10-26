@@ -4,7 +4,7 @@ export interface Mark {
   status?: Status;
   plan?: string; // YYYY-MM-DD
   note?: string;
-  doneAt?: string; // YYYY-MM-DD
+  doneAt?: string; // YYYY-MM-DD，實際使用日期：有預計日期就用它，否則是按下「吃過」的那天
   updated: string; // ISO
 }
 export type Marks = Record<string, Mark>;
@@ -46,12 +46,19 @@ export function getMark(key: string): Mark | undefined {
 export function updateMark(key: string, patch: Partial<Omit<Mark, 'updated'>>) {
   const all = { ...loadMarks() };
   const next: Mark = { ...all[key], ...patch, updated: new Date().toISOString() };
-  if (patch.status === 'done' && !next.doneAt) next.doneAt = today();
+  // 預計日期優先當作使用日期，所以可以先填過去的日期再按「吃過」補記
+  if (patch.status === 'done') next.doneAt = next.plan || today();
+  else if ('plan' in patch && next.status === 'done') next.doneAt = patch.plan || next.doneAt || today();
   if ('status' in patch && patch.status !== 'done') delete next.doneAt;
   for (const k of ['status', 'plan', 'note', 'doneAt'] as const) if (!next[k]) delete next[k];
   if (!next.status && !next.plan && !next.note) delete all[key];
   else all[key] = next;
   save(all);
+}
+
+/** 使用日期（只有吃過 / 用過才有）；舊資料若有預計日期也以它為準 */
+export function usedDate(m: Mark | undefined) {
+  return m?.status === 'done' ? m.plan || m.doneAt : undefined;
 }
 
 export function toggleStatus(key: string, s: Status) {

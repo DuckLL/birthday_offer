@@ -62,7 +62,7 @@ const catalog = [
   <script type="application/json" id="catalog" set:html={JSON.stringify(catalog)} />
 
   <script>
-    import { isValidMarks, loadMarks, mergeMarks, onMarksChange, replaceMarks, type Mark } from '../scripts/marks';
+    import { isValidMarks, loadMarks, mergeMarks, onMarksChange, replaceMarks, usedDate, type Mark } from '../scripts/marks';
 
     interface Item {
       key: string;
@@ -105,13 +105,13 @@ const catalog = [
         .filter((x): x is { it: Item; m: Mark } => !!x.it);
       const plan = entries.filter((x) => x.m.plan && x.m.status !== 'done').sort((a, b) => a.m.plan!.localeCompare(b.m.plan!));
       const want = entries.filter((x) => x.m.status === 'want' && !x.m.plan).sort((a, b) => b.it.value - a.it.value);
-      const done = entries.filter((x) => x.m.status === 'done').sort((a, b) => (b.m.doneAt || '').localeCompare(a.m.doneAt || ''));
+      const done = entries.filter((x) => x.m.status === 'done').sort((a, b) => (usedDate(b.m) || '').localeCompare(usedDate(a.m) || ''));
       const fill = (id: string, list: typeof entries, empty: string, dateOf: (m: Mark) => string | undefined) => {
         document.getElementById(id)!.innerHTML = list.length ? list.map((x) => row(x.it, x.m, dateOf(x.m))).join('') : `<p class="empty">${empty}</p>`;
       };
       fill('l-plan', plan, '還沒有排日期。到店家頁或列表上的日曆按鈕設定預計日期。', (m) => m.plan);
       fill('l-want', want, '還沒有標記想吃的店。', () => undefined);
-      fill('l-done', done, '還沒有完成的優惠。', (m) => m.doneAt);
+      fill('l-done', done, '還沒有完成的優惠。', usedDate);
       document.getElementById('s-want')!.textContent = String(entries.filter((x) => x.m.status === 'want').length);
       document.getElementById('s-plan')!.textContent = String(plan.length);
       document.getElementById('s-done')!.textContent = String(done.length);
@@ -137,7 +137,7 @@ const catalog = [
       for (const [k, m] of Object.entries(loadMarks())) {
         const it = byKey.get(k);
         if (!it) continue;
-        lines.push([it.kind === 'r' ? '餐廳' : '商店', it.name, it.offer, it.value, m.status ? statusText[m.status] : '', m.plan, m.doneAt, m.note].map(q).join(','));
+        lines.push([it.kind === 'r' ? '餐廳' : '商店', it.name, it.offer, it.value, m.status ? statusText[m.status] : '', m.plan, usedDate(m), m.note].map(q).join(','));
       }
       // 加 BOM 讓 Excel 正確顯示中文
       download(`hbd-marks-${stamp()}.csv`, 'text/csv', '﻿' + lines.join('\r\n'));

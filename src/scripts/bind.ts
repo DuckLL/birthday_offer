@@ -1,5 +1,5 @@
 // 把頁面上所有 [data-mark-key] 控制項接到 localStorage
-import { getMark, onMarksChange, toggleStatus, updateMark } from './marks';
+import { getMark, onMarksChange, toggleStatus, updateMark, usedDate } from './marks';
 
 export function sync(root: ParentNode = document) {
   root.querySelectorAll<HTMLElement>('[data-mark-key]').forEach((box) => {
@@ -10,9 +10,13 @@ export function sync(root: ParentNode = document) {
       if (b.dataset.act === 'want' || b.dataset.act === 'done') b.setAttribute('aria-pressed', String(m?.status === b.dataset.act));
     });
     const plan = box.querySelector<HTMLInputElement>('input[data-act=plan]');
-    if (plan && document.activeElement !== plan) plan.value = m?.plan ?? '';
+    // 吃過之後同一個日期欄位就是使用日期
+    const date = usedDate(m) ?? m?.plan;
+    if (plan && document.activeElement !== plan) plan.value = date ?? '';
     const planLabel = box.querySelector<HTMLElement>('[data-plan-label]');
-    if (planLabel) planLabel.textContent = m?.plan ? m.plan.slice(5).replace('-', '/') : '';
+    if (planLabel) planLabel.textContent = date ? date.slice(5).replace('-', '/') : '';
+    const dateTitle = box.querySelector<HTMLElement>('[data-date-title]');
+    if (dateTitle) dateTitle.textContent = m?.status === 'done' ? dateTitle.dataset.doneText! : dateTitle.dataset.planText!;
     const note = box.querySelector<HTMLTextAreaElement>('textarea[data-act=note]');
     if (note && document.activeElement !== note) note.value = m?.note ?? '';
   });

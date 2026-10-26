@@ -24,7 +24,9 @@ const wantLabel = kind === 'r' ? '想吃' : '想用';
     full ? (
       <>
         <label class="mk-date">
-          <span>預計日期</span>
+          <span data-date-title data-plan-text="預計日期" data-done-text={`${doneLabel}的日期`}>
+            預計日期
+          </span>
           <input type="date" data-act="plan" />
         </label>
         <label class="mk-note">
@@ -33,13 +35,13 @@ const wantLabel = kind === 'r' ? '想吃' : '想用';
         </label>
       </>
     ) : (
-      <span class="mk mk-plan" title="預計日期">
+      <span class="mk mk-plan" title="預計日期（吃過後是使用日期，可填過去的日期補記）">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <rect x="4" y="5.5" width="16" height="14.5" rx="2.5" />
           <path d="M4 10h16M8.5 3.5v4M15.5 3.5v4" />
         </svg>
         <span data-plan-label />
-        <input type="date" data-act="plan" aria-label="預計日期" />
+        <input type="date" data-act="plan" aria-label="預計或使用日期" />
       </span>
     )
   }
