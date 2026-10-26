@@ -38,7 +38,7 @@
   updated: 2026-10-26
   verified: false
 
-泰滾:
+泰滾 Rolling Thai:
   category: 火鍋
   platform: Ocard
   offer: 幾歲送幾隻蝦
@@ -50,7 +50,7 @@
   updated: 2026-10-26
   verified: false
 
-米塔義式:
+米塔義式廚房:
   category: 義式
   platform: Ocard
   offer: 幾歲送幾隻蝦
@@ -94,7 +94,7 @@
   updated: 2026-10-26
   verified: false
 
-默爾 pasta pizza:
+MORE 默爾義大利餐廳:
   category: 義式
   platform: Ocard
   offer: 義大利麵買一送一
@@ -118,7 +118,7 @@
   updated: 2026-10-26
   verified: false
 
-布納咖啡館:
+BUNA CAF'E 布納咖啡館:
   category: 套餐
   platform: Line
   offer: 當月九折、當天蛋糕
@@ -151,7 +151,7 @@
   updated: 2026-10-26
   verified: false
 
-銷魂麵舖:
+大師兄銷魂麵舖:
   category: 中式
   platform: Ocard
   offer: 套餐買一送一、免費麵
@@ -216,7 +216,7 @@
   updated: 2026-10-26
   verified: false
 
-羽樂:
+Ulove 羽樂歐陸創意料理:
   category: 義式
   platform: Ocard
   offer: 八八折+蛋糕
@@ -239,7 +239,7 @@
   updated: 2026-10-26
   verified: false
 
-這味泰泰:
+這味泰泰 Mrs. Thai:
   category: 泰式
   platform: Ocard
   offer: 主餐買一送一
@@ -287,7 +287,7 @@
   updated: 2026-10-26
   verified: false
 
-創義麵:
+創義麵 Creative Pasta:
   category: 義式
   platform: Ocard
   offer: 套餐+前菜+甜點
@@ -310,7 +310,7 @@
   updated: 2026-10-26
   verified: false
 
-Woosa:
+Woosa 洋食鬆餅屋:
   category: 日式
   platform: Ocard
   offer: 薯條
@@ -334,7 +334,7 @@ Woosa:
   updated: 2026-10-26
   verified: false
 
-Pizza Rock:
+Pizza Rock 搖滾披薩:
   category: 義式
   offer: 8吋披薩or烤布蕾
   value: 200
@@ -355,7 +355,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-自己做烘焙:
+自己做烘焙聚樂部:
   category: 甜點
   offer: 免費DIY蛋糕
   value: 200
@@ -376,7 +376,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-築間:
+築間幸福鍋物:
   category: 火鍋
   platform: Ocard
   offer: 五選一
@@ -387,7 +387,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-貳樓:
+貳樓 Second Floor:
   category: 義式
   platform: Line
   offer: 生日蛋糕
@@ -398,9 +398,9 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-肉多多:
+肉多多火鍋:
   category: 火鍋
-  platform: 自家APP
+  platform: 樂多多
   offer: 肉蛋糕
   value: 200
   intro: 樂多多集團的肉控火鍋。當月壽星加入「樂多多 APP」會員後內用，可領 200g 生日肉蛋糕，限一份，點餐前出示證件與兌換券。
@@ -409,7 +409,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-六角集團(杏子豬排、勝牛):
+六角國際（杏子豬排、京都勝牛）:
   category: 定食
   platform: 美食通
   offer: 八折
@@ -440,7 +440,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-瓦城集團:
+瓦城泰統集團:
   category: 泰式
   platform: wa10
   offer: 甜點
@@ -463,7 +463,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-添好運:
+添好運點心專門店:
   category: 中式
   platform: Ocard
   offer: 甜點+100折價
@@ -474,7 +474,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-勝博殿:
+勝博殿日式豬排:
   category: 日式
   platform: Line
   offer: 唐揚雞塊或薩摩炸魚板
@@ -512,7 +512,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-莫凡彼:
+莫凡彼歐陸餐廳:
   category: 義式
   platform: 莫凡彼
   offer: 甜點
@@ -523,7 +523,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-尖牙:
+尖牙義式廚房:
   category: 義式
   platform: 莫凡彼
   offer: pizza
@@ -554,7 +554,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-浜町食事處:
+日本橋浜町食事処:
   category: 日式
   platform: Ocard
   offer: 鮭魚卵茶碗蒸
@@ -582,7 +582,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-天成飯店:
+台北天成大飯店:
   category: 甜點
   platform: Cosmos club
   offer: 免消費拿蛋糕
@@ -599,7 +599,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-丸龜:
+丸亀製麵:
   category: 日式
   platform: Line
   offer: 豆皮烏龍買一送一
@@ -610,7 +610,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-聚:
+聚日式鍋物:
   category: 火鍋
   platform: 王品
   offer: 肉山
@@ -622,7 +622,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-養鍋:
+養鍋石頭涮涮鍋:
   category: 火鍋
   offer: 四選一
   value: 100
@@ -663,7 +663,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-波奇波奇:
+PokéPoké 波奇波奇:
   category: 沙拉
   platform: Ocard
   offer: 折價券
@@ -707,9 +707,9 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-錢都:
+錢都日式涮涮鍋:
   category: 火鍋
-  platform: 自家APP
+  platform: 錢都餐飲
   offer: 肉品三選一
   value: 100
   intro: 1997 年成立的日式涮涮鍋，昆布湯底。壽星用「錢都餐飲」APP 領肉品兌換券（梅花豬、培根牛肉、雞肉片三選一），需訂位、用餐前告知並出示證件。
@@ -730,7 +730,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-紅九九:
+紅九九個人麻辣鍋:
   category: 火鍋
   platform: Ocard
   offer: 甜點
@@ -750,9 +750,9 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-31 冰淇淋:
+Baskin-Robbins 31 冰淇淋:
   category: 甜點
-  platform: 自家APP
+  platform: 31俱樂部
   offer: 免費一球
   value: 95
   notes: 免消費
@@ -773,7 +773,7 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-Yayoi:
+YAYOI 彌生軒:
   category: 日式
   platform: Ocard
   offer: 八五折
@@ -784,7 +784,7 @@ Yayoi:
   updated: 2026-10-26
   verified: false
 
-MOS:
+MOS BURGER 摩斯漢堡:
   category: 速食
   platform: MOS
   offer: 漢堡套餐139
@@ -885,7 +885,7 @@ beard papa:
   updated: 2026-10-26
   verified: false
 
-東大門:
+東大門韓國特色料理:
   category: 韓式
   platform: Ocard
   offer: 九折
@@ -905,9 +905,9 @@ beard papa:
   updated: 2026-10-26
   verified: false
 
-順億:
+順億鮪魚專賣店:
   category: 日式
-  platform: 自家APP
+  platform: 順億GO
   offer: 九折
   value: 50
   intro: 鮪魚專賣店，有自家船隊，全台約 19 家直營門市。
@@ -927,7 +927,7 @@ beard papa:
   updated: 2026-10-26
   verified: false
 
-大心:
+大心新泰式麵食:
   category: 泰式
   platform: wa10
   offer: 折價券
@@ -984,7 +984,7 @@ beard papa:
 
 麥當勞:
   category: 速食
-  platform: 自家APP
+  platform: 麥當勞APP
   offer: 大麥克送薯條
   value: 29
   intro: 生日優惠要在麥當勞 APP 領取。

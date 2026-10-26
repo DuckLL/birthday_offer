@@ -13,8 +13,25 @@ Line:
 Web:
   intro: 在店家官網註冊會員並填生日。
 
-自家APP:
-  intro: 下載品牌自己的 APP 註冊會員，生日券在 APP 內。
+31俱樂部:
+  intro: 31 冰淇淋官方會員 APP「31俱樂部」（App Store / Google Play 搜尋同名），註冊會員並填生日，生日券在 APP 內。
+  url: https://apps.apple.com/tw/app/id6755289789
+
+樂多多:
+  intro: 樂多多集團 APP（肉多多等品牌），當月壽星加入會員後在 APP 領生日禮。
+  url: https://apps.apple.com/tw/app/id1563915787
+
+錢都餐飲:
+  intro: 錢都官方 APP「錢都餐飲」，壽星在 APP 內領肉品兌換券。
+  url: https://apps.apple.com/tw/app/id1457310811
+
+順億GO:
+  intro: 順億鮪魚官方 APP「順億GO」，註冊會員並填生日，生日禮在 APP 內。
+  url: https://apps.apple.com/tw/app/id1557394685
+
+麥當勞APP:
+  intro: 麥當勞官方 APP，註冊會員並填生日，生日優惠在 APP 內領取。
+  url: https://apps.apple.com/tw/app/id1217507712
 
 三商:
   intro: 三商 i 美食卡 APP，福勝亭、三商巧福、品川蘭、鮮五丼等品牌通用，生日券效期約兩個月。
