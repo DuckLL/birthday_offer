@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import MarkControls from '../components/MarkControls.astro';
 import ColHead from '../components/ColHead.astro';
+import ColumnsMenu from '../components/ColumnsMenu.astro';
 import FilterPop from '../components/FilterPop.astro';
 import CheckList from '../components/CheckList.astro';
 import RegionSelect from '../components/RegionSelect.astro';
@@ -62,18 +63,21 @@ const cats = [...catCount].sort((a, b) => b[1] - a[1]);
     </div>
   </section>
 
-  <div class="resultbar"><span id="result-text"></span></div>
+  <div class="resultbar">
+    <span id="result-text"></span>
+    <ColumnsMenu />
+  </div>
 
   <section class="list shops" id="list" aria-label="商店列表">
     <div class="list-head" role="row">
-      <ColHead label="商店" sort="name" />
-      <ColHead label="類型" sort="cat" filter="cat" />
-      <ColHead label="低消" sort="min" />
-      <ColHead label="折抵" sort="value" />
-      <ColHead label="實付比例" sort="ratio" />
-      <ColHead label="地區" sort="region" filter="region" />
-      <ColHead label="更新" sort="updated" filter="age" />
-      <ColHead label="我的標記" sort="plan" filter="status" />
+      <ColHead c="name" label="商店" sort="name" />
+      <ColHead c="cat" label="類型" sort="cat" filter="cat" />
+      <ColHead c="min" label="低消" sort="min" />
+      <ColHead c="value" label="折抵" sort="value" />
+      <ColHead c="ratio" label="實付比例" sort="ratio" />
+      <ColHead c="region" label="地區" sort="region" filter="region" />
+      <ColHead c="updated" label="更新" sort="updated" filter="age" />
+      <ColHead c="marks" label="我的標記" sort="plan" filter="status" />
     </div>
     {
       items.map((s) => {
@@ -93,7 +97,7 @@ const cats = [...catCount].sort((a, b) => b[1] - a[1]);
             data-updated={d.updated}
             data-q={[s.id, d.category, d.intro, d.notes, ...regions].filter(Boolean).join(' ').toLowerCase()}
           >
-            <div class="c-name">
+            <div class="c-name" data-c="name">
               <a href={detailUrl('s', s.id)}>{s.id}</a>
               {d.caution && (
                 <span class="warn-dot" title={d.caution}>
@@ -107,23 +111,23 @@ const cats = [...catCount].sort((a, b) => b[1] - a[1]);
               </span>
               {d.intro && <p class="intro">{d.intro}</p>}
             </div>
-            <div class="c-cat">
+            <div class="c-cat" data-c="cat">
               <span class="chip">{d.category}</span>
             </div>
-            <div class="c-min">{d.minSpend ? money(d.minSpend) : '無'}</div>
-            <div class="c-disc c-value" style="font-size:15px">
+            <div class="c-min" data-c="min">{d.minSpend ? money(d.minSpend) : '無'}</div>
+            <div class="c-disc c-value" data-c="value" style="font-size:15px">
               {money(d.discount)}
             </div>
-            <div class="c-offer ratio">
+            <div class="c-offer ratio" data-c="ratio">
               <span>{ratioLabel(s.ratio)}</span>
               <span class="bar" aria-hidden="true">
                 <i style={`width:${Math.round((1 - s.ratio) * 100)}%`} />
               </span>
             </div>
-            <div class="c-region" title={regions.join('、')}>
+            <div class="c-region" data-c="region" title={regions.join('、')}>
               {regionText(regions)}
             </div>
-            <div class="c-updated">
+            <div class="c-updated" data-c="updated">
               <time datetime={d.updated}>{d.updated}</time>
             </div>
             <div class="meta-row">
@@ -132,7 +136,7 @@ const cats = [...catCount].sort((a, b) => b[1] - a[1]);
               <span class="chip hot">折 {money(d.discount)}</span>
               <span class="chip">{regionText(regions)}</span>
             </div>
-            <div class="c-marks">
+            <div class="c-marks" data-c="marks">
               <MarkControls kind="s" id={s.id} />
             </div>
           </article>
@@ -150,9 +154,11 @@ const cats = [...catCount].sort((a, b) => b[1] - a[1]);
   <script>
     import { initMarkControls } from '../scripts/bind';
     import { initList } from '../scripts/list';
+    import { initColumns } from '../scripts/columns';
     import { initStats } from '../scripts/stats';
     initMarkControls();
     initStats();
+    initColumns('s');
     initList();
   </script>
 </Base>

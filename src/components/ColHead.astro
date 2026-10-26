@@ -1,15 +1,16 @@
 ---
-// 表頭欄位：點名稱排序，漏斗按鈕打開同名的 FilterPop
+// 表頭欄位：點名稱排序，漏斗按鈕打開同名的 FilterPop，整格可拖曳調整順序
 interface Props {
+  c: string; // 欄位 key，見 lib/columns.ts
   label: string;
   sort?: string;
   filter?: string;
   right?: boolean;
 }
-const { label, sort, filter, right = false } = Astro.props;
+const { c, label, sort, filter, right = false } = Astro.props;
 ---
 
-<div class:list={['th', { right }]} role="columnheader" data-col={sort}>
+<div class:list={['th', { right }]} role="columnheader" data-c={c} data-col={sort} draggable="true" title="拖曳可調整欄位順序">
   {
     sort ? (
       <button type="button" class="th-sort" data-sort-col={sort} title={`依${label}排序`}>

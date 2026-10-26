@@ -1,0 +1,16 @@
+---
+// 「欄位」按鈕：調整桌機表格欄位的順序與顯示，清單由 scripts/columns.ts 產生
+---
+
+<button type="button" class="btn-cols" popovertarget="pop-cols" title="調整表格欄位">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM9.5 5v14M14.5 5v14"></path></svg>
+  欄位
+</button>
+<div popover id="pop-cols" class="pop">
+  <div class="pop-head">
+    <b>表格欄位</b>
+    <button type="button" class="linkbtn" data-cols-reset>恢復預設</button>
+  </div>
+  <ol class="col-list" id="col-list"></ol>
+  <p class="pop-hint">拖曳或用箭頭調整順序，也可以直接拖表頭</p>
+</div>

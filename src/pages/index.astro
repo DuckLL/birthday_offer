@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import MarkControls from '../components/MarkControls.astro';
 import ColHead from '../components/ColHead.astro';
+import ColumnsMenu from '../components/ColumnsMenu.astro';
 import FilterPop from '../components/FilterPop.astro';
 import CheckList from '../components/CheckList.astro';
 import RegionSelect from '../components/RegionSelect.astro';
@@ -125,27 +126,30 @@ const noPin = items.filter((r) => !r.data.locations?.some((l) => l.lat)).map((r)
 
   <div class="resultbar">
     <span id="result-text">顯示 <b>{items.length}</b> 家</span>
-    <div class="seg" role="group" aria-label="檢視方式">
-      <button type="button" data-view="list" aria-pressed="true">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"></path></svg>列表
-      </button>
-      <button type="button" data-view="map" aria-pressed="false">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6.5v13.5L9 17.5l6 2.5 6-2.5V4l-6 2.5L9 4ZM9 4v13.5M15 6.5V20"></path></svg>地圖
-      </button>
+    <div class="resultbar-tools">
+      <ColumnsMenu />
+      <div class="seg" role="group" aria-label="檢視方式">
+        <button type="button" data-view="list" aria-pressed="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"></path></svg>列表
+        </button>
+        <button type="button" data-view="map" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6.5v13.5L9 17.5l6 2.5 6-2.5V4l-6 2.5L9 4ZM9 4v13.5M15 6.5V20"></path></svg>地圖
+        </button>
+      </div>
     </div>
   </div>
 
   <section class="list" id="list" aria-label="餐廳列表">
     <div class="list-head" role="row">
-      <ColHead label="店家" sort="name" />
-      <ColHead label="類型" sort="cat" filter="cat" />
-      <ColHead label="平台" sort="plat" filter="plat" />
-      <ColHead label="優惠" />
-      <ColHead label="價值" sort="value" filter="value" right />
-      <ColHead label="期限" sort="period" filter="period" />
-      <ColHead label="地區" sort="region" filter="region" />
-      <ColHead label="更新" sort="updated" filter="age" />
-      <ColHead label="我的標記" sort="plan" filter="status" />
+      <ColHead c="name" label="店家" sort="name" />
+      <ColHead c="cat" label="類型" sort="cat" filter="cat" />
+      <ColHead c="plat" label="平台" sort="plat" filter="plat" />
+      <ColHead c="offer" label="優惠" />
+      <ColHead c="value" label="價值" sort="value" filter="value" right />
+      <ColHead c="period" label="期限" sort="period" filter="period" />
+      <ColHead c="region" label="地區" sort="region" filter="region" />
+      <ColHead c="updated" label="更新" sort="updated" filter="age" />
+      <ColHead c="marks" label="我的標記" sort="plan" filter="status" />
     </div>
     {
       items.map((r) => {
@@ -167,7 +171,7 @@ const noPin = items.filter((r) => !r.data.locations?.some((l) => l.lat)).map((r)
             data-free={d.notes?.includes('免消費') ? '1' : undefined}
             data-q={q}
           >
-            <div class="c-name">
+            <div class="c-name" data-c="name">
               <a href={detailUrl('r', r.id)}>{r.id}</a>
               {d.caution && (
                 <span class="warn-dot" title={d.caution}>
@@ -181,20 +185,20 @@ const noPin = items.filter((r) => !r.data.locations?.some((l) => l.lat)).map((r)
               </span>
               {d.intro && <p class="intro">{d.intro}</p>}
             </div>
-            <div class="c-cat">
+            <div class="c-cat" data-c="cat">
               <span class="chip">{d.category}</span>
             </div>
-            <div class="c-plat">{d.platform ?? '—'}</div>
-            <div class="c-offer">
+            <div class="c-plat" data-c="plat">{d.platform ?? '—'}</div>
+            <div class="c-offer" data-c="offer">
               {d.offer}
               {d.notes && <small>{d.notes}</small>}
             </div>
-            <div class="c-value">{money(d.value)}</div>
-            <div class="c-period">{d.period ? <span class="chip hot">{d.period}</span> : '—'}</div>
-            <div class="c-region" title={regions.join('、')}>
+            <div class="c-value" data-c="value">{money(d.value)}</div>
+            <div class="c-period" data-c="period">{d.period ? <span class="chip hot">{d.period}</span> : '—'}</div>
+            <div class="c-region" data-c="region" title={regions.join('、')}>
               {regionText(regions)}
             </div>
-            <div class="c-updated">
+            <div class="c-updated" data-c="updated">
               <time datetime={d.updated}>{d.updated}</time>
             </div>
             <div class="meta-row">
@@ -203,7 +207,7 @@ const noPin = items.filter((r) => !r.data.locations?.some((l) => l.lat)).map((r)
               {d.period && <span class="chip hot">限{d.period}</span>}
               <span class="chip">{regions.includes(NATIONWIDE) ? '全台' : regionText(regions)}</span>
             </div>
-            <div class="c-marks">
+            <div class="c-marks" data-c="marks">
               <MarkControls kind="r" id={r.id} />
             </div>
           </article>
@@ -237,9 +241,11 @@ const noPin = items.filter((r) => !r.data.locations?.some((l) => l.lat)).map((r)
   <script>
     import { initMarkControls } from '../scripts/bind';
     import { initList } from '../scripts/list';
+    import { initColumns } from '../scripts/columns';
     import { initStats } from '../scripts/stats';
     initMarkControls();
     initStats();
+    initColumns('r');
     initList();
   </script>
 </Base>
