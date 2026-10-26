@@ -98,17 +98,21 @@ const cats = [...catCount].sort((a, b) => b[1] - a[1]);
             data-q={[s.id, d.category, d.intro, d.notes, ...regions].filter(Boolean).join(' ').toLowerCase()}
           >
             <div class="c-name" data-c="name">
-              <a href={detailUrl('s', s.id)}>{s.id}</a>
-              {d.caution && (
-                <span class="warn-dot" title={d.caution}>
-                  <svg viewBox="0 0 24 24" aria-label="注意">
-                    <path d="M12 3.5 2.5 20h19L12 3.5ZM12 10v4.5M12 17.5h.01" />
-                  </svg>
+              <div class="name-line">
+                <a href={detailUrl('s', s.id)} title={s.id}>
+                  {s.id}
+                </a>
+                {d.caution && (
+                  <span class="warn-dot" title={d.caution}>
+                    <svg viewBox="0 0 24 24" aria-label="注意">
+                      <path d="M12 3.5 2.5 20h19L12 3.5ZM12 10v4.5M12 17.5h.01" />
+                    </svg>
+                  </span>
+                )}
+                <span class="stale-tag" data-stale-show hidden title={`資料更新於 ${d.updated}，可能已過期`}>
+                  可能過期
                 </span>
-              )}
-              <span class="stale-tag" data-stale-show hidden title={`資料更新於 ${d.updated}，可能已過期`}>
-                可能過期
-              </span>
+              </div>
               {d.intro && <p class="intro">{d.intro}</p>}
             </div>
             <div class="c-cat" data-c="cat">

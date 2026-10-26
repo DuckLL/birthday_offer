@@ -1,11 +1,14 @@
-// 桌機表格欄位的順序與顯示：用一段 <style> 設定 grid 欄寬、各欄 order 與隱藏，設定存在 localStorage
+// 桌機表格欄位的順序、顯示與寬度：用一段 <style> 設定 grid 欄寬、各欄 order 與隱藏，設定存在 localStorage
 import { COLUMNS, type Column } from '../lib/columns';
 import type { Kind } from '../lib/shared';
 
 interface Prefs {
   order: string[];
   hidden: string[];
+  widths: Record<string, number>; // 使用者在表頭拖出來的寬度（px）
 }
+
+const MIN_W = 48;
 
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
@@ -13,7 +16,7 @@ export function initColumns(kind: Kind) {
   const cols = COLUMNS[kind];
   const byKey = new Map(cols.map((c) => [c.key, c]));
   const storeKey = `hbd:cols:${kind}:v1`;
-  const defaults = (): Prefs => ({ order: cols.map((c) => c.key), hidden: [] });
+  const defaults = (): Prefs => ({ order: cols.map((c) => c.key), hidden: [], widths: {} });
   let prefs = defaults();
 
   try {
@@ -23,6 +26,8 @@ export function initColumns(kind: Kind) {
       const order = saved.order.filter((k: unknown) => typeof k === 'string' && byKey.has(k));
       prefs.order = [...new Set([...order, ...cols.map((c) => c.key)])];
       prefs.hidden = Array.isArray(saved.hidden) ? saved.hidden.filter((k: string) => byKey.has(k) && !byKey.get(k)!.locked) : [];
+      if (saved.widths && typeof saved.widths === 'object')
+        for (const [k, v] of Object.entries(saved.widths)) if (byKey.has(k) && typeof v === 'number' && v >= MIN_W) prefs.widths[k] = Math.round(v);
     }
   } catch {}
 
@@ -32,7 +37,7 @@ export function initColumns(kind: Kind) {
 
   function apply(save = true) {
     const shown = prefs.order.filter((k) => !prefs.hidden.includes(k)).map((k) => byKey.get(k)!);
-    const tpl = (f: (c: Column) => string) => shown.map(f).join(' ');
+    const tpl = (f: (c: Column) => string) => shown.map((c) => (prefs.widths[c.key] ? `${prefs.widths[c.key]}px` : f(c))).join(' ');
     style.textContent =
       `@media (min-width: 1101px) {` +
       `#list .item, #list .list-head { grid-template-columns: ${tpl((c) => c.w)}; }` +
@@ -97,12 +102,48 @@ export function initColumns(kind: Kind) {
     apply();
   });
 
+  // 表頭右緣拖曳調整寬度；雙擊恢復自動寬度
+  document.addEventListener('pointerdown', (e) => {
+    const h = (e.target as HTMLElement).closest<HTMLElement>('[data-resize]');
+    if (!h || e.button !== 0) return;
+    e.preventDefault(); // 不要觸發表頭的拖曳排序
+    const key = h.dataset.resize!;
+    const th = h.closest<HTMLElement>('.th')!;
+    const startX = e.clientX;
+    const startW = th.getBoundingClientRect().width;
+    let frame = 0;
+    h.setPointerCapture(e.pointerId);
+    document.body.classList.add('col-resizing');
+    const move = (ev: PointerEvent) => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        prefs.widths[key] = Math.max(MIN_W, Math.round(startW + ev.clientX - startX));
+        apply(false);
+      });
+    };
+    const up = () => {
+      cancelAnimationFrame(frame);
+      h.removeEventListener('pointermove', move);
+      document.body.classList.remove('col-resizing');
+      apply();
+    };
+    h.addEventListener('pointermove', move);
+    h.addEventListener('pointerup', up, { once: true });
+    h.addEventListener('pointercancel', up, { once: true });
+  });
+  document.addEventListener('dblclick', (e) => {
+    const h = (e.target as HTMLElement).closest<HTMLElement>('[data-resize]');
+    if (!h) return;
+    delete prefs.widths[h.dataset.resize!];
+    apply();
+  });
+
   // 拖曳：選單裡的項目和表頭都可以
   let dragging: string | null = null;
   const keyOf = (el: EventTarget | null) => (el as HTMLElement | null)?.closest?.<HTMLElement>('#col-list li, .list-head [data-c]');
   document.addEventListener('dragstart', (e) => {
     const el = keyOf(e.target);
-    if (!el) return;
+    if (!el || (e.target as HTMLElement).closest?.('[data-resize]')) return;
     dragging = el.dataset.key ?? el.dataset.c ?? null;
     e.dataTransfer?.setData('text/plain', dragging ?? '');
     if (e.dataTransfer) e.dataTransfer.effectAllowed = 'move';

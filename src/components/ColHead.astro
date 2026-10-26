@@ -1,5 +1,5 @@
 ---
-// 表頭欄位：點名稱排序，漏斗按鈕打開同名的 FilterPop，整格可拖曳調整順序
+// 表頭欄位：點名稱排序，漏斗按鈕打開同名的 FilterPop，整格可拖曳調整順序，右緣拖曳調整寬度
 interface Props {
   c: string; // 欄位 key，見 lib/columns.ts
   label: string;
@@ -14,13 +14,13 @@ const { c, label, sort, filter, right = false } = Astro.props;
   {
     sort ? (
       <button type="button" class="th-sort" data-sort-col={sort} title={`依${label}排序`}>
-        {label}
+        <span class="th-label">{label}</span>
         <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
           <path d="m8 10 4-4 4 4M8 14l4 4 4-4" />
         </svg>
       </button>
     ) : (
-      <span>{label}</span>
+      <span class="th-label">{label}</span>
     )
   }
   {
@@ -32,4 +32,5 @@ const { c, label, sort, filter, right = false } = Astro.props;
       </button>
     )
   }
+  <span class="col-resize" data-resize={c} title="拖曳調整寬度，雙擊恢復" aria-hidden="true"></span>
 </div>

@@ -446,10 +446,38 @@ svg {
   padding-bottom: 8px;
 }
 .th {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 2px;
   min-width: 0;
+}
+.th-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.col-resize {
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  right: -9px;
+  width: 6px;
+  cursor: col-resize;
+  touch-action: none;
+  z-index: 1;
+  border-radius: 3px;
+}
+.col-resize:hover,
+.col-resizing .col-resize:active {
+  background: var(--accent);
+  opacity: 0.5;
+}
+.col-resizing,
+.col-resizing * {
+  cursor: col-resize !important;
+  user-select: none;
 }
 .th.right {
   justify-content: flex-end;
@@ -468,6 +496,11 @@ svg {
   gap: 2px;
   padding: 2px 2px 2px 0;
   white-space: nowrap;
+  min-width: 0;
+}
+.th-sort .arrow,
+.th-filter {
+  flex-shrink: 0;
 }
 .th-sort .arrow {
   width: 13px;
@@ -716,7 +749,7 @@ svg {
 }
 .stale-tag {
   display: inline-block;
-  margin-left: 6px;
+  margin-left: 2px;
   padding: 0 7px;
   border-radius: 999px;
   background: var(--warn-soft);
@@ -736,10 +769,42 @@ svg {
 .item[data-status='done'] {
   background: color-mix(in srgb, var(--done-soft) 35%, transparent);
 }
+.name-line {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+.name-line > :not(a) {
+  flex-shrink: 0;
+}
 .c-name a {
   font-weight: 700;
   font-size: 16px;
   text-decoration: none;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.c-plat {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 桌機表格：儲存格不撐開欄寬，超出的部分裁掉 */
+@media (min-width: 1101px) {
+  .item > [data-c]:not([data-c='marks']) {
+    min-width: 0;
+    overflow: hidden;
+  }
+  .list {
+    overflow-x: auto;
+  }
+  .item,
+  .list-head {
+    min-width: fit-content;
+  }
 }
 .c-name a:hover {
   color: var(--accent);

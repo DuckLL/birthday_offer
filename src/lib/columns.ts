@@ -1,5 +1,5 @@
 // 桌機表格欄位：key 對應表頭與儲存格的 data-c；w 是一般寬度，narrow 是 1101–1240px 的寬度
-// 使用者可在「欄位」選單調整順序與顯示，存在 localStorage（見 scripts/columns.ts）
+// 使用者可在「欄位」選單調整順序與顯示、在表頭調整寬度，存在 localStorage（見 scripts/columns.ts）
 import type { Kind } from './shared';
 
 export interface Column {
