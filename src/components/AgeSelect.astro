@@ -1,0 +1,9 @@
+---
+import { STALE_DAYS } from '../lib/shared';
+---
+
+<select data-f="age" aria-label="資料更新">
+  <option value="">全部更新日期</option>
+  <option value="fresh">{STALE_DAYS} 天內更新</option>
+  <option value="stale">可能過期（超過 {STALE_DAYS} 天）</option>
+</select>

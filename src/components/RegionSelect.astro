@@ -1,0 +1,22 @@
+---
+import { REGION_GROUPS, ONLINE } from '../lib/shared';
+
+interface Props {
+  online?: boolean;
+}
+const { online = false } = Astro.props;
+---
+
+<select data-f="region" aria-label="地區">
+  <option value="">全部地區</option>
+  {online && <option value={ONLINE}>線上</option>}
+  {
+    Object.entries(REGION_GROUPS).map(([g, list]) => (
+      <optgroup label={g}>
+        {list.map((c) => (
+          <option value={c}>{c}</option>
+        ))}
+      </optgroup>
+    ))
+  }
+</select>

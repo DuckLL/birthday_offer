@@ -1,7 +1,7 @@
 // 把頁面上所有 [data-mark-key] 控制項接到 localStorage
 import { getMark, onMarksChange, toggleStatus, updateMark } from './marks';
 
-function sync(root: ParentNode = document) {
+export function sync(root: ParentNode = document) {
   root.querySelectorAll<HTMLElement>('[data-mark-key]').forEach((box) => {
     const m = getMark(box.dataset.markKey!);
     box.dataset.status = m?.status ?? '';
@@ -18,7 +18,11 @@ function sync(root: ParentNode = document) {
   });
 }
 
+let ready = false;
+
 export function initMarkControls() {
+  if (ready) return;
+  ready = true;
   document.addEventListener('click', (e) => {
     const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-act]');
     const box = b?.closest<HTMLElement>('[data-mark-key]');

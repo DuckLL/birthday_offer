@@ -1,12 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
 import MarkControls from '../components/MarkControls.astro';
-import { getShops, regionText } from '../lib/data';
-import { REGION_GROUPS, ONLINE, detailUrl, markKey, money, ratioLabel } from '../lib/shared';
+import ColHead from '../components/ColHead.astro';
+import FilterPop from '../components/FilterPop.astro';
+import CheckList from '../components/CheckList.astro';
+import RegionSelect from '../components/RegionSelect.astro';
+import StatusSelect from '../components/StatusSelect.astro';
+import AgeSelect from '../components/AgeSelect.astro';
+import { getShops, regionRank, regionText } from '../lib/data';
+import { detailUrl, markKey, money, ratioLabel } from '../lib/shared';
 
 const items = await getShops();
 const total = items.reduce((s, x) => s + x.data.discount, 0);
-const cats = [...new Set(items.map((s) => s.data.category))];
+const catCount = new Map<string, number>();
+for (const s of items) catCount.set(s.data.category, (catCount.get(s.data.category) ?? 0) + 1);
+const cats = [...catCount].sort((a, b) => b[1] - a[1]);
 ---
 
 <Base title="商店生日折價券" nav="s">
@@ -28,42 +36,26 @@ const cats = [...new Set(items.map((s) => s.data.category))];
       <label class="search">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4.2-4.2"></path></svg>
         <span class="sr-only">搜尋</span>
-        <input type="search" id="f-q" placeholder="搜尋商店…" autocomplete="off" />
+        <input type="search" data-f="q" placeholder="搜尋商店…" autocomplete="off" />
       </label>
-      <select id="f-region" aria-label="地區">
-        <option value="">全部地區</option>
-        <option value={ONLINE}>線上</option>
-        {
-          Object.entries(REGION_GROUPS).map(([g, list]) => (
-            <optgroup label={g}>
-              {list.map((c) => (
-                <option value={c}>{c}</option>
-              ))}
-            </optgroup>
-          ))
-        }
-      </select>
-      <select id="f-sort" aria-label="排序">
-        <option value="ratio">最划算（實付比例低）</option>
+      <RegionSelect online />
+      <select data-f="sort" aria-label="排序">
+        <option value="ratio-asc">最划算（實付比例低）</option>
         <option value="value-desc">折抵金額高 → 低</option>
-        <option value="min">低消低 → 高</option>
-        <option value="name">店名</option>
-        <option value="plan">預計日期</option>
+        <option value="min-asc">低消低 → 高</option>
+        <option value="name-asc">店名</option>
+        <option value="updated-desc">最近更新</option>
+        <option value="plan-asc">預計日期</option>
       </select>
-      <select id="f-status" aria-label="我的標記">
-        <option value="">全部標記</option>
-        <option value="none">還沒標記</option>
-        <option value="want">想用</option>
-        <option value="plan">有預計日期</option>
-        <option value="done">用過</option>
-        <option value="hide-done">隱藏用過</option>
-      </select>
+      <StatusSelect kind="s" />
+      <AgeSelect />
     </div>
-    <div class="chips" id="f-cats" role="group" aria-label="類型">
+    <div class="chips" role="group" aria-label="類型">
       {
-        cats.map((c) => (
-          <button type="button" class="chip-btn" data-cat={c} aria-pressed="false">
+        cats.map(([c, n]) => (
+          <button type="button" class="chip-btn" data-f="cat" data-v={c} aria-pressed="false">
             {c}
+            <small>{n}</small>
           </button>
         ))
       }
@@ -74,7 +66,14 @@ const cats = [...new Set(items.map((s) => s.data.category))];
 
   <section class="list shops" id="list" aria-label="商店列表">
     <div class="list-head" role="row">
-      <span>商店</span><span>類型</span><span>低消</span><span>折抵</span><button type="button" data-sort="ratio">實付比例</button><span>地區</span><span>我的標記</span>
+      <ColHead label="商店" sort="name" />
+      <ColHead label="類型" sort="cat" filter="cat" />
+      <ColHead label="低消" sort="min" />
+      <ColHead label="折抵" sort="value" />
+      <ColHead label="實付比例" sort="ratio" />
+      <ColHead label="地區" sort="region" filter="region" />
+      <ColHead label="更新" sort="updated" filter="age" />
+      <ColHead label="我的標記" sort="plan" filter="status" />
     </div>
     {
       items.map((s) => {
@@ -90,10 +89,22 @@ const cats = [...new Set(items.map((s) => s.data.category))];
             data-ratio={s.ratio}
             data-min={d.minSpend ?? 0}
             data-regions={regions.join('|')}
+            data-rrank={regionRank(regions)}
+            data-updated={d.updated}
             data-q={[s.id, d.category, d.intro, d.notes, ...regions].filter(Boolean).join(' ').toLowerCase()}
           >
             <div class="c-name">
               <a href={detailUrl('s', s.id)}>{s.id}</a>
+              {d.caution && (
+                <span class="warn-dot" title={d.caution}>
+                  <svg viewBox="0 0 24 24" aria-label="注意">
+                    <path d="M12 3.5 2.5 20h19L12 3.5ZM12 10v4.5M12 17.5h.01" />
+                  </svg>
+                </span>
+              )}
+              <span class="stale-tag" data-stale-show hidden title={`資料更新於 ${d.updated}，可能已過期`}>
+                可能過期
+              </span>
               {d.intro && <p class="intro">{d.intro}</p>}
             </div>
             <div class="c-cat">
@@ -112,6 +123,9 @@ const cats = [...new Set(items.map((s) => s.data.category))];
             <div class="c-region" title={regions.join('、')}>
               {regionText(regions)}
             </div>
+            <div class="c-updated">
+              <time datetime={d.updated}>{d.updated}</time>
+            </div>
             <div class="meta-row">
               <span class="chip">{d.category}</span>
               <span class="chip">{d.minSpend ? `低消 ${money(d.minSpend)}` : '無低消'}</span>
@@ -127,6 +141,11 @@ const cats = [...new Set(items.map((s) => s.data.category))];
     }
     <p class="empty" id="empty" hidden>沒有符合條件的商店。</p>
   </section>
+
+  <FilterPop id="cat" title="類型" clear="cat"><CheckList f="cat" options={cats.map(([c, n]) => [c, c, n])} /></FilterPop>
+  <FilterPop id="region" title="地區" clear="region"><RegionSelect online /><p class="pop-hint">選縣市時，全台連鎖也會列出</p></FilterPop>
+  <FilterPop id="age" title="資料更新" clear="age"><AgeSelect /></FilterPop>
+  <FilterPop id="status" title="我的標記" clear="status"><StatusSelect kind="s" /></FilterPop>
 
   <script>
     import { initMarkControls } from '../scripts/bind';

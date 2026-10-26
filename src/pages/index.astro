@@ -1,8 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import MarkControls from '../components/MarkControls.astro';
-import { getRestaurants, regionText } from '../lib/data';
-import { REGION_GROUPS, NATIONWIDE, detailUrl, markKey, money } from '../lib/shared';
+import ColHead from '../components/ColHead.astro';
+import FilterPop from '../components/FilterPop.astro';
+import CheckList from '../components/CheckList.astro';
+import RegionSelect from '../components/RegionSelect.astro';
+import StatusSelect from '../components/StatusSelect.astro';
+import AgeSelect from '../components/AgeSelect.astro';
+import { getRestaurants, regionRank, regionText } from '../lib/data';
+import { NATIONWIDE, detailUrl, markKey, money } from '../lib/shared';
 
 const { items } = await getRestaurants();
 const total = items.reduce((s, r) => s + r.data.value, 0);
@@ -18,6 +24,9 @@ const count = (key: (r: (typeof items)[number]) => string | undefined) => {
 const cats = count((r) => r.data.category);
 const plats = count((r) => r.data.platform);
 const periods = count((r) => r.data.period);
+type Opt = [string, string, number];
+const platOpts: Opt[] = [...plats.map(([p, n]): Opt => [p, p, n]), ['-', '未註明', items.filter((r) => !r.data.platform).length]];
+const periodOpts: Opt[] = [...periods.map(([p, n]): Opt => [p, `限${p}`, n]), ['-', '當月／未註明', items.filter((r) => !r.data.period).length]];
 
 const pins = items.flatMap((r) =>
   (r.data.locations ?? [])
@@ -57,31 +66,21 @@ const noPin = items.filter((r) => !r.data.locations?.some((l) => l.lat)).map((r)
       <label class="search">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4.2-4.2"></path></svg>
         <span class="sr-only">搜尋</span>
-        <input type="search" id="f-q" placeholder="搜尋店名、優惠、備註…" autocomplete="off" />
+        <input type="search" data-f="q" placeholder="搜尋店名、優惠、備註…" autocomplete="off" />
       </label>
-      <select id="f-region" aria-label="地區">
-        <option value="">全部地區</option>
-        {
-          Object.entries(REGION_GROUPS).map(([g, list]) => (
-            <optgroup label={g}>
-              {list.map((c) => (
-                <option value={c}>{c}</option>
-              ))}
-            </optgroup>
-          ))
-        }
-      </select>
-      <select id="f-sort" aria-label="排序">
+      <RegionSelect />
+      <select data-f="sort" aria-label="排序">
         <option value="value-desc">價值高 → 低</option>
         <option value="value-asc">價值低 → 高</option>
-        <option value="name">店名</option>
-        <option value="plan">預計日期</option>
+        <option value="name-asc">店名</option>
+        <option value="updated-desc">最近更新</option>
+        <option value="plan-asc">預計日期</option>
       </select>
     </div>
-    <div class="chips" id="f-cats" role="group" aria-label="類型">
+    <div class="chips" role="group" aria-label="類型">
       {
         cats.map(([c, n]) => (
-          <button type="button" class="chip-btn" data-cat={c} aria-pressed="false">
+          <button type="button" class="chip-btn" data-f="cat" data-v={c} aria-pressed="false">
             {c}
             <small>{n}</small>
           </button>
@@ -90,27 +89,36 @@ const noPin = items.filter((r) => !r.data.locations?.some((l) => l.lat)).map((r)
     </div>
     <details class="more">
       <summary>更多篩選 <span class="badge" id="more-badge" hidden></span></summary>
-      <div class="f-row">
-        <select id="f-plat" aria-label="平台">
-          <option value="">全部平台</option>
-          {plats.map(([p, n]) => <option value={p}>{p}（{n}）</option>)}
-          <option value="-">未註明平台</option>
-        </select>
-        <select id="f-period" aria-label="使用期限">
-          <option value="">全部期限</option>
-          {periods.map(([p, n]) => <option value={p}>限{p}（{n}）</option>)}
-          <option value="-">未註明</option>
-        </select>
-        <select id="f-status" aria-label="我的標記">
-          <option value="">全部標記</option>
-          <option value="none">還沒標記</option>
-          <option value="want">想吃</option>
-          <option value="plan">有預計日期</option>
-          <option value="done">吃過</option>
-          <option value="hide-done">隱藏吃過</option>
-        </select>
-        <label class="toggle"><input type="checkbox" id="f-free" /> 免消費</label>
-        <button type="button" class="linkbtn" id="f-reset">清除篩選</button>
+      <div class="more-body">
+        <div class="chips" role="group" aria-label="平台">
+          <span class="chips-label">平台</span>
+          {
+            platOpts.map(([v, label, n]) => (
+              <button type="button" class="chip-btn" data-f="plat" data-v={v} aria-pressed="false">
+                {label}
+                <small>{n}</small>
+              </button>
+            ))
+          }
+        </div>
+        <div class="chips" role="group" aria-label="使用期限">
+          <span class="chips-label">期限</span>
+          {
+            periodOpts.map(([v, label, n]) => (
+              <button type="button" class="chip-btn" data-f="period" data-v={v} aria-pressed="false">
+                {label}
+                <small>{n}</small>
+              </button>
+            ))
+          }
+        </div>
+        <div class="f-row">
+          <StatusSelect kind="r" />
+          <AgeSelect />
+          <label class="num">價值至少 $<input type="number" data-f="min" min="0" step="100" inputmode="numeric" placeholder="0" /></label>
+          <label class="toggle"><input type="checkbox" data-f="free" /> 免消費</label>
+          <button type="button" class="linkbtn" data-reset>清除篩選</button>
+        </div>
       </div>
     </details>
   </section>
@@ -129,7 +137,15 @@ const noPin = items.filter((r) => !r.data.locations?.some((l) => l.lat)).map((r)
 
   <section class="list" id="list" aria-label="餐廳列表">
     <div class="list-head" role="row">
-      <span>店家</span><span>類型</span><span>平台</span><span>優惠</span><span style="text-align:right">價值</span><span>期限</span><span>地區</span><span>我的標記</span>
+      <ColHead label="店家" sort="name" />
+      <ColHead label="類型" sort="cat" filter="cat" />
+      <ColHead label="平台" sort="plat" filter="plat" />
+      <ColHead label="優惠" />
+      <ColHead label="價值" sort="value" filter="value" right />
+      <ColHead label="期限" sort="period" filter="period" />
+      <ColHead label="地區" sort="region" filter="region" />
+      <ColHead label="更新" sort="updated" filter="age" />
+      <ColHead label="我的標記" sort="plan" filter="status" />
     </div>
     {
       items.map((r) => {
@@ -146,6 +162,8 @@ const noPin = items.filter((r) => !r.data.locations?.some((l) => l.lat)).map((r)
             data-period={d.period ?? '-'}
             data-value={d.value}
             data-regions={regions.join('|')}
+            data-rrank={regionRank(regions)}
+            data-updated={d.updated}
             data-free={d.notes?.includes('免消費') ? '1' : undefined}
             data-q={q}
           >
@@ -158,6 +176,9 @@ const noPin = items.filter((r) => !r.data.locations?.some((l) => l.lat)).map((r)
                   </svg>
                 </span>
               )}
+              <span class="stale-tag" data-stale-show hidden title={`資料更新於 ${d.updated}，可能已過期`}>
+                可能過期
+              </span>
               {d.intro && <p class="intro">{d.intro}</p>}
             </div>
             <div class="c-cat">
@@ -172,6 +193,9 @@ const noPin = items.filter((r) => !r.data.locations?.some((l) => l.lat)).map((r)
             <div class="c-period">{d.period ? <span class="chip hot">{d.period}</span> : '—'}</div>
             <div class="c-region" title={regions.join('、')}>
               {regionText(regions)}
+            </div>
+            <div class="c-updated">
+              <time datetime={d.updated}>{d.updated}</time>
             </div>
             <div class="meta-row">
               <span class="chip">{d.category}</span>
@@ -188,6 +212,17 @@ const noPin = items.filter((r) => !r.data.locations?.some((l) => l.lat)).map((r)
     }
     <p class="empty" id="empty" hidden>沒有符合條件的店家，試試清除篩選。</p>
   </section>
+
+  <FilterPop id="cat" title="類型" clear="cat"><CheckList f="cat" options={cats.map(([c, n]) => [c, c, n])} /></FilterPop>
+  <FilterPop id="plat" title="平台" clear="plat"><CheckList f="plat" options={platOpts} /></FilterPop>
+  <FilterPop id="period" title="使用期限" clear="period"><CheckList f="period" options={periodOpts} /></FilterPop>
+  <FilterPop id="value" title="價值" clear="min">
+    <label class="num">至少 $<input type="number" data-f="min" min="0" step="100" inputmode="numeric" placeholder="0" /></label>
+    <label class="toggle"><input type="checkbox" data-f="free" /> 只看免消費</label>
+  </FilterPop>
+  <FilterPop id="region" title="地區" clear="region"><RegionSelect /><p class="pop-hint">選縣市時，全台連鎖也會列出</p></FilterPop>
+  <FilterPop id="age" title="資料更新" clear="age"><AgeSelect /></FilterPop>
+  <FilterPop id="status" title="我的標記" clear="status"><StatusSelect kind="r" /></FilterPop>
 
   <section class="map-view" id="map-view" hidden aria-label="地圖">
     <div class="map" id="map"></div>

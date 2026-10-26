@@ -1,6 +1,7 @@
 # 商店生日折價券。key = 店家名稱（不可重複）
 # minSpend = 低消（沒有低消就省略），discount = 折抵金額
 # 實付比例由網站自動計算：(minSpend - discount) / minSpend，沒有低消視為 0（可 100% 折抵）
+# updated: 這筆資料最後更新／確認的日期，超過一年網站會提示「可能過期」
 
 Uniqlo:
   category: 服飾
@@ -9,6 +10,7 @@ Uniqlo:
   intro: 日本平價服飾，生日券在 UNIQLO APP 會員中心。
   regions: [全台, 線上]
   website: https://www.uniqlo.com/tw/
+  updated: 2026-10-26
   verified: false
 
 GU:
@@ -18,6 +20,7 @@ GU:
   intro: UNIQLO 姊妹品牌的平價服飾，生日券在 GU APP。
   regions: [全台, 線上]
   website: https://www.gu-global.com/tw/
+  updated: 2026-10-26
   verified: false
 
 良興:
@@ -27,6 +30,7 @@ GU:
   intro: 良興電子 / EcLife 良興購物網，門市與線上都能用，會員 APP 是「良興行動金賺」。
   regions: [全台, 線上]
   website: https://www.eclife.com.tw
+  updated: 2026-10-26
   verified: false
 
 家樂福家速配店取:
@@ -36,6 +40,7 @@ GU:
   intro: 家樂福線上購物「家速配」選門市取貨。carrefour.com.tw 目前會轉址到「萬家福」，品牌可能已經改名，請確認。
   regions: [全台, 線上]
   website: https://www.uni-prosperity.com.tw
+  updated: 2026-10-26
   verified: false
 
 迪卡儂:
@@ -44,6 +49,7 @@ GU:
   intro: 法國運動用品量販，生日禮在迪卡儂會員 APP。
   regions: [全台, 線上]
   website: https://www.decathlon.tw
+  updated: 2026-10-26
   verified: false
 
 鞋全家福:
@@ -53,6 +59,7 @@ GU:
   intro: 平價鞋款連鎖，全台約 195 家，官網會員生日月有生日購物金。
   regions: [全台, 線上]
   website: https://www.familyshoes.com.tw
+  updated: 2026-10-26
   verified: false
 
 環球購物中心:
@@ -61,6 +68,7 @@ GU:
   intro: Global Mall，有中和、林口 A8/A9、桃園 A19、板橋車站、南港車站、屏東等館，會員系統是 iMall / GMpay。
   regions: [新北市, 台北市, 桃園市, 屏東縣]
   website: https://www.twglobalmall.com
+  updated: 2026-10-26
   verified: false
 
 NET:
@@ -70,6 +78,7 @@ NET:
   intro: 台灣本土平價服飾。
   regions: [全台, 線上]
   website: https://www.net-fashion.net
+  updated: 2026-10-26
   verified: false
 
 MOMO:
@@ -79,6 +88,7 @@ MOMO:
   intro: momo 購物網，生日禮在 momo APP 會員中心。
   regions: [線上]
   website: https://www.momoshop.com.tw
+  updated: 2026-10-26
   verified: false
 
 IKEA:
@@ -88,4 +98,5 @@ IKEA:
   intro: IKEA Family 會員生日禮。
   regions: [台北市, 新北市, 桃園市, 新竹縣, 台中市, 台南市, 高雄市, 線上]
   website: https://www.ikea.com.tw
+  updated: 2026-10-26
   verified: false

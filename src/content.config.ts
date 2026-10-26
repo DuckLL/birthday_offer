@@ -30,6 +30,7 @@ const common = {
   website: z.url().optional(),
   sources: z.array(z.url()).optional(),
   locations: z.array(location).optional(),
+  updated: z.iso.date(),
   verified: z.boolean().default(false),
 };
 

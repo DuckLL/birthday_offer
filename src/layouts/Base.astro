@@ -64,7 +64,20 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         </p>
       </div>
     </footer>
+    <dialog class="modal" id="detail-modal" aria-label="店家詳細資訊">
+      <div class="modal-bar">
+        <a class="linkbtn" data-modal-page href="/">開啟完整頁面</a>
+        <button type="button" class="modal-close" aria-label="關閉">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+        </button>
+      </div>
+      <div class="modal-body"></div>
+    </dialog>
     <script>
+      import { initModal } from '../scripts/modal';
+      import { markStale } from '../scripts/stale';
+      markStale();
+      initModal();
       document.getElementById('theme-btn')?.addEventListener('click', () => {
         const root = document.documentElement;
         const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;

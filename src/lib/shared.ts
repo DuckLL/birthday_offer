@@ -33,3 +33,12 @@ export function ratioLabel(r: number) {
 }
 
 export const money = (n: number) => `$${n.toLocaleString('zh-TW')}`;
+
+/** 資料更新日期超過這個天數就提示可能過期 */
+export const STALE_DAYS = 365;
+
+export function isStale(updated: string | undefined, now = new Date()) {
+  if (!updated) return true;
+  const t = new Date(`${updated}T00:00:00+08:00`).getTime();
+  return Number.isNaN(t) || now.getTime() - t > STALE_DAYS * 86400e3;
+}

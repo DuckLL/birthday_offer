@@ -201,14 +201,15 @@ const regions = [NATIONWIDE, ONLINE, ...Object.values(REGION_GROUPS).flat()];
       const REGIONS: string[] = (window as any).__REGIONS;
 
       // 欄位定義：key、標籤、型別、寬度
-      type F = [key: string, label: string, type: 'text' | 'number' | 'textarea' | 'lines' | 'regions' | 'locations' | 'bool' | 'url', span?: 1 | 2 | 4, hint?: string];
+      type F = [key: string, label: string, type: 'text' | 'number' | 'textarea' | 'lines' | 'regions' | 'locations' | 'bool' | 'url' | 'date', span?: 1 | 2 | 4, hint?: string];
       const COMMON_TAIL: F[] = [
         ['notes', '備註', 'text', 4, '例如：提前預約、低消2000'],
         ['intro', '介紹', 'textarea', 4],
         ['caution', '警示', 'textarea', 4, '例如優惠可能已結束，會在列表顯示驚嘆號'],
         ['regions', '地區', 'regions', 4],
         ['website', '官網', 'url', 2],
-        ['verified', '已人工確認', 'bool', 2],
+        ['updated', '資料更新日期', 'date', 1, '有改動的店家存檔時自動設為今天'],
+        ['verified', '已人工確認', 'bool', 1],
         ['sources', '資料來源', 'lines', 4, '一行一個網址'],
         ['locations', '分店', 'locations', 4, '填地址後按「定位」取得座標，地圖才會顯示'],
       ];
@@ -242,6 +243,13 @@ const regions = [NATIONWIDE, ONLINE, ...Object.values(REGION_GROUPS).flat()];
       let hash = '';
       let sel = 0;
       let dirty = false;
+      // 載入（或存檔）時每筆的內容，存檔時比對出有改動的店家
+      let snapshot = new WeakMap<Entry, string>();
+      const today = () => new Date().toLocaleDateString('sv-SE');
+      const takeSnapshot = () => {
+        snapshot = new WeakMap();
+        for (const e of entries) snapshot.set(e, JSON.stringify(e));
+      };
       const options: Record<string, Set<string>> = {};
 
       const status = (msg: string, cls = '') => {
@@ -256,6 +264,7 @@ const regions = [NATIONWIDE, ONLINE, ...Object.values(REGION_GROUPS).flat()];
         entries = j.entries;
         hash = j.hash;
         sel = 0;
+        takeSnapshot();
         setDirty(false);
         for (const k of ['category', 'platform', 'period']) options[k] = new Set(entries.map((e) => e[k]).filter(Boolean));
         renderList();
@@ -311,9 +320,9 @@ const regions = [NATIONWIDE, ONLINE, ...Object.values(REGION_GROUPS).flat()];
           setDirty(true);
           if (key === 'id' || key === 'value' || key === 'discount') renderList();
         };
-        if (type === 'text' || type === 'url' || type === 'number') {
+        if (type === 'text' || type === 'url' || type === 'number' || type === 'date') {
           const i = document.createElement('input');
-          i.type = type === 'number' ? 'number' : 'text';
+          i.type = type === 'number' || type === 'date' ? type : 'text';
           i.value = e[key] ?? '';
           if (options[key]) {
             i.setAttribute('list', `dl-${key}`);
@@ -472,7 +481,12 @@ const regions = [NATIONWIDE, ONLINE, ...Object.values(REGION_GROUPS).flat()];
       };
       $('find').oninput = renderList;
       $('add').onclick = () => {
-        const base: Entry = coll === 'restaurants' ? { id: '新店家', category: '', offer: '', value: 0, verified: false } : coll === 'shops' ? { id: '新商店', category: '', discount: 0, verified: false } : { id: '新平台', intro: '' };
+        const base: Entry =
+          coll === 'restaurants'
+            ? { id: '新店家', category: '', offer: '', value: 0, updated: today(), verified: false }
+            : coll === 'shops'
+              ? { id: '新商店', category: '', discount: 0, updated: today(), verified: false }
+              : { id: '新平台', intro: '' };
         entries.push(base);
         sel = entries.length - 1;
         setDirty(true);
@@ -482,11 +496,21 @@ const regions = [NATIONWIDE, ONLINE, ...Object.values(REGION_GROUPS).flat()];
       $('save').onclick = async () => {
         const dups = dupIds();
         if (dups.size) return status(`名稱重複：${[...dups].join('、')}`, 'err');
+        // 有改內容但沒手動改日期的店家，更新日期設為今天
+        if (coll !== 'platforms') {
+          for (const e of entries) {
+            const before = snapshot.get(e);
+            if (before === JSON.stringify(e)) continue;
+            if (!before || JSON.parse(before).updated === e.updated) e.updated = today();
+          }
+        }
         const r = await fetch(`/__edit/api/data/${coll}`, { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ hash, entries }) });
         const j = await r.json();
         if (!r.ok) return status(j.error, 'err');
         hash = j.hash;
+        takeSnapshot();
         setDirty(false);
+        renderForm();
         status('已儲存，網站會自動更新', 'ok');
       };
       window.addEventListener('beforeunload', (e) => {

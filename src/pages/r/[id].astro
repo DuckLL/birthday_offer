@@ -16,7 +16,7 @@ const d = r.data;
 
 <Base title={`${r.id} 壽星優惠`} description={`${r.id} 生日優惠：${d.offer}，約值 ${money(d.value)}。${d.intro ?? ''}`} nav="r">
   <nav class="crumb"><a href="/">餐廳</a> / {d.category}</nav>
-  <div class="detail">
+  <div class="detail" data-updated={d.updated}>
     <div>
       <h1>{r.id}</h1>
       <div class="tags">
@@ -67,7 +67,7 @@ const d = r.data;
         }
       </div>
 
-      <InfoCards name={r.id} intro={d.intro} regions={d.regions} website={d.website} sources={d.sources} locations={d.locations} verified={d.verified} />
+      <InfoCards name={r.id} intro={d.intro} regions={d.regions} website={d.website} sources={d.sources} locations={d.locations} updated={d.updated} verified={d.verified} />
     </div>
 
     <aside class="card" style="position:sticky;top:72px">

@@ -424,7 +424,7 @@ svg {
 .item,
 .list-head {
   display: grid;
-  grid-template-columns: minmax(180px, 2.1fr) 70px 96px minmax(160px, 2fr) 72px 70px minmax(90px, 1fr) 236px;
+  grid-template-columns: minmax(170px, 2fr) 72px 92px minmax(150px, 2fr) 76px 72px minmax(84px, 1fr) 92px 236px;
   gap: 12px;
   align-items: center;
   padding: 10px 14px;
@@ -432,7 +432,7 @@ svg {
 }
 .shops .item,
 .shops .list-head {
-  grid-template-columns: minmax(160px, 2fr) 70px 80px 80px minmax(140px, 1.4fr) minmax(90px, 1fr) 236px;
+  grid-template-columns: minmax(150px, 2fr) 72px 76px 76px minmax(130px, 1.4fr) minmax(84px, 1fr) 92px 236px;
 }
 .list-head {
   order: -999999 !important;
@@ -444,19 +444,201 @@ svg {
   padding-top: 8px;
   padding-bottom: 8px;
 }
-.list-head button {
+.th {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+.th.right {
+  justify-content: flex-end;
+}
+.th button {
   border: 0;
   background: none;
   font: inherit;
   color: inherit;
-  padding: 0;
   cursor: pointer;
-  text-align: left;
+  border-radius: 6px;
 }
-.list-head button[data-active] {
+.th-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 2px 2px 0;
+  white-space: nowrap;
+}
+.th-sort .arrow {
+  width: 13px;
+  height: 13px;
+  opacity: 0.35;
+}
+.th-sort:hover,
+.th[aria-sort] .th-sort {
+  color: var(--text);
+}
+.th[aria-sort] .arrow {
+  opacity: 1;
   color: var(--accent);
 }
+.th[aria-sort='ascending'] .arrow path {
+  d: path('m8 14 4-4 4 4');
+}
+.th[aria-sort='descending'] .arrow path {
+  d: path('m8 10 4 4 4-4');
+}
+.th-filter {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  opacity: 0.45;
+}
+.th-filter svg {
+  width: 13px;
+  height: 13px;
+}
+.th-filter:hover {
+  opacity: 1;
+  background: var(--surface);
+}
+.th-filter[data-active] {
+  opacity: 1;
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+.th-filter[data-active] svg {
+  fill: currentColor;
+}
+
+/* 表頭篩選 popover */
+.pop {
+  inset: auto;
+  margin: 0;
+  position: fixed;
+  width: max-content;
+  min-width: 200px;
+  max-width: min(300px, calc(100vw - 16px));
+  max-height: min(420px, calc(100vh - 120px));
+  overflow: auto;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 18%);
+  padding: 10px 12px 12px;
+  font-size: 14px;
+}
+.pop-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.pop select,
+.pop input[type='number'],
+.num input {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 7px 10px;
+  min-height: 38px;
+}
+.pop select {
+  width: 100%;
+}
+.pop .num,
+.pop .toggle {
+  display: flex;
+  margin-top: 6px;
+}
+.pop-hint {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.num {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.num input {
+  width: 96px;
+}
+.checklist {
+  display: grid;
+  gap: 2px;
+}
+.checklist label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.checklist label:hover {
+  background: var(--surface-2);
+}
+.checklist input {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+.checklist span {
+  flex: 1;
+}
+.checklist small {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.more-body {
+  display: grid;
+  gap: 10px;
+}
+.chips-label {
+  align-self: center;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  margin-right: 2px;
+}
 .item[hidden] {
+  display: none;
+}
+.item {
+  cursor: pointer;
+}
+.item:hover {
+  background: color-mix(in srgb, var(--surface-2) 45%, transparent);
+}
+.c-updated {
+  font-size: 13px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.item[data-stale] .c-updated {
+  color: var(--warn);
+  font-weight: 700;
+}
+.stale-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-size: 12px;
+  font-weight: 700;
+  vertical-align: 2px;
+}
+.stale-tag[hidden] {
   display: none;
 }
 .item[data-status='done'] .c-name a {
@@ -549,7 +731,7 @@ svg {
   display: none;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .list {
     background: none;
     border: 0;
@@ -604,7 +786,8 @@ svg {
   .c-plat,
   .c-period,
   .c-region,
-  .c-min {
+  .c-min,
+  .c-updated {
     display: none;
   }
   .c-marks {
@@ -616,6 +799,32 @@ svg {
 }
 .meta-row {
   display: none;
+}
+/* 桌機但不夠寬：標記按鈕只留圖示 */
+@media (min-width: 1101px) and (max-width: 1240px) {
+  .item,
+  .list-head {
+    grid-template-columns: minmax(150px, 2fr) 72px 88px minmax(140px, 2fr) 72px 68px minmax(76px, 1fr) 88px 128px;
+    gap: 10px;
+  }
+  .shops .item,
+  .shops .list-head {
+    grid-template-columns: minmax(140px, 2fr) 72px 72px 72px minmax(120px, 1.4fr) minmax(76px, 1fr) 88px 128px;
+  }
+  .c-marks .mk > span:not([data-plan-label]) {
+    display: none;
+  }
+}
+/* 平板：卡片排兩欄 */
+@media (min-width: 700px) and (max-width: 1100px) {
+  .list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+  .list .empty {
+    grid-column: 1 / -1;
+  }
 }
 
 /* 標記按鈕 */
@@ -680,7 +889,7 @@ svg {
 .mk-plan [data-plan-label]:empty {
   display: none;
 }
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .c-marks .mk {
     flex: 1;
     justify-content: center;
@@ -952,6 +1161,81 @@ svg {
 @media (max-width: 860px) {
   .detail {
     grid-template-columns: 1fr;
+  }
+}
+
+/* 詳細資訊 modal：內容就是詳細頁的 .detail */
+.modal {
+  width: min(980px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 30%);
+  overflow: hidden;
+}
+.modal[open] {
+  display: flex;
+  flex-direction: column;
+}
+.modal::backdrop {
+  background: rgb(20 10 5 / 45%);
+  backdrop-filter: blur(2px);
+}
+.modal-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px 8px 18px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 14px;
+}
+.modal-close {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+}
+.modal-close:hover {
+  background: var(--surface-2);
+}
+.modal-body {
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 18px 20px 4px;
+}
+.modal-body .detail {
+  margin-bottom: 16px;
+}
+.modal-body aside {
+  position: static !important;
+}
+.modal-loading {
+  color: var(--muted);
+  text-align: center;
+  padding: 40px 0;
+}
+@media (max-width: 640px) {
+  .modal {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+  .modal-body {
+    padding: 14px 16px 4px;
   }
 }
 

@@ -40,3 +40,10 @@ export function regionText(regions: string[] | undefined) {
   if (regions.length <= 2) return regions.join('、');
   return `${regions.slice(0, 2).join('、')} 等 ${regions.length} 地`;
 }
+
+/** 表格依地區排序用：全台最前，再依 REGION_GROUPS 由北到南，沒填的放最後 */
+const REGION_ORDER = [NATIONWIDE, ONLINE, ...Object.values(REGION_GROUPS).flat()];
+export function regionRank(regions: string[] | undefined) {
+  const ranks = (regions ?? []).map((r) => REGION_ORDER.indexOf(r));
+  return ranks.length ? Math.min(...ranks) : REGION_ORDER.length;
+}

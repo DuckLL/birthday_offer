@@ -1,0 +1,23 @@
+---
+// 表頭篩選的彈出選單（Popover API，放在 top layer，不會被表格 overflow 裁掉）
+interface Props {
+  id: string;
+  title: string;
+  clear?: string;
+}
+const { id, title, clear } = Astro.props;
+---
+
+<div popover id={`pop-${id}`} class="pop">
+  <div class="pop-head">
+    <b>{title}</b>
+    {
+      clear && (
+        <button type="button" class="linkbtn" data-clear={clear}>
+          清除
+        </button>
+      )
+    }
+  </div>
+  <slot />
+</div>

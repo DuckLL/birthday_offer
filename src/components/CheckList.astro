@@ -1,0 +1,20 @@
+---
+// 多選篩選：表頭 popover 用 checkbox，和上方 chip 綁同一個 data-f
+interface Props {
+  f: string;
+  options: [value: string, label: string, count?: number][];
+}
+const { f, options } = Astro.props;
+---
+
+<div class="checklist">
+  {
+    options.map(([v, label, n]) => (
+      <label>
+        <input type="checkbox" data-f={f} value={v} />
+        <span>{label}</span>
+        {n !== undefined && <small>{n}</small>}
+      </label>
+    ))
+  }
+</div>

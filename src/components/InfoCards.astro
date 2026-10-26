@@ -10,9 +10,10 @@ interface Props {
   website?: string;
   sources?: string[];
   locations?: { name: string; address?: string; lat?: number; lng?: number; approx?: boolean }[];
+  updated: string;
   verified: boolean;
 }
-const { name, intro, regions, website, sources, locations, verified } = Astro.props;
+const { name, intro, regions, website, sources, locations, updated, verified } = Astro.props;
 const pins = (locations ?? []).filter((l) => l.lat && l.lng);
 const issue = `https://github.com/DuckLL/birthday_offer/issues/new?title=${encodeURIComponent(`資料更正：${name}`)}`;
 ---
@@ -23,7 +24,15 @@ const issue = `https://github.com/DuckLL/birthday_offer/issues/new?title=${encod
   <dl class="kv">
     <dt>地區</dt>
     <dd>{regions?.length ? regions.join('、') : regionText(regions)}</dd>
+    <dt>資料更新</dt>
+    <dd><time datetime={updated}>{updated}</time></dd>
   </dl>
+  <p class="notice warn" data-stale-show hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3.5 2.5 20h19L12 3.5ZM12 10v4.5M12 17.5h.01" />
+    </svg>
+    <span>這筆資料超過一年沒有更新，優惠可能已經變動或結束，請先向店家確認。<a href={issue}>回報最新資訊</a></span>
+  </p>
   <div class="links" style="margin-top:14px">
     {
       website && (
@@ -66,7 +75,7 @@ const issue = `https://github.com/DuckLL/birthday_offer/issues/new?title=${encod
           </li>
         ))}
       </ul>
-      {pins.length > 0 && <div class="mini-map" id="mini-map" data-pins={JSON.stringify(pins)} />}
+      {pins.length > 0 && <div class="mini-map" data-pins={JSON.stringify(pins)} />}
     </div>
   ) : null
 }
@@ -89,15 +98,6 @@ const issue = `https://github.com/DuckLL/birthday_offer/issues/new?title=${encod
 }
 
 <script>
-  const el = document.getElementById('mini-map');
-  if (el) {
-    import('../scripts/map').then(({ createMap, pinIcon }) => {
-      import('leaflet').then(({ default: L }) => {
-        const pins = JSON.parse(el.dataset.pins!) as { name: string; lat: number; lng: number }[];
-        const map = createMap(el);
-        for (const p of pins) L.marker([p.lat, p.lng], { icon: pinIcon(), title: p.name }).bindPopup(p.name).addTo(map);
-        map.fitBounds(L.latLngBounds(pins.map((p) => [p.lat, p.lng])), { padding: [30, 30], maxZoom: 15 });
-      });
-    });
-  }
+  import { initMiniMap } from '../scripts/minimap';
+  initMiniMap(document);
 </script>

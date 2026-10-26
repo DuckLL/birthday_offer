@@ -1,0 +1,19 @@
+---
+import type { Kind } from '../lib/shared';
+
+interface Props {
+  kind: Kind;
+}
+const { kind } = Astro.props;
+const want = kind === 'r' ? '想吃' : '想用';
+const done = kind === 'r' ? '吃過' : '用過';
+---
+
+<select data-f="status" aria-label="我的標記">
+  <option value="">全部標記</option>
+  <option value="none">還沒標記</option>
+  <option value="want">{want}</option>
+  <option value="plan">有預計日期</option>
+  <option value="done">{done}</option>
+  <option value="hide-done">隱藏{done}</option>
+</select>

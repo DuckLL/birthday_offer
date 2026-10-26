@@ -22,9 +22,14 @@ function splitHeader(text) {
   return lines.slice(0, i).join('\n').trimEnd();
 }
 
+// 欄位固定順序，編輯器新增的欄位不會跑到最後
+const ORDER = ['category', 'platform', 'offer', 'value', 'minSpend', 'discount', 'period', 'notes', 'intro', 'caution', 'regions', 'website', 'sources', 'locations', 'updated', 'verified', 'url'];
+const rank = (k) => (ORDER.includes(k) ? ORDER.indexOf(k) : ORDER.length);
+const ordered = (o) => Object.fromEntries(Object.entries(o).sort(([a], [b]) => rank(a) - rank(b)));
+
 /** 和手寫 YAML 一致：店家之間空一行、regions 用 [a, b] */
 export function toYaml(header, entries) {
-  const doc = new YAML.Document(Object.fromEntries(entries.map(({ id, ...rest }) => [id, rest])));
+  const doc = new YAML.Document(Object.fromEntries(entries.map(({ id, ...rest }) => [id, ordered(rest)])));
   doc.contents.items.forEach((pair, i) => {
     if (i > 0) pair.key.spaceBefore = true;
   });
