@@ -649,18 +649,14 @@ Pizza Rock 搖滾披薩:
   updated: 2026-10-26
   verified: false
 
-義麵屋:
+La Pasta 義麵屋:
   category: 義式
   platform: Ocard
   offer: 折100
   value: 100
+  intro: 「只做您喜歡的麵」。2001 年成立於天母中山北路七段，至今第 24 年，在台灣有天母、南西、內湖、光復等 8 個據點。
   regions: [台北市]
-  website: https://www.facebook.com/p/%E7%BE%A9%E9%BA%B5%E5%B1%8B-%E5%8D%97%E4%BA%AC%E4%B8%80%E5%BA%97-100067461693067/
-  locations:
-    - name: 南京一店
-      address: 台北市松山區南京東路五段250巷8號
-      lat: 25.05028
-      lng: 121.56573
+  website: https://www.lapasta.com.tw/
   updated: 2026-10-26
   verified: false
 
@@ -694,6 +690,7 @@ PokéPoké 波奇波奇:
   notes: 低消200
   intro: 永和老字號 24 小時豆漿店。
   regions: [新北市]
+  website: https://www.soymilk.com.tw/
   updated: 2026-10-26
   verified: false
 
