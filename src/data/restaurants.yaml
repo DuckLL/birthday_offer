@@ -151,13 +151,13 @@
   updated: 2026-10-26
   verified: false
 
-銷魂麵鋪:
+銷魂麵舖:
   category: 中式
   platform: Ocard
   offer: 套餐買一送一、免費麵
   value: 350
   notes: 免消費可拿麵
-  intro: 大師兄銷魂麵舖，主打川味拌麵與雞湯，Ocard 會員每週二可免費加麵。
+  intro: 主打川味拌麵與雞湯，Ocard 會員每週二可免費加麵。
   regions: [全台]
   website: https://www.masterspicy.com
   updated: 2026-10-26
@@ -221,7 +221,7 @@
   platform: Ocard
   offer: 八八折+蛋糕
   value: 300
-  intro: Ulove 羽樂歐陸創意料理，近捷運小巨蛋站，有包廂，用餐會幫客人拍照列印。
+  intro: 歐陸創意料理，近捷運小巨蛋站，有包廂，用餐會幫客人拍照列印。
   regions: [台北市]
   website: https://www.ulovebistro.com
   updated: 2026-10-26
@@ -244,7 +244,7 @@
   platform: Ocard
   offer: 主餐買一送一
   value: 250
-  intro: Mrs. Thai，開在百貨美食街的泰式快餐，一個人也能吃。
+  intro: 開在百貨美食街的泰式快餐，一個人也能吃。
   regions: [台北市, 新北市, 新竹市]
   website: https://www.facebook.com/p/%E9%80%99%E5%91%B3%E6%B3%B0%E6%B3%B0-Mrs-Thai-Thai-61557938236982/
   locations:
@@ -287,12 +287,12 @@
   updated: 2026-10-26
   verified: false
 
-創意麵:
+創義麵:
   category: 義式
   platform: Ocard
   offer: 套餐+前菜+甜點
   value: 223
-  intro: 正式名稱為「創義麵 Creative Pasta」。網友分享生日月可送甜點、季節料理各一份，主餐免費升級 A 套餐。
+  intro: 義大利麵餐廳，雙北約 8 間。網友分享生日月可送甜點、季節料理各一份，主餐免費升級 A 套餐。
   regions: [台北市, 新北市]
   website: https://www.creativepas.com
   updated: 2026-10-26
@@ -315,7 +315,7 @@ Woosa:
   platform: Ocard
   offer: 薯條
   value: 220
-  intro: Woosa 洋食鬆餅屋，招牌是舒芙蕾「雲の鬆餅」，也有義大利麵、排餐等鹹食。
+  intro: 招牌是舒芙蕾「雲の鬆餅」，也有義大利麵、排餐等鹹食。
   regions: [台北市, 新北市, 桃園市, 台中市, 台南市, 高雄市]
   website: https://www.facebook.com/woosa.pancake/
   locations:
@@ -340,7 +340,7 @@ Pizza Rock:
   value: 200
   period: 當天
   notes: 低消100
-  intro: 搖滾披薩，2011 年台中創立的美式披薩，水牛城雞翅也很受歡迎。
+  intro: 2011 年台中創立的美式披薩，水牛城雞翅也很受歡迎。
   regions: [台中市, 彰化縣, 高雄市]
   website: https://www.pizzarock.com.tw
   locations:
@@ -355,13 +355,13 @@ Pizza Rock:
   updated: 2026-10-26
   verified: false
 
-自己做烘培:
+自己做烘焙:
   category: 甜點
   offer: 免費DIY蛋糕
   value: 200
   period: 當天
   notes: 需要預約
-  intro: 自己做烘焙聚樂部，DIY 烘焙教室。壽星需年滿 12 歲，出示證件與官網會員資料，陪同者要另做一份，部分門市不參加。
+  intro: DIY 烘焙教室。壽星需年滿 12 歲，出示證件與官網會員資料，陪同者要另做一份，部分門市不參加。
   regions: [台北市, 新北市, 台中市]
   website: https://mydiybc.com
   locations:
@@ -381,7 +381,7 @@ Pizza Rock:
   platform: Ocard
   offer: 五選一
   value: 200
-  intro: 築間幸福鍋物，2010 年基隆起家的個人鍋，18 款湯底，部分分店有蔬菜自助吧。
+  intro: 2010 年基隆起家的個人鍋，18 款湯底，部分分店有蔬菜自助吧。
   regions: [全台]
   website: https://www.jhujian.com.tw/tw
   updated: 2026-10-26
@@ -392,7 +392,7 @@ Pizza Rock:
   platform: Line
   offer: 生日蛋糕
   value: 200
-  intro: Second Floor 貳樓，美式早午餐與漢堡、義大利麵餐廳。
+  intro: 美式早午餐與漢堡、義大利麵餐廳。
   regions: [台北市, 新北市, 桃園市, 新竹市, 台中市, 台南市, 高雄市]
   website: https://www.secondfloorcafe.com
   updated: 2026-10-26
@@ -445,7 +445,7 @@ Pizza Rock:
   platform: wa10
   offer: 甜點
   value: 180
-  intro: 瓦城泰統集團，旗下有瓦城、非常泰、1010湘、大心等品牌。
+  intro: 旗下有瓦城、非常泰、1010湘、大心等品牌。
   regions: [全台]
   website: https://www.thaitown.com.tw
   updated: 2026-10-26
@@ -517,7 +517,7 @@ Pizza Rock:
   platform: 莫凡彼
   offer: 甜點
   value: 150
-  intro: 莫凡彼歐陸餐廳，同集團有尖牙、海壽司、滷春秋，生日禮要用「莫凡彼集團卡」APP 領取。
+  intro: 歐陸餐廳，同集團有尖牙、海壽司、滷春秋，生日禮要用「莫凡彼集團卡」APP 領取。
   regions: [台北市, 新北市]
   website: https://mvp-icecream.com.tw
   updated: 2026-10-26
@@ -528,7 +528,7 @@ Pizza Rock:
   platform: 莫凡彼
   offer: pizza
   value: 149
-  intro: 尖牙義式廚房，莫凡彼集團的平價義大利麵與披薩。
+  intro: 莫凡彼集團的平價義大利麵與披薩。
   regions: [台北市, 新北市]
   website: https://mvp-icecream.com.tw/fangspasta.html
   updated: 2026-10-26
@@ -559,7 +559,7 @@ Pizza Rock:
   platform: Ocard
   offer: 鮭魚卵茶碗蒸
   value: 138
-  intro: 日本橋浜町食事処，米塔集團旗下的江戶風日式料理，招牌是鰻魚三食御膳。
+  intro: 米塔集團旗下的江戶風日式料理，招牌是鰻魚三食御膳。
   regions: [台北市]
   website: https://www.facebook.com/hamachou.jp/
   locations:
@@ -588,7 +588,7 @@ Pizza Rock:
   offer: 免消費拿蛋糕
   value: 120
   notes: 免消費
-  intro: 台北天成大飯店（北車對面）。生日禮在天成飯店集團的 Cosmos CLUB APP，消費每 100 元累積 1 點。
+  intro: 台北車站對面的飯店。生日禮在天成飯店集團的 Cosmos CLUB APP，消費每 100 元累積 1 點。
   regions: [台北市]
   website: https://www.cosmos-hotel.com.tw
   locations:
@@ -604,7 +604,7 @@ Pizza Rock:
   platform: Line
   offer: 豆皮烏龍買一送一
   value: 114
-  intro: 丸亀製麵，日本讚岐烏龍麵連鎖，全台約 60 多家直營店。
+  intro: 日本讚岐烏龍麵連鎖，全台約 60 多家直營店。
   regions: [全台]
   website: https://www.toridoll.com.tw/marugame/tw
   updated: 2026-10-26
@@ -616,7 +616,7 @@ Pizza Rock:
   offer: 肉山
   value: 100
   period: 當天
-  intro: 王品集團的「聚 日式鍋物」，北海道昆布鍋。
+  intro: 王品集團的日式鍋物，北海道昆布鍋。
   regions: [全台]
   website: https://www.giguo.com.tw
   updated: 2026-10-26
@@ -626,7 +626,7 @@ Pizza Rock:
   category: 火鍋
   offer: 四選一
   value: 100
-  intro: 養鍋 石頭涮涮鍋，台中起家，石頭爆香湯底，全台 30 多間（台中就有 12 間），價位 288–868 元。
+  intro: 台中起家的石頭涮涮鍋，石頭爆香湯底，全台 30 多間（台中就有 12 間），價位 288–868 元。
   regions: [全台]
   website: https://www.yangguo.com.tw
   locations:
@@ -642,7 +642,7 @@ Pizza Rock:
   platform: 王品
   offer: 八八折
   value: 100
-  intro: 王品集團旗下品牌（王品、西堤、陶板屋、夏慕尼、石二鍋等），生日禮用「王品瘋」APP 領取。
+  intro: 旗下有王品、西堤、陶板屋、夏慕尼、石二鍋等品牌，生日禮用「王品瘋」APP 領取。
   regions: [全台]
   website: https://www.wowprime.com
   updated: 2026-10-26
@@ -668,7 +668,7 @@ Pizza Rock:
   platform: Ocard
   offer: 折價券
   value: 100
-  intro: PokéPoké 波奇波奇，夏威夷生魚飯（poke bowl）。網友分享生日月有 100 元折價券。
+  intro: 夏威夷生魚飯（poke bowl）。網友分享生日月有 100 元折價券。
   regions: [台北市]
   website: https://www.facebook.com/pokepoketw/
   updated: 2026-10-26
@@ -679,7 +679,7 @@ Pizza Rock:
   platform: Line
   offer: 折價券
   value: 100
-  intro: 漢來美食集團，旗下有漢來海港自助餐、名人坊等品牌。
+  intro: 旗下有漢來海港自助餐、名人坊等品牌。
   regions: [全台]
   website: https://www.hilai-foods.com
   updated: 2026-10-26
@@ -701,7 +701,7 @@ Pizza Rock:
   platform: Line
   offer: 買一送一
   value: 100
-  intro: 粥大福・雞湯粥舖，雞湯熬粥與港式拌麵，全台約 65 間門市。
+  intro: 雞湯熬粥與港式拌麵，全台約 65 間門市。
   regions: [全台]
   website: https://www.joudafu.com
   updated: 2026-10-26
@@ -712,7 +712,7 @@ Pizza Rock:
   platform: 自家APP
   offer: 肉品三選一
   value: 100
-  intro: 1997 年成立的錢都日式涮涮鍋，昆布湯底。壽星用「錢都餐飲」APP 領肉品兌換券（梅花豬、培根牛肉、雞肉片三選一），需訂位、用餐前告知並出示證件。
+  intro: 1997 年成立的日式涮涮鍋，昆布湯底。壽星用「錢都餐飲」APP 領肉品兌換券（梅花豬、培根牛肉、雞肉片三選一），需訂位、用餐前告知並出示證件。
   regions: [台北市, 新北市, 桃園市, 新竹縣, 新竹市, 苗栗縣, 彰化縣, 花蓮縣, 台東縣, 高雄市, 宜蘭縣]
   website: https://www.chientu.com.tw
   updated: 2026-10-26
@@ -735,7 +735,7 @@ Pizza Rock:
   platform: Ocard
   offer: 甜點
   value: 99
-  intro: 紅九九個人麻辣鍋，麻辣鴛鴦鍋配蜂巢豆腐、鴨血。
+  intro: 個人麻辣鍋，麻辣鴛鴦鍋配蜂巢豆腐、鴨血。
   regions: [台北市]
   website: https://www.facebook.com/red9999/
   locations:
@@ -756,7 +756,7 @@ Pizza Rock:
   offer: 免費一球
   value: 95
   notes: 免消費
-  intro: Baskin-Robbins 31 冰淇淋，會員 APP 是「31俱樂部」。
+  intro: 美式冰淇淋連鎖，會員 APP 是「31俱樂部」。
   regions: [全台]
   website: https://br31.tw
   updated: 2026-10-26
@@ -778,7 +778,7 @@ Yayoi:
   platform: Ocard
   offer: 八五折
   value: 80
-  intro: YAYOI 彌生軒，日本定食連鎖，白飯免費續。
+  intro: 日本定食連鎖，白飯免費續。
   regions: [全台]
   website: https://www.yayoi.com.tw
   updated: 2026-10-26
@@ -789,7 +789,7 @@ MOS:
   platform: MOS
   offer: 漢堡套餐139
   value: 76
-  intro: 摩斯漢堡，生日優惠要在 MOS Card / 摩斯 APP 領取。
+  intro: 日式漢堡連鎖，生日優惠要在 MOS Card / 摩斯 APP 領取。
   regions: [全台]
   website: https://www.mos.com.tw
   updated: 2026-10-26
@@ -806,7 +806,7 @@ MOS:
   updated: 2026-10-26
   verified: false
 
-beard papas:
+beard papa:
   category: 甜點
   platform: Ocard
   offer: 買二送一
@@ -890,7 +890,7 @@ beard papas:
   platform: Ocard
   offer: 九折
   value: 50
-  intro: 東大門韓國特色料理，台北有西門、中山、長安東路、師大等分店。
+  intro: 韓式料理，台北有西門、中山、長安東路、師大等分店。
   regions: [台北市]
   website: https://www.facebook.com/Dongdamen.Taipei/
   locations:
@@ -910,7 +910,7 @@ beard papas:
   platform: 自家APP
   offer: 九折
   value: 50
-  intro: 順億鮪魚專賣店，有自家船隊，全台約 19 家直營門市。
+  intro: 鮪魚專賣店，有自家船隊，全台約 19 家直營門市。
   regions: [全台]
   website: https://www.soonyi.com.tw
   updated: 2026-10-26
@@ -943,7 +943,7 @@ beard papas:
   platform: Ocard
   offer: 買一送一
   value: 50
-  intro: 聖瑪莉麵包，台灣連鎖烘焙坊。
+  intro: 台灣連鎖烘焙坊。
   regions: [全台]
   website: https://www.sunmerry.com.tw
   updated: 2026-10-26
