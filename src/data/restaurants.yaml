@@ -108,7 +108,7 @@ MORE 默爾義大利餐廳:
 
 龐德羅莎:
   category: 牛排
-  platform: 會員卡
+  platform: 龐德羅莎會員卡
   offer: 八五折(會員六折)
   value: 400
   notes: 不能當月辦卡
@@ -120,7 +120,7 @@ MORE 默爾義大利餐廳:
 
 BUNA CAF'E 布納咖啡館:
   category: 套餐
-  platform: Line
+  platform: LINE 官方帳號
   offer: 當月九折、當天蛋糕
   value: 400
   intro: 無國界料理咖啡館，有早午餐、義大利麵、排餐與甜點，部分分館有可投影的包廂。
@@ -131,7 +131,7 @@ BUNA CAF'E 布納咖啡館:
 
 德克士炸雞:
   category: 炸雞
-  platform: Line
+  platform: LINE 官方帳號
   offer: 炸雞五折兩張
   value: 376
   intro: 脆皮炸雞連鎖，常有會員日與 APP 買一送一活動。
@@ -142,7 +142,7 @@ BUNA CAF'E 布納咖啡館:
 
 涓豆腐:
   category: 韓式
-  platform: 豆腐
+  platform: 豆府鐵粉卡
   offer: 炸雞
   value: 358
   intro: 豆府餐飲集團的韓式豆腐鍋品牌。過去的壽星禮是加入官方 LINE 後，當月第一個工作日發送韓式炸雞兌換券。
@@ -201,7 +201,7 @@ BUNA CAF'E 布納咖啡館:
 
 小時厚牛排:
   category: 牛排
-  platform: Web
+  platform: 官網會員
   offer: 排餐十選一
   value: 300
   notes: 低消100、要有消費紀錄
@@ -229,7 +229,7 @@ Ulove 羽樂歐陸創意料理:
 
 品川蘭:
   category: 中式
-  platform: 三商
+  platform: 三商i美食卡
   offer: 雪花牛肉麵買一送一
   value: 260
   period: 兩個月
@@ -278,7 +278,7 @@ Ulove 羽樂歐陸創意料理:
 
 北村豆腐家:
   category: 韓式
-  platform: 豆腐
+  platform: 豆府鐵粉卡
   offer: 韓式炸雞
   value: 238
   intro: 豆府餐飲集團旗下韓式料理，全台約 22 間，有明洞韓式炸雞系列。
@@ -300,11 +300,11 @@ Ulove 羽樂歐陸創意料理:
 
 福勝亭:
   category: 日式
-  platform: 三商
+  platform: 三商i美食卡
   offer: 定食買一送一
   value: 220
   period: 兩個月
-  intro: 三商餐飲旗下日式豬排定食。生日月要用三商 i 美食卡 APP 領券。
+  intro: 三商餐飲旗下日式豬排定食。生日月要用「三商i美食卡」APP 領券。
   regions: [全台]
   website: https://www.mfb.com.tw
   updated: 2026-10-26
@@ -389,7 +389,7 @@ Pizza Rock 搖滾披薩:
 
 貳樓 Second Floor:
   category: 義式
-  platform: Line
+  platform: LINE 官方帳號
   offer: 生日蛋糕
   value: 200
   intro: 美式早午餐與漢堡、義大利麵餐廳。
@@ -403,7 +403,7 @@ Pizza Rock 搖滾披薩:
   platform: 樂多多
   offer: 肉蛋糕
   value: 200
-  intro: 樂多多集團的肉控火鍋。當月壽星加入「樂多多 APP」會員後內用，可領 200g 生日肉蛋糕，限一份，點餐前出示證件與兌換券。
+  intro: 樂多多集團的肉控火鍋。當月壽星加入「樂多多」APP會員後內用，可領 200g 生日肉蛋糕，限一份，點餐前出示證件與兌換券。
   regions: [全台]
   website: https://www.twrododo.com
   updated: 2026-10-26
@@ -414,7 +414,7 @@ Pizza Rock 搖滾披薩:
   platform: 美食通
   offer: 八折
   value: 200
-  intro: 六角國際旗下的杏子豬排、京都勝牛等，在「六角美食通」APP 發生日當月 8 折券。生日註冊後不能自行修改。
+  intro: 六角國際旗下的杏子豬排、京都勝牛等，在「美食通」APP 發生日當月 8 折券。生日註冊後不能自行修改。
   regions: [全台]
   website: https://lakaffagroup.com
   updated: 2026-10-26
@@ -442,7 +442,7 @@ Pizza Rock 搖滾披薩:
 
 瓦城泰統集團:
   category: 泰式
-  platform: wa10
+  platform: wa10 瓦城
   offer: 甜點
   value: 180
   intro: 旗下有瓦城、非常泰、1010湘、大心等品牌。
@@ -453,11 +453,11 @@ Pizza Rock 搖滾披薩:
 
 三商巧福:
   category: 中式
-  platform: 三商
+  platform: 三商i美食卡
   offer: 牛肉麵買一送一
   value: 175
   period: 兩個月
-  intro: 三商餐飲的牛肉麵連鎖。生日月用三商 i 美食卡 APP 領原汁牛肉麵買一送一。
+  intro: 三商餐飲的牛肉麵連鎖。生日月用「三商i美食卡」APP 領原汁牛肉麵買一送一。
   regions: [全台]
   website: https://www.mfb.com.tw
   updated: 2026-10-26
@@ -476,7 +476,7 @@ Pizza Rock 搖滾披薩:
 
 勝博殿日式豬排:
   category: 日式
-  platform: Line
+  platform: LINE 官方帳號
   offer: 唐揚雞塊或薩摩炸魚板
   value: 150
   intro: 日本來台的炸豬排專賣店。
@@ -487,7 +487,7 @@ Pizza Rock 搖滾披薩:
 
 海壽司:
   category: 日式
-  platform: 莫凡彼
+  platform: 莫凡彼集團
   offer: 壽司三拼
   value: 150
   intro: 2005 年創立的平價壽司，2022 年起由莫凡彼餐飲集團經營，多開在百貨美食街。
@@ -514,10 +514,10 @@ Pizza Rock 搖滾披薩:
 
 莫凡彼歐陸餐廳:
   category: 義式
-  platform: 莫凡彼
+  platform: 莫凡彼集團
   offer: 甜點
   value: 150
-  intro: 歐陸餐廳，同集團有尖牙、海壽司、滷春秋，生日禮要用「莫凡彼集團卡」APP 領取。
+  intro: 歐陸餐廳，同集團有尖牙、海壽司、滷春秋，生日禮要用「莫凡彼集團」APP 領取。
   regions: [台北市, 新北市]
   website: https://mvp-icecream.com.tw
   updated: 2026-10-26
@@ -525,7 +525,7 @@ Pizza Rock 搖滾披薩:
 
 尖牙義式廚房:
   category: 義式
-  platform: 莫凡彼
+  platform: 莫凡彼集團
   offer: pizza
   value: 149
   intro: 莫凡彼集團的平價義大利麵與披薩。
@@ -572,11 +572,11 @@ Pizza Rock 搖滾披薩:
 
 鮮五丼:
   category: 日式
-  platform: 三商
+  platform: 三商i美食卡
   offer: 牛丼買一送一
   value: 135
   period: 兩個月
-  intro: 三商餐飲旗下丼飯品牌，生日券在三商 i 美食卡 APP 領取。
+  intro: 三商餐飲旗下丼飯品牌，生日券在「三商i美食卡」APP 領取。
   regions: [全台]
   website: https://www.mfb.com.tw
   updated: 2026-10-26
@@ -584,11 +584,11 @@ Pizza Rock 搖滾披薩:
 
 台北天成大飯店:
   category: 甜點
-  platform: Cosmos club
+  platform: Cosmos CLUB
   offer: 免消費拿蛋糕
   value: 120
   notes: 免消費
-  intro: 台北車站對面的飯店。生日禮在天成飯店集團的 Cosmos CLUB APP，消費每 100 元累積 1 點。
+  intro: 台北車站對面的飯店。生日禮在天成飯店集團的 「Cosmos CLUB」APP，消費每 100 元累積 1 點。
   regions: [台北市]
   website: https://www.cosmos-hotel.com.tw
   locations:
@@ -601,7 +601,7 @@ Pizza Rock 搖滾披薩:
 
 丸亀製麵:
   category: 日式
-  platform: Line
+  platform: LINE 官方帳號
   offer: 豆皮烏龍買一送一
   value: 114
   intro: 日本讚岐烏龍麵連鎖，全台約 60 多家直營店。
@@ -612,7 +612,7 @@ Pizza Rock 搖滾披薩:
 
 聚日式鍋物:
   category: 火鍋
-  platform: 王品
+  platform: 王品瘋美食
   offer: 肉山
   value: 100
   period: 當天
@@ -639,10 +639,10 @@ Pizza Rock 搖滾披薩:
 
 王品集團:
   category: 套餐
-  platform: 王品
+  platform: 王品瘋美食
   offer: 八八折
   value: 100
-  intro: 旗下有王品、西堤、陶板屋、夏慕尼、石二鍋等品牌，生日禮用「王品瘋」APP 領取。
+  intro: 旗下有王品、西堤、陶板屋、夏慕尼、石二鍋等品牌，生日禮用「王品瘋美食」APP 領取。
   regions: [全台]
   website: https://www.wowprime.com
   updated: 2026-10-26
@@ -676,7 +676,7 @@ PokéPoké 波奇波奇:
 
 漢來美食:
   category: 中式
-  platform: Line
+  platform: LINE 官方帳號
   offer: 折價券
   value: 100
   intro: 旗下有漢來海港自助餐、名人坊等品牌。
@@ -698,7 +698,7 @@ PokéPoké 波奇波奇:
 
 粥大福:
   category: 中式
-  platform: Line
+  platform: LINE 官方帳號
   offer: 買一送一
   value: 100
   intro: 雞湯熬粥與港式拌麵，全台約 65 間門市。
@@ -720,7 +720,7 @@ PokéPoké 波奇波奇:
 
 裕珍馨:
   category: 甜點
-  platform: Line
+  platform: LINE 官方帳號
   offer: 100折價券
   value: 100
   notes: 免消費
@@ -786,10 +786,10 @@ YAYOI 彌生軒:
 
 MOS BURGER 摩斯漢堡:
   category: 速食
-  platform: MOS
+  platform: MOS Order
   offer: 漢堡套餐139
   value: 76
-  intro: 日式漢堡連鎖，生日優惠要在 MOS Card / 摩斯 APP 領取。
+  intro: 日式漢堡連鎖，生日優惠要在「MOS Order」APP 的 MOS Card 會員領取。
   regions: [全台]
   website: https://www.mos.com.tw
   updated: 2026-10-26
@@ -819,7 +819,7 @@ beard papa:
 
 朵頤:
   category: 牛排
-  platform: iEAT
+  platform: iEAT 饗愛吃
   offer: 96折
   value: 60
   intro: 饗賓集團的朵頤牛排。前一個月 20 日會在「iEAT 饗愛吃」APP 發 96 折生日券，2026 年起每桌優惠上限 8 人。
@@ -830,7 +830,7 @@ beard papa:
 
 定食8:
   category: 日式
-  platform: 爭鮮
+  platform: 爭鮮TW
   offer: 薯條
   value: 60
   intro: 爭鮮集團的日式定食，2007 年創立，30 多間門市。
@@ -841,7 +841,7 @@ beard papa:
 
 爭鮮:
   category: 日式
-  platform: 爭鮮
+  platform: 爭鮮TW
   offer: 鮭魚三味
   value: 60
   intro: 迴轉壽司與外帶壽司連鎖。
@@ -852,7 +852,7 @@ beard papa:
 
 洪瑞珍:
   category: 甜點
-  platform: Line
+  platform: LINE 官方帳號
   offer: 三明治＋沙琪瑪
   value: 60
   intro: 彰化起家的三明治老店，招牌是夾心三明治。
@@ -863,11 +863,11 @@ beard papa:
 
 必勝客:
   category: 速食
-  platform: PK
+  platform: PK雙饗卡
   offer: 50折價券
   value: 50
   period: 兩個月
-  intro: 披薩外送連鎖，生日券在 PK 雙饗卡 APP（必勝客 × 肯德基）。
+  intro: 披薩外送連鎖，生日券在「PK雙饗卡」APP（必勝客 × 肯德基）。
   regions: [全台]
   website: https://www.pizzahut.com.tw
   updated: 2026-10-26
@@ -875,11 +875,11 @@ beard papa:
 
 肯德基:
   category: 速食
-  platform: PK
+  platform: PK雙饗卡
   offer: 50折價券
   value: 50
   period: 兩個月
-  intro: 炸雞速食連鎖，生日券在 PK 雙饗卡 APP（必勝客 × 肯德基）。
+  intro: 炸雞速食連鎖，生日券在「PK雙饗卡」APP（必勝客 × 肯德基）。
   regions: [全台]
   website: https://www.kfcclub.com.tw
   updated: 2026-10-26
@@ -929,7 +929,7 @@ beard papa:
 
 大心新泰式麵食:
   category: 泰式
-  platform: wa10
+  platform: wa10 瓦城
   offer: 折價券
   value: 50
   intro: 瓦城集團的新泰式麵食。網友分享生日券是單筆滿 250 元折 50 元。
@@ -973,7 +973,7 @@ beard papa:
 
 爭鮮gogo:
   category: 外帶
-  platform: 爭鮮
+  platform: 爭鮮TW
   offer: 多多
   value: 30
   intro: 爭鮮集團的外帶壽司店。
@@ -987,7 +987,7 @@ beard papa:
   platform: 麥當勞APP
   offer: 大麥克送薯條
   value: 29
-  intro: 生日優惠要在麥當勞 APP 領取。
+  intro: 生日優惠要在「麥當勞APP」領取。
   regions: [全台]
   website: https://www.mcdonalds.com/tw/zh-tw.html
   updated: 2026-10-26

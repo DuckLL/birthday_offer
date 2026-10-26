@@ -7,7 +7,7 @@ UNIQLO:
   category: 服飾
   minSpend: 1000
   discount: 100
-  intro: 日本平價服飾，生日券在 UNIQLO APP 會員中心。
+  intro: 日本平價服飾，生日券在「UNIQLO TW」APP 會員中心。
   regions: [全台, 線上]
   website: https://www.uniqlo.com/tw/
   updated: 2026-10-26
@@ -17,7 +17,7 @@ GU:
   category: 服飾
   minSpend: 1000
   discount: 100
-  intro: UNIQLO 姊妹品牌的平價服飾，生日券在 GU APP。
+  intro: UNIQLO 姊妹品牌的平價服飾，生日券在「GU Taiwan」APP。
   regions: [全台, 線上]
   website: https://www.gu-global.com/tw/
   updated: 2026-10-26
@@ -46,7 +46,7 @@ GU:
 迪卡儂:
   category: 運動
   discount: 100
-  intro: 法國運動用品量販，生日禮在迪卡儂會員 APP。
+  intro: 法國運動用品量販，生日禮在「DECATHLON 購物」APP 會員中心。
   regions: [全台, 線上]
   website: https://www.decathlon.tw
   updated: 2026-10-26
@@ -85,7 +85,7 @@ momo購物網:
   category: 量販
   minSpend: 990
   discount: 300
-  intro: 網路購物平台，生日禮在 momo APP 會員中心。
+  intro: 網路購物平台，生日禮在「momo購物」APP 會員中心。
   regions: [線上]
   website: https://www.momoshop.com.tw
   updated: 2026-10-26

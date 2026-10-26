@@ -1,16 +1,16 @@
 # 領取平台說明。key 要和 restaurants.yaml 的 platform 欄位一致
 
 Ocard:
-  intro: Ocard 會員集點平台。在店家 LINE 或 Ocard 頁面加入會員並填生日，生日月會自動發券到 Ocard 票夾。
+  intro: Ocard 會員集點平台（App Store / Google Play 搜尋「Ocard」）。在店家 LINE 或 Ocard 頁面加入會員並填生日，生日月會自動發券到 Ocard 票夾。
   url: https://ocard.co
 
-Line:
+LINE 官方帳號:
   intro: 加店家的 LINE 官方帳號並綁定會員資料，生日月在 LINE 內領券。
 
-會員卡:
-  intro: 店家實體或電子會員卡，需事先辦卡，部分店家規定不能生日當月才辦。
+龐德羅莎會員卡:
+  intro: 龐德羅莎實體或電子會員卡，需事先辦卡，部分規定不能生日當月才辦。
 
-Web:
+官網會員:
   intro: 在店家官網註冊會員並填生日。
 
 31俱樂部:
@@ -33,45 +33,50 @@ Web:
   intro: 麥當勞官方 APP，註冊會員並填生日，生日優惠在 APP 內領取。
   url: https://apps.apple.com/tw/app/id1217507712
 
-三商:
-  intro: 三商 i 美食卡 APP，福勝亭、三商巧福、品川蘭、鮮五丼等品牌通用，生日券效期約兩個月。
+三商i美食卡:
+  intro: 三商餐飲「三商i美食卡」APP，福勝亭、三商巧福、品川蘭、鮮五丼等品牌通用，生日券效期約兩個月。
+  url: https://apps.apple.com/tw/app/id1446519954
 
-豆腐:
+豆府鐵粉卡:
   intro: 豆府餐飲集團「豆府鐵粉卡」APP / LINE，涓豆腐、北村豆腐家等品牌適用。
+  url: https://apps.apple.com/tw/app/id6444352218
 
 美食通:
-  intro: 六角國際「六角美食通」APP，杏子豬排、京都勝牛等品牌適用。生日註冊後不能自行修改。
+  intro: 六角國際「美食通」APP，杏子豬排、京都勝牛等品牌適用。生日註冊後不能自行修改。
+  url: https://apps.apple.com/tw/app/id1287039595
 
-wa10:
-  intro: 瓦城泰統集團會員（瓦城、非常泰、大心等），生日券在集團 APP。
-  url: https://www.thaitown.com.tw
+wa10 瓦城:
+  intro: 瓦城泰統集團「wa10 瓦城」APP（瓦城、非常泰、大心等），生日券在 APP 內。
+  url: https://apps.apple.com/tw/app/id1615523983
 
-莫凡彼:
-  intro: 莫凡彼集團卡 APP，莫凡彼、尖牙、海壽司等品牌適用。
+莫凡彼集團:
+  intro: 「莫凡彼集團」APP，莫凡彼、尖牙、海壽司等品牌適用。
+  url: https://apps.apple.com/tw/app/id883921127
 
-王品:
-  intro: 王品集團「王品瘋」APP，旗下各品牌生日禮在 APP 領取。
-  url: https://www.wowprime.com
+王品瘋美食:
+  intro: 王品集團「王品瘋美食」APP，旗下各品牌生日禮在 APP 領取。
+  url: https://apps.apple.com/tw/app/id1492438163
 
-iEAT:
+iEAT 饗愛吃:
   intro: 饗賓集團「iEAT 饗愛吃」APP，前一個月 20 日發送當月壽星券。
-  url: https://www.eatogether.com.tw
+  url: https://apps.apple.com/tw/app/id1468048530
 
-爭鮮:
-  intro: 爭鮮集團會員 APP，爭鮮、定食8、爭鮮gogo 等品牌適用。
-  url: https://www.sushiexpress.com.tw
+爭鮮TW:
+  intro: 爭鮮集團「爭鮮TW」APP，爭鮮、定食8、爭鮮gogo 等品牌適用。
+  url: https://apps.apple.com/tw/app/id1610526467
 
-PK:
-  intro: PK 雙饗卡 APP，必勝客與肯德基共用，生日券效期約兩個月。
-  url: https://www.pkcard.com.tw
+PK雙饗卡:
+  intro: 「PK雙饗卡」APP，必勝客與肯德基共用，生日券效期約兩個月。
+  url: https://apps.apple.com/tw/app/id1277406216
 
-MOS:
-  intro: 摩斯漢堡 MOS Card / 摩斯 APP。
-  url: https://www.mos.com.tw
+MOS Order:
+  intro: 摩斯漢堡官方 APP「MOS Order」，MOS Card 會員生日券在 APP 內領取。
+  url: https://apps.apple.com/tw/app/id509435066
 
 金色三麥:
-  intro: 金色三麥官網會員。
-  url: https://www.lebledor.com
+  intro: 金色三麥官方 APP「金色三麥」/ 官網會員。
+  url: https://apps.apple.com/tw/app/id6670461742
 
-Cosmos club:
-  intro: 天成飯店集團 Cosmos CLUB APP。
+Cosmos CLUB:
+  intro: 天成飯店集團「Cosmos CLUB」APP。
+  url: https://apps.apple.com/tw/app/id1587644254
