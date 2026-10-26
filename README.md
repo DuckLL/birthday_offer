@@ -25,6 +25,7 @@ npm run dev      # http://localhost:4321
 - 存檔時，內容有改動的店家 `updated` 會自動設為今天（手動改過日期則保留你填的）
 - 如果編輯期間檔案被別人（或 agent）改過，存檔會被拒絕，重新整理後再改
 - 編輯器只存在於 dev，`npm run build` 不會產生 `/edit`
+- 編輯器的寫入 API 沒有驗證；`npm run dev -- --host` 開給區網時，同網段的人都能改檔案
 
 改完後 `git commit` + `git push`，Cloudflare Pages 會自動部署。
 
@@ -34,7 +35,9 @@ npm run dev      # http://localhost:4321
 | --- | --- |
 | Build command | `npm run build` |
 | Build output directory | `dist` |
-| Node 版本 | 讀 `.nvmrc`（24） |
+| 環境變數 | `NODE_VERSION` = `24` |
+
+`public/_headers` 設定安全標頭與 `/_astro/*` 長期快取；`/sitemap.xml` 和 `/404.html` 由 build 產生。
 
 ## 資料格式
 

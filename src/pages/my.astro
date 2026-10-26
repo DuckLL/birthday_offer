@@ -88,7 +88,7 @@ const catalog = [
 
     // 整列是一個連結，點了由 modal 打開詳細資訊
     function row(it: Item, m: Mark, date?: string) {
-      const d = date ? `<span class="d ${date < today ? 'past' : ''}">${date.slice(5).replace('-', '/')}</span>` : '';
+      const d = date ? `<span class="d ${date < today ? 'past' : ''}">${esc(date.slice(5).replace('-', '/'))}</span>` : '';
       const note = m.note ? `<span class="note">${esc(m.note)}</span>` : '';
       return (
         `<a class="my-item" href="${it.url}">${d}` +

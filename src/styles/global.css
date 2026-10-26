@@ -947,6 +947,9 @@ svg {
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
+.c-value.small {
+  font-size: 15px;
+}
 .c-region,
 .c-period,
 .c-plat {
@@ -984,9 +987,6 @@ svg {
   display: block;
   height: 100%;
   background: var(--done);
-}
-.lbl {
-  display: none;
 }
 
 @media (max-width: 1100px) {
@@ -1029,10 +1029,6 @@ svg {
   }
   .c-offer {
     grid-area: offer;
-  }
-  .item > .m {
-    display: inline;
-    grid-area: auto;
   }
   .meta-row {
     grid-area: meta;

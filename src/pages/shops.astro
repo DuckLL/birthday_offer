@@ -122,7 +122,7 @@ const cats = [...catCount].sort((a, b) => b[1] - a[1]);
               <span class="chip">{d.category}</span>
             </div>
             <div class="c-min" data-c="min">{d.minSpend ? money(d.minSpend) : '無'}</div>
-            <div class="c-disc c-value" data-c="value" style="font-size:15px">
+            <div class="c-value small" data-c="value">
               {money(d.discount)}
             </div>
             <div class="c-offer ratio" data-c="ratio">

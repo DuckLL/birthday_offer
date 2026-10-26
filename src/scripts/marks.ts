@@ -88,9 +88,22 @@ export function mergeMarks(m: Marks) {
   save(all);
 }
 
+const DATE = /^\d{4}-\d{2}-\d{2}$/;
+
+/** 匯入檔是外部資料：逐欄檢查型別，日期必須是 YYYY-MM-DD，避免奇怪的值被塞進頁面 */
 export function isValidMarks(x: unknown): x is Marks {
   if (!x || typeof x !== 'object' || Array.isArray(x)) return false;
-  return Object.entries(x).every(
-    ([k, v]) => /^[rs]:/.test(k) && v && typeof v === 'object' && (!('status' in v) || ['want', 'done', undefined].includes((v as Mark).status)),
-  );
+  const opt = (v: unknown, ok: (v: unknown) => boolean) => v === undefined || ok(v);
+  const date = (v: unknown) => typeof v === 'string' && DATE.test(v);
+  return Object.entries(x).every(([k, v]) => {
+    if (!/^[rs]:/.test(k) || !v || typeof v !== 'object' || Array.isArray(v)) return false;
+    const m = v as Record<string, unknown>;
+    return (
+      opt(m.status, (s) => s === 'want' || s === 'done') &&
+      opt(m.plan, date) &&
+      opt(m.doneAt, date) &&
+      opt(m.note, (s) => typeof s === 'string') &&
+      opt(m.updated, (s) => typeof s === 'string')
+    );
+  });
 }

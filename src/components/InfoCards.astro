@@ -15,6 +15,14 @@ interface Props {
 }
 const { name, intro, regions, website, sources, locations, updated, verified } = Astro.props;
 const pins = (locations ?? []).filter((l) => l.lat && l.lng);
+// 來源網址有亂碼的 % 時 decodeURI 會丟錯，退回原字串
+const pretty = (u: string) => {
+  try {
+    return decodeURI(u);
+  } catch {
+    return u;
+  }
+};
 const issue = `https://github.com/DuckLL/birthday_offer/issues/new?title=${encodeURIComponent(`資料更正：${name}`)}`;
 ---
 
@@ -88,7 +96,7 @@ const issue = `https://github.com/DuckLL/birthday_offer/issues/new?title=${encod
         {sources.map((s) => (
           <li>
             <a href={s} target="_blank" rel="noopener">
-              {decodeURI(s)}
+              {pretty(s)}
             </a>
           </li>
         ))}
