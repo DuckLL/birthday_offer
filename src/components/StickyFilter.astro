@@ -1,0 +1,26 @@
+---
+// 篩選區捲出畫面後，固定在 navbar 下方的一行搜尋列；和上方篩選共用 [data-f]
+import RegionSelect from './RegionSelect.astro';
+
+interface Props {
+  online?: boolean;
+  placeholder: string;
+}
+const { online = false, placeholder } = Astro.props;
+---
+
+<div class="sticky-filter" id="sticky-filter" aria-hidden="true" inert>
+  <div class="wrap">
+    <label class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4.2-4.2"></path></svg>
+      <span class="sr-only">搜尋</span>
+      <input type="search" data-f="q" placeholder={placeholder} autocomplete="off" />
+    </label>
+    <RegionSelect online={online} />
+    <span class="sf-count" data-count></span>
+    <button type="button" class="sf-more" data-to-filters title="回到完整篩選">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"></path></svg>
+      <span>篩選</span>
+    </button>
+  </div>
+</div>

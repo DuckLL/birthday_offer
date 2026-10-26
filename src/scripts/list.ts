@@ -179,6 +179,7 @@ export function initList() {
     $('empty')!.hidden = shown > 0;
     const sumText = kind === 'r' ? `，合計價值 <b>$${sum.toLocaleString('zh-TW')}</b>` : `，合計可折 <b>$${sum.toLocaleString('zh-TW')}</b>`;
     $('result-text')!.innerHTML = `顯示 <b>${shown}</b> / ${items.length} ${unit}${sumText}`;
+    document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => (el.textContent = `${shown} ${unit}`));
 
     const extra = [s.plat.length, s.period.length, s.status, s.age, s.min, s.free].filter(Boolean).length;
     const badge = $('more-badge');
@@ -272,6 +273,23 @@ export function initList() {
     });
   });
   addEventListener('scroll', () => document.querySelectorAll<HTMLElement>('.pop:popover-open').forEach((p) => p.hidePopover()), { passive: true });
+
+  // 篩選區捲出畫面後，顯示固定在 navbar 下方的一行搜尋列
+  const sticky = $('sticky-filter');
+  if (sticky) {
+    const head = document.querySelector<HTMLElement>('.site-head');
+    const show = (on: boolean) => {
+      sticky.classList.toggle('on', on);
+      sticky.toggleAttribute('inert', !on);
+      sticky.setAttribute('aria-hidden', String(!on));
+    };
+    new IntersectionObserver(([e]) => show(!e.isIntersecting && e.boundingClientRect.top < (head?.offsetHeight ?? 56)), {
+      rootMargin: `-${head?.offsetHeight ?? 56}px 0px 0px 0px`,
+    }).observe(root);
+    sticky.querySelector('[data-to-filters]')?.addEventListener('click', () => {
+      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 
   // 點卡片空白處也打開詳細資訊（手機上比點店名好按）
   for (const el of items) {

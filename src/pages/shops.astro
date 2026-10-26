@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import MarkControls from '../components/MarkControls.astro';
 import ColHead from '../components/ColHead.astro';
 import ColumnsMenu from '../components/ColumnsMenu.astro';
+import StickyFilter from '../components/StickyFilter.astro';
 import FilterPop from '../components/FilterPop.astro';
 import CheckList from '../components/CheckList.astro';
 import RegionSelect from '../components/RegionSelect.astro';
@@ -62,6 +63,8 @@ const cats = [...catCount].sort((a, b) => b[1] - a[1]);
       }
     </div>
   </section>
+
+  <StickyFilter placeholder="搜尋商店…" online />
 
   <div class="resultbar">
     <span id="result-text"></span>

@@ -398,6 +398,81 @@ svg {
   width: 16px;
   height: 16px;
 }
+/* 捲動後固定在 navbar 下方的一行搜尋列 */
+.sticky-filter {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 6px 16px rgb(60 30 10 / 8%);
+  transform: translateY(-110%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease;
+}
+.sticky-filter.on {
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+.sticky-filter .wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.sticky-filter .search {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.sticky-filter input[type='search'],
+.sticky-filter select {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 7px 12px;
+  min-height: 38px;
+}
+.sticky-filter input[type='search'] {
+  width: 100%;
+  padding-left: 34px;
+}
+.sticky-filter select {
+  flex: 0 0 auto;
+  max-width: 40%;
+}
+.sf-count {
+  color: var(--muted);
+  font-size: 14px;
+  white-space: nowrap;
+}
+.sf-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 7px 10px;
+  min-height: 38px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  .sf-count,
+  .sf-more span {
+    display: none;
+  }
+}
 .resultbar {
   display: flex;
   align-items: center;
@@ -456,7 +531,7 @@ svg {
 .item,
 .list-head {
   display: grid;
-  grid-template-columns: minmax(170px, 2fr) 72px 92px minmax(150px, 2fr) 76px 72px minmax(84px, 1fr) 92px 236px;
+  grid-template-columns: minmax(150px, 2fr) 68px 88px minmax(140px, 2fr) 72px 64px minmax(76px, 1fr) 88px 220px;
   gap: 12px;
   align-items: center;
   padding: 10px 14px;
@@ -464,7 +539,7 @@ svg {
 }
 .shops .item,
 .shops .list-head {
-  grid-template-columns: minmax(150px, 2fr) 72px 76px 76px minmax(130px, 1.4fr) minmax(84px, 1fr) 92px 236px;
+  grid-template-columns: minmax(150px, 2fr) 72px 76px 76px minmax(130px, 1.4fr) minmax(84px, 1fr) 88px 220px;
 }
 .list-head {
   order: -999999 !important;
@@ -987,7 +1062,7 @@ svg {
 @media (min-width: 1101px) and (max-width: 1240px) {
   .item,
   .list-head {
-    grid-template-columns: minmax(150px, 2fr) 72px 88px minmax(140px, 2fr) 72px 68px minmax(76px, 1fr) 88px 128px;
+    grid-template-columns: minmax(150px, 2fr) 68px 88px minmax(140px, 2fr) 72px 64px minmax(76px, 1fr) 88px 128px;
     gap: 10px;
   }
   .shops .item,
