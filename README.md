@@ -84,7 +84,9 @@ Uniqlo:
 ```yaml
 Ocard:
   intro: 平台說明，顯示在店家頁的「領取方式」
-  url: https://ocard.co   # 選填
+  url: https://ocard.co   # 選填，官網
+  ios: https://apps.apple.com/tw/app/id978302973                     # 選填，App Store
+  android: https://play.google.com/store/apps/details?id=com.ocard  # 選填，Google Play
 ```
 
 ### 地區名稱
@@ -96,7 +98,7 @@ Ocard:
 - 直接改 YAML 即可，保持既有格式：店家之間空一行、`regions` 用 `[a, b]`、欄位順序同上。不要動檔案開頭的註解。
 - 改了哪家店的資料（或確認過仍然正確），就把那家的 `updated` 改成當天日期。
 - 新增 `platform` 前先在 `platforms.yaml` 加說明，否則 build 會失敗。
-- 平台名稱用 APP 在 App Store / Google Play 上的正式名稱（例如 `王品瘋美食`、`PK雙饗卡`），`url` 放 App Store 連結。
+- 平台名稱用 APP 在 App Store / Google Play 上的正式名稱（例如 `王品瘋美食`、`PK雙饗卡`），`ios` / `android` 放 App Store 與 Google Play 連結。
 - 補分店座標可以在 dev server 開著時呼叫 `GET /__edit/api/geocode?q=<地址>`。
 - 改完跑 `npm run build` 確認通過。
 

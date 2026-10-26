@@ -202,7 +202,7 @@ BUNA CAF'E 布納咖啡館:
 
 小時厚牛排:
   category: 牛排
-  platform: 官網會員
+  platform: 小時厚牛排
   offer: 排餐十選一
   value: 300
   notes: 低消100、要有消費紀錄
@@ -411,7 +411,7 @@ Pizza Rock 搖滾披薩:
   verified: false
 
 六角國際（杏子豬排、京都勝牛）:
-  category: 定食
+  category: 套餐
   platform: 美食通
   offer: 八折
   value: 200
@@ -973,7 +973,7 @@ beard papa:
   verified: false
 
 爭鮮gogo:
-  category: 外帶
+  category: 日式
   platform: 爭鮮TW
   offer: 多多
   value: 30

@@ -58,7 +58,9 @@ const platforms = defineCollection({
   loader: file('src/data/platforms.yaml', { parser: parseYaml }),
   schema: z.strictObject({
     intro: z.string(),
-    url: z.url().optional(),
+    url: z.url().optional(), // 官網
+    ios: z.url().optional(), // App Store
+    android: z.url().optional(), // Google Play
   }),
 });
 

@@ -36,10 +36,11 @@ GU:
   updated: 2026-10-26
   verified: true
 
-萬家福（原家樂福）家速配:
+萬家福:
   category: 量販
   minSpend: 300
   discount: 100
+  notes: 家速配滿300可以店取
   intro: 家樂福量販 2026 年 7 月起改名「萬家福」、超市改名「樂家康」，「家速配」APP 照常營運。線上下單選門市取貨可用生日券。
   regions: [全台, 線上]
   website: https://www.uni-prosperity.com.tw

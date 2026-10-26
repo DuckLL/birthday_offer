@@ -47,10 +47,24 @@ const d = r.data;
             {d.platform ?? '未註明'}
             {platform && <div style="color:var(--muted);font-size:14px">{platform.intro}</div>}
             {
-              platform?.url && (
-                <a href={platform.url} target="_blank" rel="noopener" style="font-size:14px">
-                  {new URL(platform.url).hostname}
-                </a>
+              (platform?.url || platform?.ios || platform?.android) && (
+                <div class="app-links">
+                  {platform.ios && (
+                    <a href={platform.ios} target="_blank" rel="noopener">
+                      App Store
+                    </a>
+                  )}
+                  {platform.android && (
+                    <a href={platform.android} target="_blank" rel="noopener">
+                      Google Play
+                    </a>
+                  )}
+                  {platform.url && (
+                    <a href={platform.url} target="_blank" rel="noopener">
+                      {new URL(platform.url).hostname}
+                    </a>
+                  )}
+                </div>
               )
             }
           </dd>

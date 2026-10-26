@@ -23,7 +23,7 @@ function splitHeader(text) {
 }
 
 // 欄位固定順序，編輯器新增的欄位不會跑到最後
-const ORDER = ['category', 'platform', 'offer', 'value', 'minSpend', 'discount', 'period', 'notes', 'intro', 'caution', 'regions', 'website', 'sources', 'locations', 'updated', 'verified', 'url'];
+const ORDER = ['category', 'platform', 'offer', 'value', 'minSpend', 'discount', 'period', 'notes', 'intro', 'caution', 'regions', 'website', 'sources', 'locations', 'updated', 'verified', 'url', 'ios', 'android'];
 const rank = (k) => (ORDER.includes(k) ? ORDER.indexOf(k) : ORDER.length);
 const ordered = (o) => Object.fromEntries(Object.entries(o).sort(([a], [b]) => rank(a) - rank(b)));
 
