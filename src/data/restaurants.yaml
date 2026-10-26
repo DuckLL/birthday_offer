@@ -10,9 +10,10 @@
   value: 700
   notes: 提前預約、低消2000、適合多人
   intro: 平價義式連鎖，招牌是烤雞翅與窯烤披薩，全台多家分店。
-  caution: 2023 年報導指出「幾歲送幾隻雞翅」已於 5/31 結束，請先向店家確認是否恢復。
   regions: [全台]
   website: https://www.bite2eatpizza.com
+  sources:
+    - https://www.bite2eatpizza.com/blogs/news/%E6%AF%8F%E6%9C%88%E5%A3%BD%E6%98%9F
   updated: 2026-10-26
   verified: false
 
@@ -425,7 +426,7 @@ Pizza Rock 搖滾披薩:
   platform: Ocard
   offer: 炸物拼盤
   value: 198
-  intro: 鮮蝦湯頭拉麵。報導中的壽星禮是「四大天王酥炸拼盤」（雞塊、里肌、魚片、牛蒡天婦羅）。
+  intro: 鮮蝦湯頭拉麵。
   regions: [台北市, 新北市]
   website: https://www.facebook.com/leshrimptw/
   locations:
