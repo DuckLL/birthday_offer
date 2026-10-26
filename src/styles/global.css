@@ -83,6 +83,11 @@ body {
   font-size: 15px;
   line-height: 1.6;
   overflow-x: hidden;
+  overflow-x: clip;
+}
+/* iOS Safari 只看 body 的 overflow-x 擋不住左右滑動，html 也要裁 */
+html {
+  overflow-x: clip;
 }
 a {
   color: inherit;
@@ -148,6 +153,18 @@ svg {
   font-size: 17px;
   text-decoration: none;
   white-space: nowrap;
+  min-width: 0;
+}
+/* 空間不夠時店名先截斷，導覽列不被擠出畫面 */
+.brand > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.brand svg,
+.nav,
+.theme-btn {
+  flex-shrink: 0;
 }
 .brand svg {
   width: 26px;
@@ -197,6 +214,20 @@ svg {
   }
   .nav a {
     padding: 6px 10px;
+  }
+}
+@media (max-width: 400px) {
+  .site-head .wrap {
+    gap: 4px;
+  }
+  .nav {
+    gap: 0;
+  }
+  .nav a {
+    padding: 6px 8px;
+  }
+  .theme-btn {
+    padding: 6px 4px;
   }
 }
 
