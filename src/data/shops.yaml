@@ -7,7 +7,8 @@ UNIQLO:
   category: 服飾
   minSpend: 1000
   discount: 100
-  intro: 日本平價服飾，生日券在「UNIQLO TW」APP 會員中心。
+  notes: 限官網（網路商店）使用，生日當月初發券
+  intro: 日本平價服飾。生日當月在「UNIQLO TW」APP 會員中心領券，當月才註冊的會員約 15 分鐘內會收到。
   regions: [全台, 線上]
   website: https://www.uniqlo.com/tw/
   updated: 2026-10-26
@@ -17,35 +18,40 @@ GU:
   category: 服飾
   minSpend: 1000
   discount: 100
-  intro: UNIQLO 姊妹品牌的平價服飾，生日券在「GU Taiwan」APP。
+  notes: 限官網（網路商店）使用
+  intro: UNIQLO 姊妹品牌的平價服飾，生日券在「GU Taiwan」APP 會員中心。
   regions: [全台, 線上]
   website: https://www.gu-global.com/tw/
   updated: 2026-10-26
   verified: false
 
-良興:
+良興 EcLife:
   category: 3C
   minSpend: 1000
   discount: 200
-  intro: 3C 家電通路，門市與線上購物網都能用，會員 APP 是「良興行動金賺」。
+  notes: 生日禮金，門市與 EcLife 良興購物網都能用
+  intro: 3C 家電通路（1973 年成立），會員 APP 是「良興行動金賺」，生日禮金可在 APP 查詢。
+  caution: 生日禮金 200 元只在活動報導中出現過，低消 1,000 元的條件未找到官方說明，請先在 APP 確認。
   regions: [全台, 線上]
   website: https://www.eclife.com.tw
   updated: 2026-10-26
   verified: false
 
-家樂福家速配店取:
+萬家福（原家樂福）家速配:
   category: 量販
   minSpend: 300
   discount: 100
-  intro: 線上購物「家速配」選門市取貨。carrefour.com.tw 目前會轉址到「萬家福」，品牌可能已經改名，請確認。
+  intro: 家樂福量販 2026 年 7 月起改名「萬家福」、超市改名「樂家康」，「家速配」APP 照常營運。線上下單選門市取貨可用生日券。
+  caution: 改名後官方說會員優惠券權益延續，但找不到生日券的最新說明，請先在家速配 APP 確認。
   regions: [全台, 線上]
   website: https://www.uni-prosperity.com.tw
   updated: 2026-10-26
   verified: false
 
-迪卡儂:
+DECATHLON 迪卡儂:
   category: 運動
   discount: 100
+  notes: 生日當月在迪卡儂 APP 會員中心領 100 元優惠券
   intro: 法國運動用品量販，生日禮在「DECATHLON 購物」APP 會員中心。
   regions: [全台, 線上]
   website: https://www.decathlon.tw
@@ -56,26 +62,30 @@ GU:
   category: 鞋
   minSpend: 500
   discount: 100
-  intro: 平價鞋款連鎖，全台約 195 家，官網會員生日月有生日購物金。
+  notes: 需下載 APP，生日購物金限生日當月使用
+  intro: 三商行旗下的平價鞋款連鎖。官網寫明下載 APP 的會員享生日購物金（限當月使用）。
+  caution: 官網沒有寫購物金金額與低消，滿 500 折 100 是原始表格的資料。
   regions: [全台, 線上]
   website: https://www.familyshoes.com.tw
   updated: 2026-10-26
   verified: false
 
-環球購物中心:
+Global Mall 環球購物中心:
   category: 百貨
   discount: 100
-  intro: 購物中心，有中和、林口 A8/A9、桃園 A19、板橋車站、南港車站、屏東等館，會員系統是 iMall / GMpay。
-  regions: [新北市, 台北市, 桃園市, 屏東縣]
+  notes: 生日當月底前在 APP「會員生日禮」領 100 元電子商品禮券
+  intro: 冠德集團的車站型購物中心，有新北中和、林口 A9、板橋車站、南港車站、桃園 A8、桃園 A19、新左營車站、屏東等館，會員 APP 是「GlobalMall環球購物中心」。
+  regions: [新北市, 台北市, 桃園市, 高雄市, 屏東縣]
   website: https://www.twglobalmall.com
   updated: 2026-10-26
   verified: false
 
-NET:
+NET FASHION:
   category: 服飾
   minSpend: 500
   discount: 100
-  intro: 台灣本土平價服飾。
+  notes: 限官網使用
+  intro: 台灣本土平價服飾，生日券在官網會員中心，限網路商店使用。
   regions: [全台, 線上]
   website: https://www.net-fashion.net
   updated: 2026-10-26
@@ -86,6 +96,7 @@ momo購物網:
   minSpend: 990
   discount: 300
   intro: 網路購物平台，生日禮在「momo購物」APP 會員中心。
+  caution: 找不到 momo 生日禮的官方說明，滿 990 折 300 是原始表格的資料，請先在 APP 確認。
   regions: [線上]
   website: https://www.momoshop.com.tw
   updated: 2026-10-26
@@ -95,8 +106,9 @@ IKEA 宜家家居:
   category: 家具
   minSpend: 200
   discount: 100
-  intro: 家具家飾量販，生日禮給 IKEA Family 會員。
-  regions: [台北市, 新北市, 桃園市, 新竹縣, 台中市, 台南市, 高雄市, 線上]
+  notes: 生日當月持 IKEA Family 卡與證件到門市兌換；另有瑞典餐廳主餐第二件 5 折
+  intro: 家具家飾量販。IKEA Family 會員生日月可到門市兌換生日 100 元券與主餐優惠。
+  regions: [台北市, 新北市, 桃園市, 新竹縣, 台中市, 嘉義市, 台南市, 高雄市]
   website: https://www.ikea.com.tw
   updated: 2026-10-26
   verified: false
