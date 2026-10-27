@@ -932,10 +932,14 @@ svg {
   vertical-align: -2px;
 }
 .c-offer {
+  min-width: 0;
   font-weight: 600;
 }
 .c-offer small {
   display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-weight: 400;
   color: var(--muted);
   font-size: 13px;
